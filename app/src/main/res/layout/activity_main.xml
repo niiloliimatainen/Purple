@@ -8,12 +8,11 @@
 
 
     <ImageButton
-        android:id="@+id/Bank1"
+        android:id="@+id/bank2"
 
         android:layout_width="131dp"
         android:layout_height="71dp"
         android:layout_marginEnd="40dp"
-        android:onClick="openActivity2"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +23,11 @@
         app:srcCompat="@drawable/ic_bank1_logo" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/bank1"
         android:layout_width="129dp"
         android:layout_height="73dp"
         android:scaleType="fitCenter"
+        android:onClick="openActivity2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.141"
