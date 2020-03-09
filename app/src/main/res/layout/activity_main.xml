@@ -34,11 +34,12 @@
         app:layout_constraintVertical_bias="0.139" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/Bank1"
 
         android:layout_width="74dp"
         android:layout_height="50dp"
         android:layout_marginEnd="68dp"
+        android:onClick="openActivity2"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +54,7 @@
         android:layout_marginStart="68dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/Bank1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
