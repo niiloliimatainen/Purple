@@ -7,7 +7,7 @@ public class Bank {
 
     ArrayList<Account> accounts = new ArrayList<>();
 
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     private String account;
     private int money, credit;
