@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+//Starting page
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
