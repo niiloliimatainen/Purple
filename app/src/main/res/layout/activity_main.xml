@@ -6,59 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PURPLE"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        android:textColor="#020202"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pick you bank"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.139" />
 
     <ImageButton
         android:id="@+id/Bank1"
 
-        android:layout_width="74dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="68dp"
+        android:layout_width="131dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="40dp"
         android:onClick="openActivity2"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574"
+        app:layout_constraintVertical_bias="0.81"
         app:srcCompat="@drawable/ic_bank1_logo" />
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="74dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="68dp"
+        android:layout_width="129dp"
+        android:layout_height="73dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Bank1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.813"
+        app:srcCompat="@drawable/ic_bank2_logo" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="410dp"
+        android:layout_height="729dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574"
-        app:srcCompat="@drawable/ic_bank2_logo" />
+        app:srcCompat="@drawable/purple_1screen_items" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
