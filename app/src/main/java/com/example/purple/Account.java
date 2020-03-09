@@ -17,7 +17,6 @@ public abstract class Account {
 }
 
 
-
 class Regular extends Account {
 
     public Regular(String account, int money) {
@@ -35,6 +34,7 @@ class Regular extends Account {
             System.out.println("Not enough money.");
         }
     }
+
 
     public void getInfo() {
         System.out.println("Account number: " + account + " Amount of money: " + money);
@@ -72,9 +72,11 @@ class Credit extends Account {
         }
     }
 
+
     public void getInfo() {
         System.out.println("Account number: " + account + " Amount of money: " + money + " Credit limit: " + credit);
     }
+
 
     public String getAccountNumber() {
         return account;
