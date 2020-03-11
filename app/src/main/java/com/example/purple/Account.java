@@ -17,9 +17,9 @@ public abstract class Account {
 }
 
 
-class Regular extends Account {
+class regularAccount extends Account {
 
-    public Regular(String account, int money) {
+    public regularAccount(String account, int money) {
         super(account, money);
     }
 
@@ -46,11 +46,11 @@ class Regular extends Account {
 }
 
 
-class Credit extends Account {
+class creditAccount extends Account {
 
     int credit;
 
-    public Credit(String account, int money, int x) {
+    public creditAccount(String account, int money, int x) {
         super(account, money);
         credit = x;
     }
@@ -60,6 +60,7 @@ class Credit extends Account {
         money += x;
 
     }
+
 
     public void getMoney(int x) {
         if ((money -= x) < 0 - credit) {

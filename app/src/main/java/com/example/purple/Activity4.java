@@ -8,7 +8,7 @@ import android.widget.EditText;
 //Registration screen
 
 public class Activity4 extends AppCompatActivity {
-    private EditText getFirstname, getLastname, getEmail, getPassword, getPassword2;
+    private EditText getFirstname, getLastname, getEmail, getPhoneNumber, getPassword, getPassword2;
 
 
 
@@ -21,6 +21,7 @@ public class Activity4 extends AppCompatActivity {
         getFirstname = findViewById(R.id.fname);
         getLastname = findViewById(R.id.lname);
         getEmail = findViewById(R.id.email);
+        getPhoneNumber = findViewById(R.id.pnumber);
         getPassword = findViewById(R.id.password);
         getPassword2 = findViewById(R.id.password2);
 
