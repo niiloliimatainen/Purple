@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 // Logging in page
 
@@ -21,7 +21,7 @@ public class Activity2 extends AppCompatActivity {
         setContentView(R.layout.activity_2);
 
         getUsername = findViewById(R.id.username);
-        getPassword = findViewById(R.id.email);
+        getPassword = findViewById(R.id.password);
 
     }
 
@@ -30,9 +30,13 @@ public class Activity2 extends AppCompatActivity {
         username = getUsername.getText().toString();
         password = getPassword.getText().toString();
 
-        Intent intent = new Intent(this, Activity3.class);
+        if ((username.isEmpty()) || (password.isEmpty())) {
+            Toast.makeText(getApplicationContext(), "Invalid username or password. Try again!", Toast.LENGTH_LONG).show();
 
-        startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, Activity3.class);
+            startActivity(intent);
+        }
     }
 
     public void doRegistration(View v) {
