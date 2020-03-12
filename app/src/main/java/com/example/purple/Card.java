@@ -1,5 +1,7 @@
 package com.example.purple;
 
+//joo
+
 public abstract class Card {
     protected String account, cardNumber, country;
     protected int year, raiseLimit;
