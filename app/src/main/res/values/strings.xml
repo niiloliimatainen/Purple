@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Purple</string>
+
+    <string name="title_activity_3_1">activity_3_1</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
