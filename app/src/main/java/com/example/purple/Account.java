@@ -1,18 +1,17 @@
 package com.example.purple;
 
 public abstract class Account {
-    protected int money;
     protected String account;
+    protected int money = 0;
 
-    public Account(String account, int money) {
-        this.money = money;
+    public Account(String account) {
         this.account = account;
     }
 
 
     public abstract void addMoney(int x);
-    public abstract void getMoney(int x);
-    public abstract void getInfo();
+    public abstract void transferMoney(int x);
+    public abstract void getAccountInfo();
     public abstract String getAccountNumber();
 }
 
@@ -20,7 +19,7 @@ public abstract class Account {
 class regularAccount extends Account {
 
     public regularAccount(String account, int money) {
-        super(account, money);
+        super(account);
     }
 
 
@@ -28,7 +27,7 @@ class regularAccount extends Account {
         money += x;
     }
 
-    public void getMoney(int x) {
+    public void transferMoney(int x) {
         if ((money -= x) < 0) {
             money += x;
             System.out.println("Not enough money.");
@@ -36,8 +35,7 @@ class regularAccount extends Account {
     }
 
 
-    public void getInfo() {
-        System.out.println("Account number: " + account + " Amount of money: " + money);
+    public void getAccountInfo() {
     }
 
     public String getAccountNumber() {
@@ -50,8 +48,8 @@ class creditAccount extends Account {
 
     int credit;
 
-    public creditAccount(String account, int money, int x) {
-        super(account, money);
+    public creditAccount(String account, int x) {
+        super(account);
         credit = x;
     }
 
@@ -62,7 +60,7 @@ class creditAccount extends Account {
     }
 
 
-    public void getMoney(int x) {
+    public void transferMoney(int x) {
         if ((money -= x) < 0 - credit) {
             money += x;
             System.out.println("Not enough credit.");
@@ -74,8 +72,7 @@ class creditAccount extends Account {
     }
 
 
-    public void getInfo() {
-        System.out.println("Account number: " + account + " Amount of money: " + money + " Credit limit: " + credit);
+    public void getAccountInfo() {
     }
 
 
@@ -83,7 +80,6 @@ class creditAccount extends Account {
         return account;
     }
 }
-
 
 
 
