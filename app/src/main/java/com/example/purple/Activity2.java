@@ -11,8 +11,8 @@ import android.widget.Toast;
 // Logging in page
 
 public class Activity2 extends AppCompatActivity {
-    private EditText getUsername, getPassword;
-    private String username, password;
+    private EditText getEmail, getPassword;
+    private String email, password;
 
 
     @Override
@@ -20,24 +20,24 @@ public class Activity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
 
-        getUsername = findViewById(R.id.username);
+        getEmail = findViewById(R.id.email);
         getPassword = findViewById(R.id.password);
 
     }
 
 
     public void submitLoginInfo(View v) {
-        username = getUsername.getText().toString();
+        email = getEmail.getText().toString();
         password = getPassword.getText().toString();
 
-        if ((username.isEmpty()) || (password.isEmpty())) {
+        if ((email.isEmpty()) || (password.isEmpty())) {
             Toast.makeText(getApplicationContext(), "Invalid username or password. Try again!", Toast.LENGTH_LONG).show();
 
         } else {
             Intent intent = new Intent(this, Activity3.class);
             startActivity(intent);
-        }
     }
+}
 
     public void doRegistration(View v) {
         Intent intent2 = new Intent(this, Activity4.class);

@@ -14,6 +14,7 @@ public abstract class User {
 
     }
 
+    public abstract String getUserEmail();
     public abstract void changeUserInfo();
     public abstract void addAccount();
     public abstract void delAccount();
@@ -25,6 +26,11 @@ class regularUser extends User {
 
     public regularUser(String fname, String lname,String email, String pword, String pnumber) {
         super(fname, lname, email, pnumber, pword);
+    }
+
+    @Override
+    public String getUserEmail() {
+        return email;
     }
 
     @Override
@@ -56,6 +62,11 @@ class Admin extends User {
 
     public Admin(String fname, String lname,String email, String pword, String pnumber) {
         super(fname, lname, email, pnumber, pword);
+    }
+
+    @Override
+    public String getUserEmail() {
+        return email;
     }
 
     @Override
