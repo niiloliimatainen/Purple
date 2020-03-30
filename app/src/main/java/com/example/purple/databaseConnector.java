@@ -22,7 +22,8 @@ public class databaseConnector {
             BufferedWriter writer = new BufferedWriter(file);
             Gson gson = new Gson();
             String json_object = gson.toJson(user);
-
+            System.out.println("moi");
+            System.out.println(json_object);
             writer.write(json_object);
             writer.newLine();
             writer.close();
@@ -35,11 +36,11 @@ public class databaseConnector {
     public static ArrayList<User> readFromFile() {
         ArrayList<User> list = new ArrayList<User>();
         Gson gson = new Gson();
+        String line;
         try {
             FileReader file = new FileReader("database.json");
             BufferedReader reader = new BufferedReader(file);
-            String line = reader.readLine();
-            while (line != null) {
+            while ((line = reader.readLine()) != null) {
                 User user = gson.fromJson(line, User.class);
                 list.add(user);
             }
