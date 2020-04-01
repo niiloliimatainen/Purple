@@ -1,5 +1,7 @@
 package com.example.purple;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 public class Bank {
@@ -16,16 +18,16 @@ public class Bank {
     }
 
 
-    public void addUser(String fname, String lname, String email, String pnumber, String pword) {
+    public void addUser(String fname, String lname, String email, String pnumber, String pword, Context context) {
             System.out.println("Haloo");
-            User user = new regularUser(fname, lname, email, pword, pnumber);
-            databaseConnector.writeToFile(user);
+            User user = new regularUser(fname, lname, email, pnumber, pword);
+            databaseConnector.writeToFile(context, user);
             //admini viel
     }
 
 
-    public void currentUser(String email) {
-        ArrayList<User> userList = databaseConnector.readFromFile();
+    public void currentUser(String email, Context context) {
+        ArrayList<User> userList = databaseConnector.readFromFile(context);
 
         for (int i = 0; i < userList.size(); i++) {
             if (email.equals(userList.get(i).getUserEmail())) {

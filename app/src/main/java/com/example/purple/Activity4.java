@@ -72,7 +72,7 @@ public class Activity4 extends AppCompatActivity {
         }
 
         if (ok) {
-            bank.addUser(firstName, lastName, email, phoneNumber, password1);
+            bank.addUser(firstName, lastName, email, phoneNumber, password1, this);
             Intent intent = new Intent(this, Activity2.class);
             startActivity(intent);
         }
