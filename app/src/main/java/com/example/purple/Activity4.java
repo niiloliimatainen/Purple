@@ -55,23 +55,22 @@ public class Activity4 extends AppCompatActivity {
 
         //tässä viel vähän säätämistä ja tarkistamista ton salasanan checkin kanssa//
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Fill all of the user information first!", Toast.LENGTH_LONG).show();
-        } if (password1.length() < 12) {
-            System.out.println("Tuleeko=?????");
-            Toast.makeText(getApplicationContext(), "Password has to be at least 12 characters!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Fill all of the user information first!", Toast.LENGTH_SHORT).show();
+
+        }else if (password1.length() < 12) {
+            Toast.makeText(getApplicationContext(), "Password has to be at least 12 characters!", Toast.LENGTH_SHORT).show();
+
         } else if (flag1 && flag2 && flag3 && flag4) {
-            System.out.println("hä");
             if (password2.equals(password1)) {
                 //tähän voisi laittaa sellasen hienon vihreen valon et näkee niitten salasanojen olevan ok//
-                //Ok aikasemmin
-                Toast.makeText(getApplicationContext(), "Password ok!", Toast.LENGTH_LONG).show();
                 ok = true;
             } else {
-                Toast.makeText(getApplicationContext(), "Passwords don't match!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Passwords don't match!", Toast.LENGTH_SHORT).show();
             }
         }
 
         if (ok) {
+            Toast.makeText(getApplicationContext(), "Registration complete!", Toast.LENGTH_SHORT).show();
             bank.addUser(firstName, lastName, email, phoneNumber, password1, this);
             Intent intent = new Intent(this, Activity2.class);
             startActivity(intent);

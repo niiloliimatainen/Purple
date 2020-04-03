@@ -15,6 +15,7 @@ public abstract class User {
     }
 
     public abstract String getUserEmail();
+    public abstract String getUserPassword();
     public abstract void changeUserInfo();
     public abstract void addAccount();
     public abstract void delAccount();
@@ -31,6 +32,12 @@ class regularUser extends User {
     @Override
     public String getUserEmail() {
         return email;
+    }
+
+
+    @Override
+    public String getUserPassword() {
+        return password;
     }
 
     @Override
@@ -67,6 +74,12 @@ class Admin extends User {
     @Override
     public String getUserEmail() {
         return email;
+    }
+
+
+    @Override
+    public String getUserPassword() {
+        return password;
     }
 
     @Override

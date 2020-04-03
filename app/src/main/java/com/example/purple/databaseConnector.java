@@ -5,10 +5,8 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -53,7 +51,6 @@ public class databaseConnector {
             while ((line = reader.readLine()) != null) {
                 regularUser user = gson.fromJson(line, regularUser.class);
                 list.add(user);
-                System.out.println(user.firstName);
             }
             reader.close();
         }  catch (IOException e) {

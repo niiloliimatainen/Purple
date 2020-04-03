@@ -10,7 +10,7 @@ public class Bank {
 
     private Bank() {
        String BIC = "BOFAAFIHH";
-        String name = "Bank of Finland";
+       String name = "Bank of Finland";
     }
 
     public static Bank getInstance() {
@@ -26,11 +26,11 @@ public class Bank {
     }
 
 
-    public int currentUser(String email, Context context) {
+    public int login(String email, String password, Context context) {
         ArrayList<regularUser> userList = databaseConnector.readFromFile(context);
 
         for (int i = 0; i < userList.size(); i++) {
-            if (email.equals(userList.get(i).getUserEmail())) {
+            if (email.equals(userList.get(i).getUserEmail()) && (password.equals(userList.get(i).getUserPassword()))) {
                 counter = i;
                 return 1;
             }
