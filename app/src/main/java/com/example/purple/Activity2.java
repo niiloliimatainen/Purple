@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class Activity2 extends AppCompatActivity {
     private EditText getEmail, getPassword;
     private String email, password;
+    private Bank bank = Bank.getInstance();
 
 
     @Override
@@ -34,10 +35,12 @@ public class Activity2 extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Invalid username or password. Try again!", Toast.LENGTH_LONG).show();
 
         } else {
-            Intent intent = new Intent(this, Activity3.class);
-            startActivity(intent);
+            if (bank.currentUser(email, this) == 1) {
+                Intent intent = new Intent(this, Activity3.class);
+                startActivity(intent);
+            }
+        }
     }
-}
 
     public void doRegistration(View v) {
         Intent intent2 = new Intent(this, Activity4.class);

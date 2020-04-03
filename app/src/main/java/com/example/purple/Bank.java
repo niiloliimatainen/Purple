@@ -26,15 +26,16 @@ public class Bank {
     }
 
 
-    public void currentUser(String email, Context context) {
-        ArrayList<User> userList = databaseConnector.readFromFile(context);
+    public int currentUser(String email, Context context) {
+        ArrayList<regularUser> userList = databaseConnector.readFromFile(context);
 
         for (int i = 0; i < userList.size(); i++) {
             if (email.equals(userList.get(i).getUserEmail())) {
                 counter = i;
-                break;
+                return 1;
             }
         }
+        return 0;
     }
 
 

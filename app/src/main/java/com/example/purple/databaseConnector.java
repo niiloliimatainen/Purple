@@ -41,8 +41,8 @@ public class databaseConnector {
     }
 
 
-    public static ArrayList<User> readFromFile(Context context) {
-        ArrayList<User> list = new ArrayList<User>();
+    public static ArrayList<regularUser> readFromFile(Context context) {
+        ArrayList<regularUser> list = new ArrayList<regularUser>();
         Gson gson = new Gson();
         String line;
         try {
@@ -51,8 +51,9 @@ public class databaseConnector {
             BufferedReader reader = new BufferedReader(isr);
 
             while ((line = reader.readLine()) != null) {
-                User user = gson.fromJson(line, User.class);
+                regularUser user = gson.fromJson(line, regularUser.class);
                 list.add(user);
+                System.out.println(user.firstName);
             }
             reader.close();
         }  catch (IOException e) {
