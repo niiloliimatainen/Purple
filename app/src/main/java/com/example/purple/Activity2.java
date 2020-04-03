@@ -32,13 +32,17 @@ public class Activity2 extends AppCompatActivity {
         password = getPassword.getText().toString();
 
         if ((email.isEmpty()) || (password.isEmpty())) {
-            Toast.makeText(getApplicationContext(), "Invalid username or password. Try again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Invalid Email address or Password!", Toast.LENGTH_SHORT).show();
 
         } else {
             if (bank.login(email, password,this) == 1) {
                 Toast.makeText(getApplicationContext(), "Logged in!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, Activity3.class);
                 startActivity(intent);
+            } else {
+                getEmail.setText("");
+                getPassword.setText("");
+                Toast.makeText(getApplicationContext(), "Invalid Email address or Password!", Toast.LENGTH_SHORT).show();
             }
         }
     }
