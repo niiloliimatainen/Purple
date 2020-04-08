@@ -68,16 +68,10 @@ public class Activity2 extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 if(code.equals(input.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Confirmation ok, logging in...", Toast.LENGTH_LONG).show();
-                    try {
-                        Thread.sleep(3000);
                         dialog.dismiss();
                         Intent intent;
                         intent = new Intent(Activity2.this, Activity3.class);
                         startActivity(intent);
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }else {
                     Toast.makeText(getApplicationContext(), "Incorrect code, try again!", Toast.LENGTH_SHORT).show();
                 }
