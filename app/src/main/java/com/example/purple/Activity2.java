@@ -1,9 +1,12 @@
 package com.example.purple;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,7 +39,7 @@ public class Activity2 extends AppCompatActivity {
 
         } else {
             if (bank.login(email, password,this) == 1) {
-                Toast.makeText(getApplicationContext(), "Logged in!", Toast.LENGTH_SHORT).show();
+                confirmationPopup();
                 Intent intent = new Intent(this, Activity3.class);
                 startActivity(intent);
             } else {
@@ -52,5 +55,33 @@ public class Activity2 extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    public void confirmationPopup(){
+        final String code = numberHandler.setVerificationNumber();
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Confirmation");
+        dialog.setMessage("Input the given code below");
+        dialog.setMessage("Code: "+ code);
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dialog.setView(input);
 
+        dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(code.equals(input.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Confirmation ok, logging in...", Toast.LENGTH_LONG).show();
+                    try {
+                        Thread.sleep(3000);
+                        dialog.dismiss();
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(getApplicationContext(), "Incorrect code, try again!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+    }
 }
