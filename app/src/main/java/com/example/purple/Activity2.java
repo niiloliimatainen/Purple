@@ -40,8 +40,7 @@ public class Activity2 extends AppCompatActivity {
         } else {
             if (bank.login(email, password,this) == 1) {
                 confirmationPopup();
-                Intent intent = new Intent(this, Activity3.class);
-                startActivity(intent);
+
             } else {
                 getEmail.setText("");
                 getPassword.setText("");
@@ -57,10 +56,9 @@ public class Activity2 extends AppCompatActivity {
 
     public void confirmationPopup(){
         final String code = numberHandler.setVerificationNumber();
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         dialog.setTitle("Confirmation");
-        dialog.setMessage("Input the given code below");
-        dialog.setMessage("Code: "+ code);
+        dialog.setMessage("Input the given code below\nCode: "+ code);
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialog.setView(input);
@@ -73,6 +71,9 @@ public class Activity2 extends AppCompatActivity {
                     try {
                         Thread.sleep(3000);
                         dialog.dismiss();
+                        Intent intent;
+                        intent = new Intent(Activity2.this, Activity3.class);
+                        startActivity(intent);
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
