@@ -1,12 +1,12 @@
 package com.example.purple;
 
 import android.content.Context;
-
 import java.util.ArrayList;
 
 public class Bank {
     private static Bank bank = new Bank();
-    private int counter = 0;
+    private ArrayList<regularUser> userList = new ArrayList<regularUser>();
+    private int currentUser;
 
     private Bank() {
        String BIC = "BOFAAFIHH";
@@ -19,19 +19,19 @@ public class Bank {
 
 
     public void addUser(String fname, String lname, String email, String pnumber, String pword, Context context) {
-            System.out.println("Haloo");
-            User user = new regularUser(fname, lname, email, pnumber, pword);
-            databaseConnector.writeToFile(context, user);
+            regularUser user = new regularUser(fname, lname, email, pnumber, pword);
+            userList.add(user);
+            databaseConnector.writeToFile(context, userList);
             //admini viel
     }
 
 
     public int login(String email, String password, Context context) {
-        ArrayList<regularUser> userList = databaseConnector.readFromFile(context);
+        userList = databaseConnector.readFromFile(context);
 
         for (int i = 0; i < userList.size(); i++) {
             if (email.equals(userList.get(i).getUserEmail()) && (password.equals(userList.get(i).getUserPassword()))) {
-                counter = i;
+                currentUser = i;
                 return 1;
             }
         }
@@ -39,8 +39,9 @@ public class Bank {
     }
 
 
-    public void addAccount() {
-
+    public void addAccount(Context context) {
+        userList.get(currentUser).addAccount();
+        databaseConnector.writeToFile(context, userList);
     }
 
 

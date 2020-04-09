@@ -18,7 +18,7 @@ public abstract class Account {
 
 class regularAccount extends Account {
 
-    public regularAccount(String account, int money) {
+    public regularAccount(String account) {
         super(account);
     }
 
