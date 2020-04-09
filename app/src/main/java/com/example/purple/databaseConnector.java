@@ -20,17 +20,21 @@ public class databaseConnector {
     //Constructor is private to make sure this class cannot be instantiated.
     private databaseConnector() { }
 
-    public static void writeToFile(Context context, User user) {
+    public static void writeToFile(Context context, ArrayList<regularUser> userList) {
         try {
             FileOutputStream fos = context.openFileOutput("database.json", Context.MODE_APPEND);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
-            Gson gson = new Gson();
-            String json_object = gson.toJson(user);
-            System.out.println("moi");
-            System.out.println(json_object);
-            writer.print(json_object);
-            writer.println();
-            writer.flush();
+
+            for (int i = 0; i < userList.size(); i++) {
+                Gson gson = new Gson();
+                String json_object = gson.toJson(userList.get(i));
+                System.out.println("moi");
+                System.out.println(json_object);
+                writer.print(json_object);
+                writer.println();
+                writer.flush();
+            }
+
             writer.close();
             fos.close();
         } catch (IOException e) {

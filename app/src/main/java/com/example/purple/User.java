@@ -5,7 +5,7 @@ package com.example.purple;
 public abstract class User {
     protected String firstName, lastName, email, phoneNumber, password;
 
-    public User(String fname, String lname,String email, String pword, String pnumber) {
+    public User(String fname, String lname,String email, String pnumber, String pword) {
         this.firstName = fname;
         this.lastName = lname;
         this.email = email;
@@ -25,9 +25,10 @@ public abstract class User {
 
 class regularUser extends User {
 
-    public regularUser(String fname, String lname,String email, String pword, String pnumber) {
+    public regularUser(String fname, String lname,String email, String pnumber, String pword) {
         super(fname, lname, email, pnumber, pword);
     }
+
 
     @Override
     public String getUserEmail() {
@@ -42,7 +43,8 @@ class regularUser extends User {
 
     @Override
     public void addAccount() {
-
+        String accountNumber = numberHandler.setAccountNumber();
+        Account account = new regularAccount(accountNumber);
     }
 
 
@@ -67,9 +69,10 @@ class regularUser extends User {
 
 class Admin extends User {
 
-    public Admin(String fname, String lname,String email, String pword, String pnumber) {
+    public Admin(String fname, String lname,String email, String pnumber, String pword) {
         super(fname, lname, email, pnumber, pword);
     }
+
 
     @Override
     public String getUserEmail() {
