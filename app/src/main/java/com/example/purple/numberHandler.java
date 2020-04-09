@@ -6,6 +6,8 @@ import java.util.Random;
 //Only class methods
 public class numberHandler {
 
+    //Constructor is private to make sure this class cannot be instantiated
+    private numberHandler() {}
 
     public static String setVerificationNumber(){
         Random random = new Random();
