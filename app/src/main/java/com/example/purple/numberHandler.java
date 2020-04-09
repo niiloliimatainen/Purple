@@ -1,6 +1,6 @@
 package com.example.purple;
 
-import org.mindrot.jbcrypt.BCrypt;
+
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -17,7 +17,7 @@ public class numberHandler {
         return code;
     }
     public static String getHashedPassword(String password){
-        String hashedPw = BCrypt.hashpw
+
         return hashedPw;
     }
 
