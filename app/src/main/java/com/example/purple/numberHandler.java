@@ -1,9 +1,17 @@
 package com.example.purple;
 
 
+import android.provider.ContactsContract;
+
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 //Only class methods
 public class numberHandler {
@@ -17,11 +25,22 @@ public class numberHandler {
         String code = String.valueOf(number);
         return code;
     }
-    public static String getHashedPassword(String password){
-
-        return hashedPw;
+    public static SecretKeySpec getKey(String password) throws Exception {
+        final MessageDigest digest = MessageDigest.getInstance("SHA-512");
+        byte[] bytes = password.getBytes(StandardCharsets.UTF_8);
+        digest.update(bytes);
+        byte[] key = digest.digest();
+        SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
+        return secretKeySpec;
     }
 
+    public static String encrypter(String password) throws Exception{
+        SecretKeySpec key = getKey(password);
+        Cipher c = Cipher.getInstance("AES");
+        c.init(Cipher.ENCRYPT_MODE, key);
+
+
+    }
 
     public static String setAccountNumber() {
         //Country code, IBAN-code and bank identifier
