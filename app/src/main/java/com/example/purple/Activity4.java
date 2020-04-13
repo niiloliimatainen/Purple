@@ -70,10 +70,15 @@ public class Activity4 extends AppCompatActivity {
         }
 
         if (ok) {
-            Toast.makeText(getApplicationContext(), "Registration complete!", Toast.LENGTH_SHORT).show();
-            bank.addUser(firstName, lastName, email, phoneNumber, password1, this);
-            Intent intent = new Intent(this, Activity2.class);
-            startActivity(intent);
+            int newUser = bank.addUser(firstName, lastName, email, phoneNumber, password1, this);
+
+            if (newUser == 1) {
+                Toast.makeText(getApplicationContext(), "Registration complete!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, Activity2.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "You already have an account!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

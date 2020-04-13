@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Bank {
     private static Bank bank = new Bank();
-    private ArrayList<regularUser> userList = new ArrayList<regularUser>();
+    private ArrayList<regularUser> userList = new ArrayList<>();
     private int currentUser;
 
     private Bank() {
@@ -18,10 +18,17 @@ public class Bank {
     }
 
 
-    public void addUser(String fname, String lname, String email, String pnumber, String pword, Context context) {
+    public int addUser(String fname, String lname, String email, String pnumber, String pword, Context context) {
             regularUser user = new regularUser(fname, lname, email, pnumber, pword);
+            for (int i = 0; i < userList.size(); i++) {
+                if (email.equals(userList.get(i).getUserEmail())) {
+                    return 0;
+                }
+            }
+
             userList.add(user);
             databaseConnector.writeToFile(context, userList);
+            return 1;
             //admini viel
     }
 

@@ -41,6 +41,7 @@ class regularUser extends User {
         return password;
     }
 
+
     @Override
     public void addAccount() {
         String accountNumber = numberHandler.setAccountNumber();
@@ -84,6 +85,7 @@ class Admin extends User {
     public String getUserPassword() {
         return password;
     }
+
 
     @Override
     public void addAccount() {
