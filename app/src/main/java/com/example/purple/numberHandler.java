@@ -38,6 +38,8 @@ public class numberHandler {
         SecretKeySpec key = getKey(password);
         Cipher c = Cipher.getInstance("AES");
         c.init(Cipher.ENCRYPT_MODE, key);
+        byte[] encrypted = c.doFinal(password.getBytes());
+        return encrypted.toString();
 
 
     }
