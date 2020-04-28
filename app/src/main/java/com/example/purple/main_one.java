@@ -69,6 +69,28 @@ public class main_one extends AppCompatActivity {
         });
         dialog.show();
     }
+    public void addCardPopup(View v){
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        dialog.setTitle("Choose the card type");
 
+        dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //TÄHÄN SE AKKOUNTTIJUTTU
+                Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //TÄHÄN SE AKKOUNTTIJUTTU TAAS
+                Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 }
