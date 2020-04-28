@@ -16,10 +16,10 @@
         android:layout_height="67dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695"
+        app:layout_constraintVertical_bias="0.724"
         app:srcCompat="@drawable/pohjavari" />
 
     <ImageView
@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457"
+        app:layout_constraintVertical_bias="0.459"
         app:srcCompat="@drawable/pohjavari" />
 
     <ImageView
@@ -51,10 +51,10 @@
         android:layout_height="132dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208"
+        app:layout_constraintVertical_bias="0.21"
         app:srcCompat="@drawable/pohjavari" />
 
     <TextView

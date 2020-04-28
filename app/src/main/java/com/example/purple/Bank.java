@@ -51,12 +51,26 @@ public class Bank {
         databaseConnector.writeToFile(context, userList);
     }
 
+
     public void addMoney(int flag, double money) {
         userList.get(currentUser).addMoney(flag, money);
     }
 
+
     public void selfTransfer(int pay, int receive, double money) {
         userList.get(currentUser).selfTransfer(pay, receive, money);
+    }
+
+
+    public ArrayList<Account> getAccounts() {
+        ArrayList<Account> accountList = userList.get(currentUser).getAccounts();
+        return accountList;
+    }
+
+
+    public double getMoneyAmount() {
+        double money = userList.get(currentUser).getMoneyAmount();
+        return money;
     }
 
 }

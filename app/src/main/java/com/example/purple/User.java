@@ -23,8 +23,9 @@ public abstract class User {
     public abstract void addMoney(int flag, double money);
     public abstract void selfTransfer(int pay, int receive, double money);
     public abstract void delAccount();
-    public abstract void getAccount();
+    public abstract ArrayList<Account> getAccounts();
     public abstract void editUser();
+    public abstract double getMoneyAmount();
 }
 
 
@@ -57,6 +58,15 @@ class regularUser extends User {
 
 
     @Override
+    public double getMoneyAmount() {
+        double money = 0;
+        for (int i = 0; i < accountList.size(); i++) {
+               money += accountList.get(i).getMoneyAmount();
+        }
+        return money;
+    }
+
+    @Override
     public void addMoney(int index, double money) {
         accountList.get(index).addMoney(money);
     }
@@ -75,8 +85,8 @@ class regularUser extends User {
 
 
     @Override
-    public void getAccount() {
-
+    public ArrayList<Account> getAccounts() {
+        return accountList;
     }
 
 
@@ -124,10 +134,15 @@ class Admin extends User {
 
 
     @Override
-    public void getAccount() {
-
+    public ArrayList<Account> getAccounts() {
+        return null;
     }
 
+
+    @Override
+    public double getMoneyAmount() {
+        return 0;
+    }
 
     @Override
     public void delAccount() {
