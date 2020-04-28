@@ -2,8 +2,11 @@ package com.example.purple;
 
 //Class for creating user. Abstract class shows the structure of user classes.
 
+
+import java.util.ArrayList;
+
 public abstract class User {
-    protected String firstName, lastName, email, phoneNumber, password;
+        protected String firstName, lastName, email, phoneNumber, password;
 
     public User(String fname, String lname,String email, String pnumber, String pword) {
         this.firstName = fname;
@@ -16,14 +19,17 @@ public abstract class User {
 
     public abstract String getUserEmail();
     public abstract String getUserPassword();
-    public abstract void changeUserInfo();
-    public abstract void addAccount();
+    public abstract void addAccount(int flag);
+    public abstract void addMoney(int flag, double money);
+    public abstract void selfTransfer(int pay, int receive, double money);
     public abstract void delAccount();
     public abstract void getAccount();
+    public abstract void editUser();
 }
 
 
 class regularUser extends User {
+    private ArrayList<Account> accountList = new ArrayList<Account>();
 
     public regularUser(String fname, String lname,String email, String pnumber, String pword) {
         super(fname, lname, email, pnumber, pword);
@@ -43,14 +49,27 @@ class regularUser extends User {
 
 
     @Override
-    public void addAccount() {
+    public void addAccount(int flag) {
         String accountNumber = numberHandler.setAccountNumber();
-        Account account = new regularAccount(accountNumber);
+        Account account = new Account(accountNumber, flag);
+        accountList.add(account);
     }
 
 
     @Override
-    public void changeUserInfo() {
+    public void addMoney(int index, double money) {
+        accountList.get(index).addMoney(money);
+    }
+
+
+    @Override
+    public void selfTransfer(int pay, int receive, double money) {
+
+    }
+
+
+    @Override
+    public void editUser() {
 
     }
 
@@ -88,13 +107,18 @@ class Admin extends User {
 
 
     @Override
-    public void addAccount() {
+    public void addAccount(int flag) {
 
     }
 
 
     @Override
-    public void changeUserInfo() {
+    public void selfTransfer(int pay, int receive, double money) {
+
+    }
+
+    @Override
+    public void editUser() {
 
     }
 
@@ -108,6 +132,10 @@ class Admin extends User {
     @Override
     public void delAccount() {
 
+    }
+
+    @Override
+    public void addMoney(int flag, double money) {
     }
 
     //All methods below this apply to all users
