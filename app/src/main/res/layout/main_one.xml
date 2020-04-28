@@ -103,4 +103,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@android:drawable/bottom_bar" />
+
+    <ImageButton
+        android:id="@+id/addAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addAccountPopup"
+        app:layout_constraintBottom_toTopOf="@+id/cardviewbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountviewbox"
+        app:srcCompat="@android:drawable/ic_input_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

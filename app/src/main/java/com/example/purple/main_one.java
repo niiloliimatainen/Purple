@@ -1,12 +1,18 @@
 package com.example.purple;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
+import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class main_one extends AppCompatActivity {
@@ -40,7 +46,29 @@ public class main_one extends AppCompatActivity {
         }
     }
 
+    public void addAccountPopup(View v){
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        dialog.setTitle("Choose the account type");
 
+        dialog.setNeutralButton("Regular", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //TÄHÄN SE AKKOUNTTIJUTTU
+                Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setNeutralButton("Savings", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //TÄHÄN SE AKKOUNTTIJUTTU TAAS
+                    Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 
 }
