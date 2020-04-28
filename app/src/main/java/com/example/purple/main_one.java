@@ -8,15 +8,16 @@ import android.view.MotionEvent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Locale;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class main_one extends AppCompatActivity {
     private GestureDetectorCompat gesture;
+    private TextView moneyAmount;
+    private Bank bank = Bank.getInstance();
+    private int allMoney = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,17 @@ public class main_one extends AppCompatActivity {
 
         setContentView(R.layout.main_one);
         gesture = new GestureDetectorCompat(this, new LearnGesture());
+        moneyAmount = findViewById(R.id.allmoney);
 
+        ArrayList<Account> accountList = bank.getAccounts();
+        if (accountList == null) {
+            moneyAmount.setText("--");
+        } else {
+            moneyAmount.setText(String.format(Locale.GERMANY, "%.2f", bank.getMoneyAmount()));
+        }
     }
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         this.gesture.onTouchEvent(event);
