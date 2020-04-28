@@ -31,7 +31,7 @@ public class Activity3_2 extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2, float x1, float y1) {
             if (event2.getX() > event1.getX()) {
-                Intent intent1 = new Intent(Activity3_2.this, activity_3_1.class);
+                Intent intent1 = new Intent(Activity3_2.this, main_two.class);
                 finish();
                 startActivity(intent1);
 
