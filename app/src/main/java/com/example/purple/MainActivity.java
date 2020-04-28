@@ -23,7 +23,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, login.class);
         startActivity(intent);
     }
-
+    public void tester(View v){
+        Intent intent;
+        intent = new Intent(MainActivity.this, main_one.class);
+        startActivity(intent);
+    }
 
 
 }

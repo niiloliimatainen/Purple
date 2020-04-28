@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
 import android.content.DialogInterface;
-import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.content.Intent;
@@ -59,7 +58,7 @@ public class main_one extends AppCompatActivity {
             }
         });
 
-        dialog.setNeutralButton("Savings", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Savings", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
                 //TÄHÄN SE AKKOUNTTIJUTTU TAAS
@@ -70,5 +69,28 @@ public class main_one extends AppCompatActivity {
         dialog.show();
     }
 
+    public void addCardPopup(View v){
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        dialog.setTitle("Choose the card type");
+
+        dialog.setNeutralButton("Credit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //TÄHÄN SE KORTTIJUTTU
+                Toast.makeText(getApplicationContext(), "New credit card added!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //TÄHÄN SE KORTTIJUTTU TAAS
+                Toast.makeText(getApplicationContext(), "New debit card added!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 }

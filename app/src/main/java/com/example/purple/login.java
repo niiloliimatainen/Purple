@@ -34,7 +34,7 @@ public class login extends AppCompatActivity {
         email = getEmail.getText().toString();
         password = getPassword.getText().toString();
         //numberHandler.tester();
-        if ((email.isEmpty()) || (password.isEmpty())) {
+        if ((email.isEmpty()) || (password.isEmpty())){
             Toast.makeText(getApplicationContext(), "Invalid Email address or Password!", Toast.LENGTH_SHORT).show();
 
         } else {

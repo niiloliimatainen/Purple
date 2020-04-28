@@ -34,10 +34,6 @@ public class main_two extends AppCompatActivity {
                 Intent intent1 = new Intent(main_two.this, main_one.class);
                 finish();
                 startActivity(intent1);
-            } else if (event2.getX() < event1.getX()) {
-                Intent intent2 = new Intent(main_two.this, Activity3_2.class);
-                finish();
-                startActivity(intent2);
             }
             return true;
         }
