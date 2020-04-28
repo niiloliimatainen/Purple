@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 //Registration screen
 
-public class Activity4 extends AppCompatActivity {
+public class register extends AppCompatActivity {
     private EditText getFirstname, getLastname, getEmail, getPhoneNumber, getPassword, getPassword2;
     private String firstName, lastName, email, phoneNumber, password1, password2;
     private boolean ok = false;
@@ -20,7 +20,7 @@ public class Activity4 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_4);
+        setContentView(R.layout.register);
         getFirstname = findViewById(R.id.fname);
         getLastname = findViewById(R.id.lname);
         getEmail = findViewById(R.id.email);
@@ -74,7 +74,7 @@ public class Activity4 extends AppCompatActivity {
 
             if (newUser == 1) {
                 Toast.makeText(getApplicationContext(), "Registration complete!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, Activity2.class);
+                Intent intent = new Intent(this, login.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "You already have an account!", Toast.LENGTH_SHORT).show();

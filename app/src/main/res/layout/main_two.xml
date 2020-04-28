@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E92C2C3A"
-    tools:context=".activity_3_1"
+    tools:context=".main_two"
     android:id="@+id/frameLayout">
 
     <ImageView

@@ -15,12 +15,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.start);
     }
 
 
     public void openActivity2(View v) {
-        Intent intent = new Intent(this, Activity2.class);
+        Intent intent = new Intent(this, login.class);
         startActivity(intent);
     }
 

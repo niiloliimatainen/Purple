@@ -8,7 +8,7 @@
     android:animateLayoutChanges="false"
     android:background="#E92C2C3A"
     android:backgroundTintMode="add"
-    tools:context=".Activity3" >
+    tools:context=".main_one" >
 
     <ImageView
         android:id="@+id/cardviewbox"

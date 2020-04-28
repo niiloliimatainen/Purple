@@ -1,17 +1,14 @@
 package com.example.purple;
-
-
-import android.provider.ContactsContract;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Random;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 
 //Only class methods
 public class numberHandler {
@@ -25,24 +22,46 @@ public class numberHandler {
         String code = String.valueOf(number);
         return code;
     }
-    public static SecretKeySpec getKey(String password) throws Exception {
-        final MessageDigest digest = MessageDigest.getInstance("SHA-512");
-        byte[] bytes = password.getBytes(StandardCharsets.UTF_8);
-        digest.update(bytes);
-        byte[] key = digest.digest();
-        SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
-        return secretKeySpec;
-    }
 
-    public static String encrypter(String password) throws Exception{
-        SecretKeySpec key = getKey(password);
-        Cipher c = Cipher.getInstance("AES");
-        c.init(Cipher.ENCRYPT_MODE, key);
-        byte[] encrypted = c.doFinal(password.getBytes());
-        return encrypted.toString();
+   // https://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/ //
 
+    /*public static String enCrypter(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        int iterations = 10000;
+        char[] chars = password.toCharArray();
+        byte[] salt = getSalt();
+
+        PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations);
+        SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        SecretKey key = secretKeyFactory.generateSecret(spec);
+        byte[] hashedpw = secretKeyFactory.generateSecret(spec).getEncoded();
+        return iterations + ":"+ toHex(salt) + ":" + toHex(hashedpw);
 
     }
+    private static String toHex(byte[] array) throws NoSuchAlgorithmException
+    {
+        BigInteger bi = new BigInteger(1, array);
+        String hex = bi.toString(16);
+        int paddingLength = (array.length * 2) - hex.length();
+        if(paddingLength > 0)
+        {
+            return String.format("%0"  +paddingLength + "d", 0) + hex;
+        }else{
+            return hex;
+        }
+    }
+    private static byte [] getSalt() throws NoSuchAlgorithmException {
+        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+        byte[] salt = new byte[16];
+        secureRandom.nextBytes(salt);
+        return salt;
+    }
+     public  static void tester() throws Exception {
+        String testPW = "ASDasd123%";
+        String encoded = enCrypter(testPW);
+        System.out.println("TESTISALASANA ON: " + encoded);
+
+    }
+*/
 
     public static String setAccountNumber() {
         //Country code, IBAN-code and bank identifier

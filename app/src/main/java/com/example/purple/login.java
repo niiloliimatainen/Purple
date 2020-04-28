@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 // Logging in page
 
-public class Activity2 extends AppCompatActivity {
+public class login extends AppCompatActivity {
     private EditText getEmail, getPassword;
     private String email, password;
     private Bank bank = Bank.getInstance();
@@ -22,7 +22,7 @@ public class Activity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2);
+        setContentView(R.layout.login);
 
         getEmail = findViewById(R.id.email);
         getPassword = findViewById(R.id.password);
@@ -30,10 +30,10 @@ public class Activity2 extends AppCompatActivity {
     }
 
 
-    public void submitLoginInfo(View v) {
+    public void submitLoginInfo(View v) throws Exception {
         email = getEmail.getText().toString();
         password = getPassword.getText().toString();
-
+        //numberHandler.tester();
         if ((email.isEmpty()) || (password.isEmpty())) {
             Toast.makeText(getApplicationContext(), "Invalid Email address or Password!", Toast.LENGTH_SHORT).show();
 
@@ -50,7 +50,7 @@ public class Activity2 extends AppCompatActivity {
     }
 
     public void doRegistration(View v) {
-        Intent intent2 = new Intent(this, Activity4.class);
+        Intent intent2 = new Intent(this, register.class);
         startActivity(intent2);
     }
 
@@ -70,7 +70,7 @@ public class Activity2 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Confirmation ok, logging in...", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                         Intent intent;
-                        intent = new Intent(Activity2.this, Activity3.class);
+                        intent = new Intent(login.this, main_one.class);
                         startActivity(intent);
                 }else {
                     Toast.makeText(getApplicationContext(), "Incorrect code, try again!", Toast.LENGTH_SHORT).show();

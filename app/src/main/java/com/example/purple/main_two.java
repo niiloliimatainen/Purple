@@ -9,14 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
-public class activity_3_1 extends AppCompatActivity {
+public class main_two extends AppCompatActivity {
     private GestureDetectorCompat gesture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_3_1);
+        setContentView(R.layout.main_two);
         gesture = new GestureDetectorCompat(this, new LearnGesture());
 
     }
@@ -31,11 +31,11 @@ public class activity_3_1 extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2, float x1, float y1) {
             if (event2.getX() > event1.getX()) {
-                Intent intent1 = new Intent(activity_3_1.this, Activity3.class);
+                Intent intent1 = new Intent(main_two.this, main_one.class);
                 finish();
                 startActivity(intent1);
             } else if (event2.getX() < event1.getX()) {
-                Intent intent2 = new Intent(activity_3_1.this, Activity3_2.class);
+                Intent intent2 = new Intent(main_two.this, Activity3_2.class);
                 finish();
                 startActivity(intent2);
             }
