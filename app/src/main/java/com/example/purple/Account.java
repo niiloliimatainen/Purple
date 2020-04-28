@@ -23,6 +23,11 @@ public class Account {
     }
 
 
+    public double getMoneyAmount() {
+        return money;
+    }
+
+
     public void getAccountInfo() {
     }
 
