@@ -10,7 +10,7 @@ public class Bank {
 
     private Bank() {
        String BIC = "BOFAAFIHH";
-       String name = "Bank of Finland";
+       String bankName = "Bank of Finland";
     }
 
     public static Bank getInstance() {
@@ -46,11 +46,17 @@ public class Bank {
     }
 
 
-    public void addAccount(Context context) {
-        userList.get(currentUser).addAccount();
+    public void addAccount(Context context, int flag) {
+        userList.get(currentUser).addAccount(flag);
         databaseConnector.writeToFile(context, userList);
     }
 
+    public void addMoney(int flag, double money) {
+        userList.get(currentUser).addMoney(flag, money);
+    }
 
+    public void selfTransfer(int pay, int receive, double money) {
+        userList.get(currentUser).selfTransfer(pay, receive, money);
+    }
 
 }
