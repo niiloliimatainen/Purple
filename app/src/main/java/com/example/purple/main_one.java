@@ -31,7 +31,7 @@ public class main_one extends AppCompatActivity {
         if (accountList == null) {
             moneyAmount.setText("--");
         } else {
-            moneyAmount.setText(String.format(Locale.GERMANY, "%.2f", bank.getMoneyAmount()));
+            moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
         }
     }
 
