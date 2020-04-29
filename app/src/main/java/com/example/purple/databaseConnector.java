@@ -22,15 +22,16 @@ public class databaseConnector {
 
     public static void writeToFile(Context context, ArrayList<regularUser> userList) {
         try {
-            FileOutputStream fos = context.openFileOutput("database.json", Context.MODE_APPEND);
+            FileOutputStream fos = context.openFileOutput("database.json", Context.MODE_PRIVATE);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
-
             for (int i = 0; i < userList.size(); i++) {
                 Gson gson = new Gson();
                 String json_object = gson.toJson(userList.get(i));
+                System.out.println(json_object);
                 writer.print(json_object);
                 writer.println();
                 writer.flush();
+
             }
 
             writer.close();

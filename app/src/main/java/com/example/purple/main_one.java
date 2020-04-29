@@ -35,19 +35,21 @@ public class main_one extends AppCompatActivity {
 
     }
 
-
+    //Ehkä viel se countteri
     protected void onStart() {
         super.onStart();
         getDelegate().onStart();
-        ArrayList<Account> accountList = bank.getAccounts();
-        if (accountList == null) {
+        ArrayList<String> accountList = bank.getAccounts();
+        if (accountList.isEmpty()) {
             moneyAmount.setText("--");
             System.out.println("häölfgjsepofjpose");
         } else {
             moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
-            for (int i = 0; i < accountList.size(); i++) {
-                accounts.setText(accountList.get(i).getAccountNumber());
+            String text = "";
+            for (int i = 0; accountList.size() > i; i++) {
+                text = text + ("\n" + accountList.get(i));
             }
+            accounts.setText(text);
         }
     }
 
@@ -82,8 +84,11 @@ public class main_one extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //TÄHÄN SE AKKOUNTTIJUTTU
-                bank.addAccount(1);
-                Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                if (bank.addAccount(1)) {
+                    Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Max limit of accounts!", Toast.LENGTH_SHORT).show();
+                }
                 dialog.dismiss();
             }
         });
