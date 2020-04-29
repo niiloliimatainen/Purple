@@ -1,10 +1,9 @@
 package com.example.purple;
 
 
-
 public class Account {
     private String accountNumber;
-    private double money;
+    private double money = 0;
     private int payPossibility;
 
     public Account(String account, int flag) {

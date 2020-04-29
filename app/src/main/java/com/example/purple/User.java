@@ -1,12 +1,10 @@
 package com.example.purple;
 
 //Class for creating user. Abstract class shows the structure of user classes.
-
-
 import java.util.ArrayList;
 
 public abstract class User {
-        protected String firstName, lastName, email, phoneNumber, password;
+    protected String firstName, lastName, email, phoneNumber, password;
 
     public User(String fname, String lname,String email, String pnumber, String pword) {
         this.firstName = fname;
@@ -30,10 +28,11 @@ public abstract class User {
 
 
 class regularUser extends User {
-    private ArrayList<Account> accountList = new ArrayList<Account>();
+    private ArrayList<Account> accounts = new ArrayList<Account>();
 
     public regularUser(String fname, String lname,String email, String pnumber, String pword) {
         super(fname, lname, email, pnumber, pword);
+
     }
 
 
@@ -51,24 +50,36 @@ class regularUser extends User {
 
     @Override
     public void addAccount(int flag) {
-        String accountNumber = numberHandler.setAccountNumber();
-        Account account = new Account(accountNumber, flag);
-        accountList.add(account);
+        ArrayList<Account> initializer = new ArrayList<Account>();
+        if (accounts == null) {
+            String accountNumber = numberHandler.setAccountNumber();
+            Account account = new Account(accountNumber, flag);
+            initializer.add(account);
+        } else {
+            initializer = accounts;
+            String accountNumber = numberHandler.setAccountNumber();
+            Account account = new Account(accountNumber, flag);
+            initializer.add(account);
+        }
+        accounts = initializer;
+        for (int i = 0; i < accounts.size(); i++) {
+            System.out.println(accounts.get(i).getAccountNumber());
+        }
     }
 
 
     @Override
     public double getMoneyAmount() {
         double money = 0;
-        for (int i = 0; i < accountList.size(); i++) {
-               money += accountList.get(i).getMoneyAmount();
+        for (int i = 0; i < accounts.size(); i++) {
+               money += accounts.get(i).getMoneyAmount();
         }
         return money;
     }
 
     @Override
     public void addMoney(int index, double money) {
-        accountList.get(index).addMoney(money);
+        accounts.get(index).addMoney(money);
     }
 
 
@@ -86,7 +97,7 @@ class regularUser extends User {
 
     @Override
     public ArrayList<Account> getAccounts() {
-        return accountList;
+        return accounts;
     }
 
 

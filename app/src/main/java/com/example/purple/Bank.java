@@ -7,6 +7,7 @@ public class Bank {
     private static Bank bank = new Bank();
     private ArrayList<regularUser> userList = new ArrayList<>();
     private int currentUser;
+    private Context context;
 
     private Bank() {
        String BIC = "BOFAAFIHH";
@@ -18,7 +19,8 @@ public class Bank {
     }
 
 
-    public int addUser(String fname, String lname, String email, String pnumber, String pword, Context context) {
+    public int addUser(String fname, String lname, String email, String pnumber, String pword, Context Context) {
+            context = Context;
             regularUser user = new regularUser(fname, lname, email, pnumber, pword);
             for (int i = 0; i < userList.size(); i++) {
                 if (email.equals(userList.get(i).getUserEmail())) {
@@ -33,9 +35,9 @@ public class Bank {
     }
 
 
-    public int login(String email, String password, Context context) {
+    public int login(String email, String password, Context Context) {
+        context = Context;
         userList = databaseConnector.readFromFile(context);
-
         for (int i = 0; i < userList.size(); i++) {
             if (email.equals(userList.get(i).getUserEmail()) && (password.equals(userList.get(i).getUserPassword()))) {
                 currentUser = i;
@@ -46,7 +48,7 @@ public class Bank {
     }
 
 
-    public void addAccount(Context context, int flag) {
+    public void addAccount(int flag) {
         userList.get(currentUser).addAccount(flag);
         databaseConnector.writeToFile(context, userList);
     }
@@ -54,11 +56,13 @@ public class Bank {
 
     public void addMoney(int flag, double money) {
         userList.get(currentUser).addMoney(flag, money);
+        databaseConnector.writeToFile(context, userList);
     }
 
 
     public void selfTransfer(int pay, int receive, double money) {
         userList.get(currentUser).selfTransfer(pay, receive, money);
+        databaseConnector.writeToFile(context, userList);
     }
 
 
