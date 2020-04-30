@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class main_one extends AppCompatActivity {
     private GestureDetectorCompat gesture;
-    private TextView moneyAmount;
+    private TextView moneyAmount, accounts;
     private Bank bank = Bank.getInstance();
     private int allMoney = 0;
 
@@ -30,12 +30,26 @@ public class main_one extends AppCompatActivity {
         setContentView(R.layout.main_one);
         gesture = new GestureDetectorCompat(this, new LearnGesture());
         moneyAmount = findViewById(R.id.allmoney);
+        accounts = findViewById(R.id.accounts);
 
-        ArrayList<Account> accountList = bank.getAccounts();
-        if (accountList == null) {
+
+    }
+
+    //Ehkä viel se countteri
+    protected void onStart() {
+        super.onStart();
+        getDelegate().onStart();
+        ArrayList<String> accountList = bank.getAccounts();
+        if (accountList.isEmpty()) {
             moneyAmount.setText("--");
+            System.out.println("häölfgjsepofjpose");
         } else {
             moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
+            String text = "";
+            for (int i = 0; accountList.size() > i; i++) {
+                text = text + ("\n" + accountList.get(i));
+            }
+            accounts.setText(text);
         }
     }
 
@@ -70,21 +84,30 @@ public class main_one extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //TÄHÄN SE AKKOUNTTIJUTTU
-                Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                if (bank.addAccount(1)) {
+                    Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Max limit of accounts!", Toast.LENGTH_SHORT).show();
+                }
                 dialog.dismiss();
             }
         });
 
-        dialog.setNeutralButton("Savings", new DialogInterface.OnClickListener() {
+
+        dialog.setPositiveButton("Savings", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
                 //TÄHÄN SE AKKOUNTTIJUTTU TAAS
+                bank.addAccount(0);
                 Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
         dialog.show();
     }
+
+
+
     public void addCardPopup(View v){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         dialog.setTitle("Choose the card type");
