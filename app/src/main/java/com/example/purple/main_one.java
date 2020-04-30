@@ -109,6 +109,11 @@ public class main_one extends AppCompatActivity {
         dialog.show();
     }
 
+    public void payButton(View v){
+        Intent intent = new Intent(main_one.this, pay_transfer.class);
+        startActivity(intent);
+    }
+
 }
 
 
