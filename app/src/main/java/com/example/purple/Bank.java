@@ -62,8 +62,8 @@ public class Bank {
     }
 
 
-    public void addMoney(int flag, double money) {
-        userList.get(currentUser).addMoney(flag, money);
+    public void addMoney(int index, double money) {
+        userList.get(currentUser).addMoney(index, money);
         databaseConnector.writeToFile(context, userList);
     }
 
@@ -71,6 +71,21 @@ public class Bank {
     public void selfTransfer(int pay, int receive, double money) {
         userList.get(currentUser).selfTransfer(pay, receive, money);
         databaseConnector.writeToFile(context, userList);
+    }
+
+
+    public void transferMoney(String accountNumber) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < userList.size(); i++) {
+            list = userList.get(i).getAccounts();
+            for (int j = 0; i < list.size(); i++) {
+                if (accountNumber.equals(list.get(i))) {
+
+                    break;
+                }
+            }
+
+        }
     }
 
 
@@ -84,5 +99,12 @@ public class Bank {
         double money = userList.get(currentUser).getMoneyAmount();
         return money;
     }
+
+
+    public double getAccountsMoneyAmount(int index) {
+       double money = userList.get(currentUser).getAccountsMoneyAmount(index);
+        return money;
+    }
+
 
 }

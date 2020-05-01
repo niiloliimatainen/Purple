@@ -21,7 +21,7 @@ public class main_one extends AppCompatActivity {
     private GestureDetectorCompat gesture;
     private TextView moneyAmount, accounts;
     private Bank bank = Bank.getInstance();
-    private int allMoney = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +42,11 @@ public class main_one extends AppCompatActivity {
         ArrayList<String> accountList = bank.getAccounts();
         if (accountList.isEmpty()) {
             moneyAmount.setText("--");
-            System.out.println("häölfgjsepofjpose");
         } else {
-            moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
+            moneyAmount.setText(bank.getMoneyAmount() + "€");
             String text = "";
             for (int i = 0; accountList.size() > i; i++) {
-                text = text + ("\n" + accountList.get(i));
+                text = text + ("\n" + accountList.get(i) + " " + bank.getAccountsMoneyAmount(i) + "€");
             }
             accounts.setText(text);
         }
@@ -75,7 +74,6 @@ public class main_one extends AppCompatActivity {
     }
 
 
-
     public void addAccountPopup(View v){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         dialog.setTitle("Choose the account type");
@@ -85,7 +83,14 @@ public class main_one extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //TÄHÄN SE AKKOUNTTIJUTTU
                 if (bank.addAccount(1)) {
+                    ArrayList<String> accountList = bank.getAccounts();
                     Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                    moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
+                    String text = "";
+                    for (int i = 0; accountList.size() > i; i++) {
+                        text = text + ("\n" + accountList.get(i));
+                    }
+                    accounts.setText(text);
                 } else {
                     Toast.makeText(getApplicationContext(), "Max limit of accounts!", Toast.LENGTH_SHORT).show();
                 }
@@ -94,12 +99,23 @@ public class main_one extends AppCompatActivity {
         });
 
 
+
         dialog.setPositiveButton("Savings", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                //TÄHÄN SE AKKOUNTTIJUTTU TAAS
-                bank.addAccount(0);
-                Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                //TÄHÄN SE AKKOUNTTIJUTTU
+                if (bank.addAccount(0)) {
+                    ArrayList<String> accountList = bank.getAccounts();
+                    Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
+                    moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
+                    String text = "";
+                    for (int i = 0; accountList.size() > i; i++) {
+                        text = text + ("\n" + accountList.get(i));
+                    }
+                    accounts.setText(text);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Max limit of accounts!", Toast.LENGTH_SHORT).show();
+                }
                 dialog.dismiss();
             }
         });
@@ -136,6 +152,20 @@ public class main_one extends AppCompatActivity {
         Intent intent = new Intent(main_one.this, pay_transfer.class);
         startActivity(intent);
     }
+
+
+    public void addMoney(View v) {
+        ArrayList<String> accountList = bank.getAccounts();
+        bank.addMoney(1, 200);
+        moneyAmount.setText(bank.getMoneyAmount() + "€");
+        String text = "";
+        for (int i = 0; accountList.size() > i; i++) {
+            text = text + ("\n" + accountList.get(i) + " " + bank.getAccountsMoneyAmount(i) + "€");
+        }
+        accounts.setText(text);
+    }
+
+
 
 }
 

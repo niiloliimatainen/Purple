@@ -20,13 +20,14 @@ public abstract class User {
 
     public abstract String getUserEmail();
     public abstract String getUserPassword();
-    public abstract boolean addAccount(int flag);
-    public abstract void addMoney(int flag, double money);
+    public abstract boolean addAccount(int payPossibility);
+    public abstract void addMoney(int index, double money);
     public abstract void selfTransfer(int pay, int receive, double money);
-    public abstract void delAccount();
+    public abstract void delAccount(int index);
     public abstract ArrayList<String> getAccounts();
     public abstract void editUser();
     public abstract double getMoneyAmount();
+    public abstract double getAccountsMoneyAmount(int index);
 }
 
 
@@ -50,25 +51,25 @@ class regularUser extends User {
 
 
     @Override
-    public boolean addAccount(int flag) {
-       if (this.counter == 0) {
-           String accountNumber = numberHandler.setAccountNumber();
-           this.account1 = new Account(accountNumber, flag);
-           this.counter += 1;
-           System.out.println(this.counter);
-       } else if (this.counter == 1) {
-           String accountNumber = numberHandler.setAccountNumber();
-           this.account2 = new Account(accountNumber, flag);
-           this.counter += 1;
+    public boolean addAccount(int payPossibility) {
+        if (counter == 0) {
+            String accountNumber = numberHandler.setAccountNumber();
+            account1 = new Account(accountNumber, payPossibility);
+            counter += 1;
+            System.out.println(counter);
+        } else if (counter == 1) {
+            String accountNumber = numberHandler.setAccountNumber();
+            account2 = new Account(accountNumber, payPossibility);
+            counter += 1;
 
-       } else if (this.counter == 2) {
-           String accountNumber = numberHandler.setAccountNumber();
-           this.account3 = new Account(accountNumber, flag);
-           this.counter += 1;
-       } else {
-           return false;
-       }
-       return true;
+        } else if (counter == 2) {
+            String accountNumber = numberHandler.setAccountNumber();
+            account3 = new Account(accountNumber, payPossibility);
+            counter += 1;
+        } else {
+            return false;
+        }
+        return true;
     }
 
 
@@ -76,23 +77,45 @@ class regularUser extends User {
     public double getMoneyAmount() {
         double money = 0;
 
-        if (this.counter == 1) {
-            money += this.account1.getMoneyAmount();
-        } else if (this.counter == 2) {
-            money += this.account1.getMoneyAmount() + this.account2.getMoneyAmount();
-        } else if (this.counter == 3) {
-            money += this.account1.getMoneyAmount() + this.account2.getMoneyAmount() + this.account3.getMoneyAmount();
+        if (counter == 1) {
+            money += account1.getMoneyAmount();
+        } else if (counter == 2) {
+            money += account1.getMoneyAmount() + account2.getMoneyAmount();
+        } else if (counter == 3) {
+            money += account1.getMoneyAmount() + account2.getMoneyAmount() + account3.getMoneyAmount();
         }
         return money;
     }
 
     @Override
     public void addMoney(int index, double money) {
+        if (index == 1) {
+            account1.addMoney(money);
+        } else if (index == 2) {
+            account2.addMoney(money);
+        } else if (index == 3) {
+            account3.addMoney(money);
+        }
     }
 
 
     @Override
     public void selfTransfer(int pay, int receive, double money) {
+        if (pay == 1) {
+            account1.transferMoney(money);
+        } else if (pay == 2) {
+            account2.transferMoney(money);
+        } else if (pay == 3) {
+            account3.transferMoney(money);
+        }
+
+        if (receive == 1) {
+            account1.addMoney(money);
+        } else if (receive == 2) {
+            account2.addMoney(money);
+        } else if (receive == 3) {
+            account3.addMoney(money);
+        }
 
     }
 
@@ -106,23 +129,47 @@ class regularUser extends User {
     @Override
     public ArrayList<String> getAccounts() {
         ArrayList<String> list = new ArrayList<>();
-        if (this.counter == 1) {
-            list.add(this.account1.getAccountNumber());
-        } else if (this.counter == 2) {
-            list.add(this.account1.getAccountNumber());
-            list.add(this.account2.getAccountNumber());
-        } else if (this.counter == 3) {
-            list.add(this.account1.getAccountNumber());
-            list.add(this.account2.getAccountNumber());
-            list.add(this.account3.getAccountNumber());
+        if (counter == 1) {
+            list.add(account1.getAccountNumber());
+        } else if (counter == 2) {
+            list.add(account1.getAccountNumber());
+            list.add(account2.getAccountNumber());
+        } else if (counter == 3) {
+            list.add(account1.getAccountNumber());
+            list.add(account2.getAccountNumber());
+            list.add(account3.getAccountNumber());
         }
         return list;
     }
 
 
     @Override
-    public void delAccount() {
+    public void delAccount(int index) {
+        if (index == 1) {
+            account1 = null;
+            account1 = account2;
+            account2 = account3;
+            account3 = null;
+        } else if (index == 2) {
+            account2 = null;
+            account2 = account3;
+            account3 = null;
+        } else if (index == 3) {
+            account3 = null;
+        }
+    }
 
+    @Override
+    public double getAccountsMoneyAmount(int index) {
+        double money = 0;
+        if (index == 1) {
+            money = account1.getMoneyAmount();
+        } else if (index == 2) {
+            money = account2.getMoneyAmount();
+        } else if (index == 3) {
+            money = account3.getMoneyAmount();
+        }
+        return money;
     }
 }
 
