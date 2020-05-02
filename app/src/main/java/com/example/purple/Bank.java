@@ -86,6 +86,7 @@ public class Bank {
             }
 
         }
+        databaseConnector.writeToFile(context, userList);
     }
 
 

@@ -56,6 +56,10 @@ public class pay_transfer extends AppCompatActivity {
 
         Spinner chooseAcc = findViewById(R.id.chooseAcc);
         ArrayList<String> accountList = bank.getAccounts();
+        for (int i = 0; accountList.size() > i; i++) {
+           accountList.set(i, accountList.get(i) + " " + bank.getAccountsMoneyAmount(i) + "€");
+
+        }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, accountList);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chooseAcc.setAdapter(spinnerArrayAdapter);
@@ -68,6 +72,7 @@ public class pay_transfer extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void makeTransaction(View v){
         Spinner chooseAcc = findViewById(R.id.chooseAcc);
         Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
@@ -76,6 +81,8 @@ public class pay_transfer extends AppCompatActivity {
         double amount = Double.parseDouble(payamount.getText().toString());
         if (flag == 1){
             bank.selfTransfer(chooseAcc.getSelectedItemPosition(), chooseAccToPay.getSelectedItemPosition(), amount);
+            System.out.println(chooseAcc.getSelectedItemPosition() + " pay " + chooseAccToPay.getSelectedItemPosition());
+            Toast.makeText(getApplicationContext(), "Payment completed!", Toast.LENGTH_SHORT).show();
         }else if(flag == 2){
         }else{
             Toast.makeText(getApplicationContext(), "Choose an account first!", Toast.LENGTH_SHORT).show();
