@@ -17,8 +17,12 @@ public class Account {
     }
 
 
-    public void transferMoney(double x) {
+    public int transferMoney(double x) {
+        if (money < x) {
+            return 0;
+        }
         money -= x;
+        return 1;
     }
 
 

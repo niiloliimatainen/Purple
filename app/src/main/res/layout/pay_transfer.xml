@@ -9,8 +9,8 @@
 
     <Button
         android:id="@+id/payment"
-        android:layout_width="82dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="input account number"
         android:textSize="10sp"
@@ -98,10 +98,10 @@
 
     <EditText
         android:id="@+id/inputAccountToPay"
-        android:layout_width="347dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="text"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

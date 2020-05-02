@@ -23,12 +23,14 @@ public abstract class User {
     public abstract String getUserPassword();
     public abstract boolean addAccount(int payPossibility);
     public abstract void addMoney(int index, double money);
-    public abstract void selfTransfer(int pay, int receive, double money);
+    public abstract int transferMoney(int index, double money);
+    public abstract int selfTransfer(int pay, int receive, double money);
     public abstract void delAccount(int index);
     public abstract ArrayList<String> getAccounts();
     public abstract void editUser();
     public abstract double getMoneyAmount();
     public abstract double getAccountsMoneyAmount(int index);
+    public abstract int getAccountsPayPossibility(int index);
 }
 
 
@@ -101,15 +103,50 @@ class regularUser extends User {
 
 
     @Override
-    public void selfTransfer(int pay, int receive, double money) {
-        if (pay == 1) {
-            account1.transferMoney(money);
-        } else if (pay == 2) {
-            account2.transferMoney(money);
-        } else if (pay == 3) {
-            account3.transferMoney(money);
+    public int transferMoney(int index, double money) {
+        if (index == 1) {
+            if (account1.getPayPossibility() == 0) {
+                return 0;
+            }
+            if (account1.transferMoney(money) == 1) {
+                return 1;
+            }
+        } else if (index == 2) {
+            if (account2.getPayPossibility() == 0) {
+                return 0;
+            }
+            if (account2.transferMoney(money) == 1) {
+                return 1;
+            }
+        } else if (index == 3) {
+            if (account3.getPayPossibility() == 0) {
+                return 0;
+            }
+            if (account3.transferMoney(money) == 1) {
+                return 1;
+            }
         }
+        return 2;
+    }
 
+
+
+    @Override
+    public int selfTransfer(int pay, int receive, double money) {
+        int flag = 0;
+        if (pay == 1) {
+            if (account1.transferMoney(money) == 1) {
+                flag = 1;
+            }
+        } else if (pay == 2) {
+            if (account2.transferMoney(money) == 1) {
+                flag = 1;
+            }
+        } else if (pay == 3) {
+            if (account3.transferMoney(money) == 1) {
+                flag = 1;
+            }
+        }
         if (receive == 1) {
             account1.addMoney(money);
         } else if (receive == 2) {
@@ -117,7 +154,7 @@ class regularUser extends User {
         } else if (receive == 3) {
             account3.addMoney(money);
         }
-
+        return flag;
     }
 
 
@@ -171,6 +208,20 @@ class regularUser extends User {
             money = account3.getMoneyAmount();
         }
         return money;
+    }
+
+
+    @Override
+    public int getAccountsPayPossibility(int index) {
+        int payPossibility = 0;
+        if (index == 1) {
+            payPossibility = account1.getPayPossibility();
+        } else if (index == 2) {
+            payPossibility = account2.getPayPossibility();
+        } else if (index == 3) {
+            payPossibility = account3.getPayPossibility();
+        }
+        return payPossibility;
     }
 }
 
