@@ -5,28 +5,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class pay_transfer extends AppCompatActivity {
-
+    private Bank bank = Bank.getInstance();
+    private EditText inputAccountToPay, payamount;
+    int flag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_transfer);
+        payamount = findViewById(R.id.payamount);
+        inputAccountToPay = findViewById(R.id.inputAccountToPay);
 
         Button showInputButton = findViewById(R.id.payment);
         Button showSpinnerButton = findViewById(R.id.selfTransfer);
-        final View inputAccountToPay = findViewById(R.id.inputAccountToPay);
-        final View chooseAccToPay = findViewById(R.id.chooseAccToPay);
         final TextView paymentInfo = findViewById(R.id.paymentInfoTW);
         final View payButton = findViewById(R.id.payButton);
-        Spinner chooseAcc = findViewById(R.id.chooseAcc);
+        final Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
 
-        // molemmat spinnerit täytetään user->getAccounts liststa tässä!!
-
-        // tähän metodi joka odottaa kunnes maksutili ja maksettava tili valittu ja senjälkeen paybutton.setVisibility(View.VISIBLE);
 
         showInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +41,7 @@ public class pay_transfer extends AppCompatActivity {
                 chooseAccToPay.setVisibility(View.GONE);
                 paymentInfo.setVisibility(View.VISIBLE);
                 paymentInfo.setText("Input the account number you want to make payment");
+                flag = 2;
             }
         });
         showSpinnerButton.setOnClickListener(new View.OnClickListener(){
@@ -45,22 +52,40 @@ public class pay_transfer extends AppCompatActivity {
                 chooseAccToPay.setVisibility(View.VISIBLE);
                 paymentInfo.setVisibility(View.VISIBLE);
                 paymentInfo.setText("Choose the account you want to transfer to");
+                flag = 1;
             }
         });
 
-
-
-
-
-
+        Spinner chooseAcc = findViewById(R.id.chooseAcc);
+        ArrayList<String> accountList = bank.getAccounts();
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, accountList);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        chooseAcc.setAdapter(spinnerArrayAdapter);
+        chooseAccToPay.setAdapter(spinnerArrayAdapter);
     }
+
 
     public void returnMethod(View v){
         Intent intent = new Intent(pay_transfer.this, main_one.class);
         startActivity(intent);
     }
 
-}
+    public void makeTransaction(){
+        Spinner chooseAcc = findViewById(R.id.chooseAcc);
+        Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
+        chooseAcc.getSelectedItemPosition();
+        chooseAccToPay.getSelectedItemPosition();
+        double amount = Double.parseDouble(payamount.getText().toString());
+        if (flag == 1){
+            bank.selfTransfer(chooseAcc.getSelectedItemPosition(), chooseAccToPay.getSelectedItemPosition(), amount);
+        }else if(flag == 2){
+        }else{
+            Toast.makeText(getApplicationContext(), "Choose an account first!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    }
 
 
 
