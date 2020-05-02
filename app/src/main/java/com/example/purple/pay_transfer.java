@@ -28,7 +28,6 @@ public class pay_transfer extends AppCompatActivity {
         Button showInputButton = findViewById(R.id.payment);
         Button showSpinnerButton = findViewById(R.id.selfTransfer);
         final TextView paymentInfo = findViewById(R.id.paymentInfoTW);
-        final View payButton = findViewById(R.id.payButton);
         final Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
 
 
@@ -73,10 +72,12 @@ public class pay_transfer extends AppCompatActivity {
         Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
         chooseAcc.getSelectedItemPosition();
         chooseAccToPay.getSelectedItemPosition();
+
         double amount = Double.parseDouble(payamount.getText().toString());
         if (flag == 1){
             bank.selfTransfer(chooseAcc.getSelectedItemPosition(), chooseAccToPay.getSelectedItemPosition(), amount);
         }else if(flag == 2){
+
         }else{
             Toast.makeText(getApplicationContext(), "Choose an account first!", Toast.LENGTH_SHORT).show();
         }
