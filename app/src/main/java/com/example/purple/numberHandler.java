@@ -65,7 +65,7 @@ public class numberHandler {
 
     public static String setAccountNumber() {
         //Country code, IBAN-code and bank identifier
-        String account = "FI 86 433";
+        String account = "FI86 433";
         Random random = new Random();
         int number = random.nextInt(89999) + 10000;
         int number2 = random.nextInt(89999) + 10000;

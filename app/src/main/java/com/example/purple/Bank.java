@@ -68,25 +68,37 @@ public class Bank {
     }
 
 
-    public void selfTransfer(int pay, int receive, double money) {
-        userList.get(currentUser).selfTransfer(pay, receive, money);
-        databaseConnector.writeToFile(context, userList);
+    public int selfTransfer(int pay, int receive, double money) {
+        if (userList.get(currentUser).selfTransfer(pay, receive, money) == 1) {
+            databaseConnector.writeToFile(context, userList);
+            return 1;
+        }
+        return 0;
     }
 
 
-    public void transferMoney(String accountNumber) {
-        ArrayList<String> list = new ArrayList<>();
+    public int transferMoney(String receivingAcc, int payAccount, double money) {
+        ArrayList<String> list;
+        int flag;
         for (int i = 0; i < userList.size(); i++) {
             list = userList.get(i).getAccounts();
-            for (int j = 0; i < list.size(); i++) {
-                if (accountNumber.equals(list.get(i))) {
+            for (int x = 0; x < list.size(); x++) {
+                System.out.println(receivingAcc + " " + list.get(x));
+                if (receivingAcc.equals(list.get(x))) {
+                    if ((flag = userList.get(currentUser).transferMoney(payAccount, money)) == 1) {
+                        userList.get(i).addMoney(x + 1, money);
+                        databaseConnector.writeToFile(context, userList);
+                        return 1;
+                    } else if ((flag = userList.get(currentUser).transferMoney(payAccount, money)) == 0){
+                        return 2;
+                    } else {
+                        return 3;
+                    }
 
-                    break;
                 }
             }
-
         }
-        databaseConnector.writeToFile(context, userList);
+        return 4;
     }
 
 
@@ -107,5 +119,14 @@ public class Bank {
         return money;
     }
 
+
+    public String getAccountsPayPossibility(int index) {
+        int payPossibility;
+        if ((payPossibility = userList.get(currentUser).getAccountsPayPossibility(index)) == 1) {
+            return "Regular";
+        } else {
+            return "Savings";
+        }
+    }
 
 }

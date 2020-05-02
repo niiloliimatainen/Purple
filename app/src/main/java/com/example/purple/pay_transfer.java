@@ -16,18 +16,19 @@ import java.util.ArrayList;
 
 public class pay_transfer extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
-    private EditText inputAccountToPay, payamount;
+    private EditText inputAccountToPay, payAmount;
     int flag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_transfer);
-        payamount = findViewById(R.id.payamount);
+        payAmount = findViewById(R.id.payamount);
         inputAccountToPay = findViewById(R.id.inputAccountToPay);
 
         Button showInputButton = findViewById(R.id.payment);
         Button showSpinnerButton = findViewById(R.id.selfTransfer);
         final TextView paymentInfo = findViewById(R.id.paymentInfoTW);
+        final View payButton = findViewById(R.id.payButton);
         final Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
 
 
@@ -56,7 +57,7 @@ public class pay_transfer extends AppCompatActivity {
         Spinner chooseAcc = findViewById(R.id.chooseAcc);
         ArrayList<String> accountList = bank.getAccounts();
         for (int i = 0; accountList.size() > i; i++) {
-           accountList.set(i, accountList.get(i) + " " + bank.getAccountsMoneyAmount(i) + "€");
+           accountList.set(i, accountList.get(i) + " " + bank.getAccountsMoneyAmount(i + 1) + "€");
 
         }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, accountList);
@@ -72,25 +73,42 @@ public class pay_transfer extends AppCompatActivity {
     }
 
 
-    public void makeTransaction(View v) throws Exception{
+    public void makeTransaction(View v){
         Spinner chooseAcc = findViewById(R.id.chooseAcc);
         Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
         chooseAcc.getSelectedItemPosition();
         chooseAccToPay.getSelectedItemPosition();
-        double amount = Double.parseDouble(payamount.getText().toString());
+        double amount = Double.parseDouble(payAmount.getText().toString());
         if (flag == 1){
-            bank.selfTransfer(chooseAcc.getSelectedItemPosition(), chooseAccToPay.getSelectedItemPosition(), amount);
-            System.out.println(chooseAcc.getSelectedItemPosition() + " pay " + chooseAccToPay.getSelectedItemPosition());
-            Toast.makeText(getApplicationContext(), "Payment completed!", Toast.LENGTH_SHORT).show();
-        }else if(flag == 2){
+            if(bank.selfTransfer(chooseAcc.getSelectedItemPosition() + 1, chooseAccToPay.getSelectedItemPosition() + 1, amount) == 1) {
+                Toast.makeText(getApplicationContext(), "Payment completed!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(pay_transfer.this, main_one.class);
+                startActivity(intent);
+            } else if(bank.selfTransfer(chooseAcc.getSelectedItemPosition() + 1, chooseAccToPay.getSelectedItemPosition() + 1, amount) == 0) {
+                Toast.makeText(getApplicationContext(), "Not enough money!", Toast.LENGTH_SHORT).show();
+            }
 
+
+        }else if(flag == 2){
+            if (bank.transferMoney(inputAccountToPay.getText().toString(), chooseAcc.getSelectedItemPosition() + 1, amount) == 1) {
+                Toast.makeText(getApplicationContext(), "Payment completed!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(pay_transfer.this, main_one.class);
+                startActivity(intent);
+
+            } else if (bank.transferMoney(inputAccountToPay.getText().toString(), chooseAcc.getSelectedItemPosition() + 1, amount) == 2){
+                Toast.makeText(getApplicationContext(), "You're trying to pay with savings account!", Toast.LENGTH_SHORT).show();
+
+            } else if (bank.transferMoney(inputAccountToPay.getText().toString(), chooseAcc.getSelectedItemPosition() + 1, amount) == 3) {
+                Toast.makeText(getApplicationContext(), "Not enough money!", Toast.LENGTH_SHORT).show();
+
+            }else if (bank.transferMoney(inputAccountToPay.getText().toString(), chooseAcc.getSelectedItemPosition() + 1, amount) == 4) {
+                Toast.makeText(getApplicationContext(), "Invalid receiving account!", Toast.LENGTH_SHORT).show();
+            }
         }else{
             Toast.makeText(getApplicationContext(), "Choose an account first!", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-    }
+}
 
 
 
