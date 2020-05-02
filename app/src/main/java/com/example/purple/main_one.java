@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class main_one extends AppCompatActivity {
     private GestureDetectorCompat gesture;
-    private TextView moneyAmount, accounts;
+    private TextView moneyAmount, accounts, accountCounter;
     private Bank bank = Bank.getInstance();
 
 
@@ -31,6 +31,7 @@ public class main_one extends AppCompatActivity {
         gesture = new GestureDetectorCompat(this, new LearnGesture());
         moneyAmount = findViewById(R.id.allmoney);
         accounts = findViewById(R.id.accounts);
+        accountCounter = findViewById(R.id.accountCounter);
 
 
     }
@@ -45,9 +46,12 @@ public class main_one extends AppCompatActivity {
         } else {
             moneyAmount.setText(bank.getMoneyAmount() + "€");
             String text = "";
+            int counter = 0;
             for (int i = 0; accountList.size() > i; i++) {
                 text = text + ("\n" + accountList.get(i) + " " + bank.getAccountsMoneyAmount(i) + "€");
+                counter += 1;
             }
+            accountCounter.setText(counter + "/3");
             accounts.setText(text);
         }
     }
@@ -87,10 +91,13 @@ public class main_one extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
                     moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
                     String text = "";
+                    int counter = 0;
                     for (int i = 0; accountList.size() > i; i++) {
                         text = text + ("\n" + accountList.get(i));
+                        counter += 1;
                     }
                     accounts.setText(text);
+                    accountCounter.setText(counter + "/3");
                 } else {
                     Toast.makeText(getApplicationContext(), "Max limit of accounts!", Toast.LENGTH_SHORT).show();
                 }
@@ -109,10 +116,13 @@ public class main_one extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
                     moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
                     String text = "";
+                    int counter = 0;
                     for (int i = 0; accountList.size() > i; i++) {
                         text = text + ("\n" + accountList.get(i));
+                        counter += 1;
                     }
                     accounts.setText(text);
+                    accountCounter.setText(counter + "/3");
                 } else {
                     Toast.makeText(getApplicationContext(), "Max limit of accounts!", Toast.LENGTH_SHORT).show();
                 }

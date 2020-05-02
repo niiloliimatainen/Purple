@@ -18,6 +18,7 @@ public abstract class User {
 
     }
 
+    //index refers to account
     public abstract String getUserEmail();
     public abstract String getUserPassword();
     public abstract boolean addAccount(int payPossibility);
