@@ -72,12 +72,11 @@ public class pay_transfer extends AppCompatActivity {
     }
 
 
-    public void makeTransaction(View v){
+    public void makeTransaction(View v) throws Exception{
         Spinner chooseAcc = findViewById(R.id.chooseAcc);
         Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
         chooseAcc.getSelectedItemPosition();
         chooseAccToPay.getSelectedItemPosition();
-
         double amount = Double.parseDouble(payamount.getText().toString());
         if (flag == 1){
             bank.selfTransfer(chooseAcc.getSelectedItemPosition(), chooseAccToPay.getSelectedItemPosition(), amount);
