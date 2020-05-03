@@ -20,7 +20,7 @@ public class databaseConnector {
     //Constructor is private to make sure this class cannot be instantiated.
     private databaseConnector() { }
 
-    public static void writeToFile(Context context, ArrayList<regularUser> userList) {
+    public static void writeToFile(Context context, ArrayList<User> userList) {
         try {
             FileOutputStream fos = context.openFileOutput("database.json", Context.MODE_PRIVATE);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
@@ -42,8 +42,8 @@ public class databaseConnector {
     }
 
 
-    public static ArrayList<regularUser> readFromFile(Context context) {
-        ArrayList<regularUser> list = new ArrayList<regularUser>();
+    public static ArrayList<User> readFromFile(Context context) {
+        ArrayList<User> list = new ArrayList<User>();
         Gson gson = new Gson();
         String line;
         try {
@@ -52,7 +52,7 @@ public class databaseConnector {
             BufferedReader reader = new BufferedReader(isr);
 
             while ((line = reader.readLine()) != null) {
-                regularUser user = gson.fromJson(line, regularUser.class);
+                User user = gson.fromJson(line, User.class);
                 list.add(user);
             }
             reader.close();
@@ -61,4 +61,46 @@ public class databaseConnector {
         }
         return list;
     }
+
+
+
+    // Saving user's bank statement by email address
+    public static void saveBankStatement(Context context, String email, String transaction) {
+        try {
+            FileOutputStream fos = context.openFileOutput("email", Context.MODE_APPEND);
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
+
+            writer.print(transaction);
+            writer.println();
+            writer.flush();
+
+            writer.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static ArrayList<String> readBankStatement(Context context, String email) {
+        ArrayList<String> list = new ArrayList<>();
+        String line;
+        try {
+            FileInputStream fis = context.openFileInput("email");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader reader = new BufferedReader(isr);
+
+            while ((line = reader.readLine()) != null) {
+                list.add(line);
+            }
+            reader.close();
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+
+
 }

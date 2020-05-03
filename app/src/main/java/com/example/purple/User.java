@@ -3,7 +3,7 @@ package com.example.purple;
 //Class for creating user. Abstract class shows the structure of user classes.
 import java.util.ArrayList;
 
-public abstract class User {
+public class User {
     protected String firstName, lastName, email, phoneNumber, password;
     protected Account account1, account2, account3;
     protected int counter = 0;
@@ -15,45 +15,21 @@ public abstract class User {
         this.email = email;
         this.phoneNumber = pnumber;
         this.password = pword;
-
-    }
-
-    //index refers to account
-    public abstract String getUserEmail();
-    public abstract String getUserPassword();
-    public abstract boolean addAccount(int payPossibility);
-    public abstract void addMoney(int index, double money);
-    public abstract int transferMoney(int index, double money);
-    public abstract int selfTransfer(int pay, int receive, double money);
-    public abstract void delAccount(int index);
-    public abstract ArrayList<String> getAccounts();
-    public abstract void editUser();
-    public abstract double getMoneyAmount();
-    public abstract double getAccountsMoneyAmount(int index);
-    public abstract int getAccountsPayPossibility(int index);
-}
-
-
-class regularUser extends User {
-
-    public regularUser(String fname, String lname,String email, String pnumber, String pword) {
-        super(fname, lname, email, pnumber, pword);
     }
 
 
-    @Override
     public String getUserEmail() {
         return email;
     }
 
 
-    @Override
+
     public String getUserPassword() {
         return password;
     }
 
 
-    @Override
+
     public boolean addAccount(int payPossibility) {
         if (counter == 0) {
             String accountNumber = numberHandler.setAccountNumber();
@@ -76,7 +52,7 @@ class regularUser extends User {
     }
 
 
-    @Override
+
     public double getMoneyAmount() {
         double money = 0;
 
@@ -90,7 +66,7 @@ class regularUser extends User {
         return money;
     }
 
-    @Override
+
     public void addMoney(int index, double money) {
         if (index == 1) {
             account1.addMoney(money);
@@ -102,7 +78,7 @@ class regularUser extends User {
     }
 
 
-    @Override
+
     public int transferMoney(int index, double money) {
         if (index == 1) {
             if (account1.getPayPossibility() == 0) {
@@ -131,7 +107,6 @@ class regularUser extends User {
 
 
 
-    @Override
     public int selfTransfer(int pay, int receive, double money) {
         int flag = 0;
         if (pay == 1) {
@@ -158,13 +133,13 @@ class regularUser extends User {
     }
 
 
-    @Override
+
     public void editUser() {
 
     }
 
 
-    @Override
+
     public ArrayList<String> getAccounts() {
         ArrayList<String> list = new ArrayList<>();
         if (counter == 1) {
@@ -181,7 +156,6 @@ class regularUser extends User {
     }
 
 
-    @Override
     public void delAccount(int index) {
         if (index == 1) {
             account1 = null;
@@ -197,7 +171,7 @@ class regularUser extends User {
         }
     }
 
-    @Override
+
     public double getAccountsMoneyAmount(int index) {
         double money = 0;
         if (index == 1) {
@@ -211,7 +185,7 @@ class regularUser extends User {
     }
 
 
-    @Override
+
     public int getAccountsPayPossibility(int index) {
         int payPossibility = 0;
         if (index == 1) {
@@ -225,64 +199,14 @@ class regularUser extends User {
     }
 }
 
-/*
+
+
 class Admin extends User {
 
     public Admin(String fname, String lname,String email, String pnumber, String pword) {
         super(fname, lname, email, pnumber, pword);
     }
 
-
-    @Override
-    public String getUserEmail() {
-        return email;
-    }
-
-
-    @Override
-    public String getUserPassword() {
-        return password;
-    }
-
-
-    @Override
-    public void addAccount(int flag) {
-
-    }
-
-
-    @Override
-    public void selfTransfer(int pay, int receive, double money) {
-
-    }
-
-    @Override
-    public void editUser() {
-
-    }
-
-
-    @Override
-    public ArrayList<Account> getAccounts() {
-        return null;
-    }
-
-
-    @Override
-    public double getMoneyAmount() {
-        return 0;
-    }
-
-    @Override
-    public void delAccount() {
-
-    }
-
-    @Override
-    public void addMoney(int flag, double money) {
-    }
-
-    //All methods below this apply to all users
 
     public void delAnyAccount() {
 
@@ -298,4 +222,3 @@ class Admin extends User {
     }
 
 }
-*/
