@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
 import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ public class main_one extends AppCompatActivity {
     private GestureDetectorCompat gesture;
     private TextView moneyAmount, accounts, accountCounter;
     private Bank bank = Bank.getInstance();
+    private double creditLimit;
 
 
     @Override
@@ -36,7 +39,6 @@ public class main_one extends AppCompatActivity {
 
     }
 
-    //Ehkä viel se countteri
     protected void onStart() {
         super.onStart();
         getDelegate().onStart();
@@ -152,6 +154,29 @@ public class main_one extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which){
                 //TÄHÄN SE AKKOUNTTIJUTTU TAAS
                 Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                creditPopup();
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
+
+    }
+
+    private void creditPopup(){
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        creditLimit = 0;
+        dialog.setTitle("Creditcard");
+        dialog.setMessage("Input the limit for your creditcard");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dialog.setView(input);
+
+        dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                creditLimit = Double.parseDouble(input.getText().toString());
+                Toast.makeText(getApplicationContext(), "New card added, with credit limit of: " + creditLimit + "€", Toast.LENGTH_LONG).show();
                 dialog.dismiss();
             }
         });
@@ -165,14 +190,62 @@ public class main_one extends AppCompatActivity {
 
 
     public void addMoney(View v) {
-        ArrayList<String> accountList = bank.getAccounts();
-        bank.addMoney(1, 200);
-        moneyAmount.setText(bank.getMoneyAmount() + "€");
-        String text = "";
-        for (int i = 0; accountList.size() > i; i++) {
-            text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " " + accountList.get(i) + " " + bank.getAccountsMoneyAmount(i + 1) + "€");
-        }
-        accounts.setText(text);
+
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        dialog.setTitle("Add money");
+        dialog.setMessage("Input the amount you want to add\n");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dialog.setView(input);
+        dialog.setPositiveButton("Add to account 1.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                double money = Double.parseDouble(input.getText().toString());
+                ArrayList<String> accountList = bank.getAccounts();
+                bank.addMoney(1, money);
+                moneyAmount.setText(bank.getMoneyAmount() + "€");
+                String text = "";
+                for (int i = 0; accountList.size() > i; i++) {
+                    text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " " + accountList.get(i) + " " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                }
+                accounts.setText(text);
+                Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
+        dialog.setNegativeButton("Add to account 2.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                double money = Double.parseDouble(input.getText().toString());
+                ArrayList<String> accountList = bank.getAccounts();
+                bank.addMoney(2, money);
+                moneyAmount.setText(bank.getMoneyAmount() + "€");
+                String text = "";
+                for (int i = 0; accountList.size() > i; i++) {
+                    text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " " + accountList.get(i) + " " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                }
+                accounts.setText(text);
+                Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
+        dialog.setNeutralButton("Add to account 3.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                double money = Double.parseDouble(input.getText().toString());
+                ArrayList<String> accountList = bank.getAccounts();
+                bank.addMoney(3, money);
+                moneyAmount.setText(bank.getMoneyAmount() + "€");
+                String text = "";
+                for (int i = 0; accountList.size() > i; i++) {
+                    text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " " + accountList.get(i) + " " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                }
+                accounts.setText(text);
+                Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 
