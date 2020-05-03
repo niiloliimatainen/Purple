@@ -15,8 +15,8 @@ public abstract class User {
         this.email = email;
         this.phoneNumber = pnumber;
         this.password = pword;
-
     }
+
 
     //index refers to account
     public abstract String getUserEmail();

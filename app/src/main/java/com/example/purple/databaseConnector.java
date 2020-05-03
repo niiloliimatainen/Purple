@@ -61,4 +61,46 @@ public class databaseConnector {
         }
         return list;
     }
+
+
+
+    // Saving user's bank statement by email address
+    public static void saveBankStatement(Context context, String email, String transaction) {
+        try {
+            FileOutputStream fos = context.openFileOutput("email", Context.MODE_APPEND);
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
+
+            writer.print(transaction);
+            writer.println();
+            writer.flush();
+
+            writer.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static ArrayList<String> readBankStatement(Context context, String email) {
+        ArrayList<String> list = new ArrayList<>();
+        String line;
+        try {
+            FileInputStream fis = context.openFileInput("email");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader reader = new BufferedReader(isr);
+
+            while ((line = reader.readLine()) != null) {
+                list.add(line);
+            }
+            reader.close();
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+
+
 }
