@@ -112,7 +112,7 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("Savings", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                //TÄHÄN SE AKKOUNTTIJUTTU
+
                 if (bank.addAccount(0)) {
                     ArrayList<String> accountList = bank.getAccounts();
                     Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
@@ -143,7 +143,7 @@ public class main_one extends AppCompatActivity {
         dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //TÄHÄN SE AKKOUNTTIJUTTU
+
                 Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -152,7 +152,7 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                //TÄHÄN SE AKKOUNTTIJUTTU TAAS
+
                 Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
                 creditPopup();
                 dialog.dismiss();
@@ -197,6 +197,7 @@ public class main_one extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialog.setView(input);
+        //
         dialog.setPositiveButton("Add to account 1.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
