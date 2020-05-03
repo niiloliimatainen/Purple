@@ -81,7 +81,7 @@ public class databaseConnector {
         }
     }
 
-
+    // Reading user's bank statement by email address
     public static ArrayList<String> readBankStatement(Context context, String email) {
         ArrayList<String> list = new ArrayList<>();
         String line;
