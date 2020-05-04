@@ -144,9 +144,8 @@ public class Bank {
 
 
     public String getAccountsPayPossibility(int index) {
-        //eiks toi oo turha muuttuja
-        int payPossibility;
-        if ((payPossibility = userList.get(currentUser).getAccountsPayPossibility(index)) == 1) {
+
+        if ((userList.get(currentUser).getAccountsPayPossibility(index)) == 1) {
             return "Regular";
         } else {
             return "Savings";
