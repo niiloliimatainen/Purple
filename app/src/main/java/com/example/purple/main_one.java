@@ -153,7 +153,7 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                //creditkortti lisätään eri metodissa
+                //creditkortti lisätään eri metodissa ehkä tai emmätiie mitä mä teen
                 creditPopup();
                 dialog.dismiss();
 
