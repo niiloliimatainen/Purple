@@ -159,7 +159,7 @@ public class main_one extends AppCompatActivity {
 
 
     public void whichAccountToAddPopup(View v){
-        int counter = 0
+        int counter = 0;
         String account1 = null, account2 = null, account3 = null;
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         ArrayList<String> accountList = bank.getAccounts();
@@ -169,8 +169,9 @@ public class main_one extends AppCompatActivity {
         accountsToAddCard.add(null);
 
         for(int i = 0; accountList.size()>i;i++){
-
+            counter += 1;
             if(bank.getAccountsPayPossibility(i + 1).equals("Regular")){
+
                 if (counter == 1) {
                     account1 = (i + 1) + "." + accountList.get(i);
                     accountsToAddCard.add(i, account1);
