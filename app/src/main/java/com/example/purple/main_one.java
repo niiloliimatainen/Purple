@@ -222,7 +222,6 @@ public class main_one extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialog.setView(input);
-        dialog.show();
 
         dialog.setPositiveButton("Add to account 1.", new DialogInterface.OnClickListener() {
             @Override
@@ -272,6 +271,7 @@ public class main_one extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+        dialog.show();
     }
 
 
