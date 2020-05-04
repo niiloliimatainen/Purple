@@ -12,7 +12,6 @@ public class Bank {
     private int currentUser;
     private Context context;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    private Date date = new Date();
 
 
     private Bank() {
@@ -67,8 +66,9 @@ public class Bank {
 
 
     public void addMoney(int index, double money) {
+        Date date = new Date();
         String accountNumber = userList.get(currentUser).getAccountNumber(index);
-        String transaction = sdf.format(date) + "   ADD MONEY   " + money + userList.get(currentUser).getName();
+        String transaction = String.format("%s        %s         +%s",sdf.format(date), userList.get(currentUser).getName(), money);
         System.out.println(transaction);
         userList.get(currentUser).addMoney(index, money);
         databaseConnector.writeToFile(context, userList);
@@ -77,9 +77,16 @@ public class Bank {
 
 
     public int selfTransfer(int pay, int receive, double money) {
-        String transaction = sdf.format(date) + "   SELF TRANSFER   " + money + userList.get(currentUser).getName();
+        Date date = new Date();
+        String accountNumber1 = userList.get(currentUser).getAccountNumber(pay);
+        String accountNumber2 = userList.get(currentUser).getAccountNumber(receive);
+        String transaction1 = String.format("%s        %s         +%s",sdf.format(date), userList.get(currentUser).getName(), money);
+        String transaction2 = String.format("%s        %s         -%s",sdf.format(date), userList.get(currentUser).getName(), money);
+
         if (userList.get(currentUser).selfTransfer(pay, receive, money) == 1) {
             databaseConnector.writeToFile(context, userList);
+            databaseConnector.saveBankStatement(context, accountNumber1, transaction1);
+            databaseConnector.saveBankStatement(context, accountNumber2, transaction2);
             return 1;
         }
         return 0;
@@ -87,18 +94,25 @@ public class Bank {
 
 
     public int transferMoney(String receivingAcc, int payAccount, double money) {
+        Date date = new Date();
+        String accountNumber = userList.get(currentUser).getAccountNumber(payAccount);
         ArrayList<String> list;
-        int flag;
+
         for (int i = 0; i < userList.size(); i++) {
             list = userList.get(i).getAccounts();
             for (int x = 0; x < list.size(); x++) {
                 System.out.println(receivingAcc + " " + list.get(x));
                 if (receivingAcc.equals(list.get(x))) {
-                    if ((flag = userList.get(currentUser).transferMoney(payAccount, money)) == 1) {
+                    if ((userList.get(currentUser).transferMoney(payAccount, money)) == 1) {
                         userList.get(i).addMoney(x + 1, money);
+                        String transaction1 = String.format("%s        %s         +%s",sdf.format(date), userList.get(currentUser).getName(), money);
+                        String transaction2 = String.format("%s        %s         -%s",sdf.format(date), userList.get(i).getName(), money);
                         databaseConnector.writeToFile(context, userList);
+                        databaseConnector.saveBankStatement(context, accountNumber, transaction2);
+                        databaseConnector.saveBankStatement(context, receivingAcc, transaction1);
+
                         return 1;
-                    } else if ((flag = userList.get(currentUser).transferMoney(payAccount, money)) == 0){
+                    } else if ((userList.get(currentUser).transferMoney(payAccount, money)) == 0){
                         return 2;
                     } else {
                         return 3;
@@ -162,6 +176,12 @@ public class Bank {
         } else {
             return false;
         }
+    }
+
+
+    public String getAccountNumber(int index) {
+        String accountNumber = userList.get(currentUser).getAccountNumber(index);
+        return accountNumber;
     }
 
 

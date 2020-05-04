@@ -338,7 +338,7 @@ public class main_one extends AppCompatActivity {
         dialog.setTitle("Choose account");
 
 
-        dialog.setNeutralButton("Account 1.", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Bank statement of Account 1.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(main_one.this, bankStatement1.class);
@@ -350,10 +350,11 @@ public class main_one extends AppCompatActivity {
         if (accountList.size() == 1) {
             dialog.show();
         }
-        dialog.setNegativeButton("Account 2.", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("Bank statement of Account 2.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                Intent intent = new Intent(main_one.this, bankStatement2.class);
+                startActivity(intent);
                 dialog.dismiss();
             }
         });
@@ -361,10 +362,11 @@ public class main_one extends AppCompatActivity {
             dialog.show();
         }
 
-        dialog.setPositiveButton("Account 3.", new DialogInterface.OnClickListener() {
+        dialog.setNeutralButton("Bank statement of Account 3.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                Intent intent = new Intent(main_one.this, bankStatement3.class);
+                startActivity(intent);
                 dialog.dismiss();
             }
         });
