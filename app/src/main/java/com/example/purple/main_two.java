@@ -16,7 +16,7 @@ import android.widget.Spinner;
 public class main_two extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private GestureDetectorCompat gesture;
-    private Spinner chooseCountry = findViewById(R.id.chooseCountry);
+
 
 
     @Override
@@ -24,7 +24,6 @@ public class main_two extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_two);
         gesture = new GestureDetectorCompat(this, new LearnGesture());
-
 
         //tässä alustetaan spinneri korteilla
 
@@ -37,10 +36,12 @@ public class main_two extends AppCompatActivity {
     }
 
     public void cardPayment(View v){
+        Spinner chooseCountry = findViewById(R.id.chooseCountry);
         String country = chooseCountry.getSelectedItem().toString();
     }
 
     public void withDraw(View v){
+        Spinner chooseCountry = findViewById(R.id.chooseCountry);
         String country = chooseCountry.getSelectedItem().toString();
 
     }

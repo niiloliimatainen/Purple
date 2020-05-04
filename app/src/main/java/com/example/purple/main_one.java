@@ -137,7 +137,7 @@ public class main_one extends AppCompatActivity {
 
 
 
-    public void addCardPopup(final String accNumber){
+    public void addCardPopup(){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         dialog.setTitle("Choose the card type");
 
@@ -154,7 +154,7 @@ public class main_one extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which){
                 //creditkortti lisätään eri metodissa
-                creditPopup(accNumber);
+                creditPopup();
                 dialog.dismiss();
 
             }
@@ -173,6 +173,7 @@ public class main_one extends AppCompatActivity {
             }
         }
         if(accountsToAddCard.size()==0){
+
             dialog.setTitle("No accounts!");
             dialog.setMessage("You need to create account first!");
             dialog.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
@@ -189,7 +190,7 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("1. Account", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                addCardPopup(accountsToAddCard.get(0));
+                addCardPopup();
                 dialog.dismiss();
             }
         });
@@ -200,7 +201,7 @@ public class main_one extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which){
                 accToAddCard = accountsToAddCard.get(1);
-                addCardPopup(accountsToAddCard.get(1));
+                addCardPopup();
                 dialog.dismiss();
             }
         });
@@ -210,7 +211,7 @@ public class main_one extends AppCompatActivity {
         dialog.setNegativeButton("3. Account", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                addCardPopup(accountsToAddCard.get(2));
+                addCardPopup();
                 dialog.dismiss();
             }
         });
@@ -220,7 +221,7 @@ public class main_one extends AppCompatActivity {
 
     }
 
-    private void creditPopup(String accountNumber){
+    private void creditPopup(){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         creditLimit = 1;
         dialog.setTitle("Creditcard");
@@ -232,12 +233,17 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                creditLimit = Double.parseDouble(input.getText().toString());
+                if(input.getText() == null || input.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(),  "Incorrect amount!", Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
+                }else {
+                    creditLimit = Double.parseDouble(input.getText().toString());
 
-                //accountin lisäys creditlimitillä
+                    //accountin lisäys creditlimitillä
 
-                Toast.makeText(getApplicationContext(), "New card added, with credit limit of: " + creditLimit + "€", Toast.LENGTH_LONG).show();
-                dialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "New card added, with credit limit of: " + creditLimit + "€", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                }
             }
         });
         dialog.show();
@@ -262,21 +268,22 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("Add to account 1.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(input.getText() == null){
+                if(input.getText() == null || input.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),  "Incorrect amount!", Toast.LENGTH_SHORT).show();
                     dialog.cancel();
+                }else {
+                    double money = Double.parseDouble(input.getText().toString());
+                    ArrayList<String> accountList = bank.getAccounts();
+                    bank.addMoney(1, money);
+                    moneyAmount.setText(bank.getMoneyAmount() + "€");
+                    String text = "";
+                    for (int i = 0; accountList.size() > i; i++) {
+                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                    }
+                    accounts.setText(text);
+                    Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
                 }
-                double money = Double.parseDouble(input.getText().toString());
-                ArrayList<String> accountList = bank.getAccounts();
-                bank.addMoney(1, money);
-                moneyAmount.setText(bank.getMoneyAmount() + "€");
-                String text = "";
-                for (int i = 0; accountList.size() > i; i++) {
-                    text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
-                }
-                accounts.setText(text);
-                Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
-                dialog.dismiss();
             }
         });
         if (accountList.size() == 1) {
@@ -285,21 +292,22 @@ public class main_one extends AppCompatActivity {
         dialog.setNegativeButton("Add to account 2.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(input.getText() == null){
+                if(input.getText() == null || input.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),  "Incorrect amount!", Toast.LENGTH_SHORT).show();
                     dialog.cancel();
+                }else {
+                    double money = Double.parseDouble(input.getText().toString());
+                    ArrayList<String> accountList = bank.getAccounts();
+                    bank.addMoney(2, money);
+                    moneyAmount.setText(bank.getMoneyAmount() + "€");
+                    String text = "";
+                    for (int i = 0; accountList.size() > i; i++) {
+                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                    }
+                    accounts.setText(text);
+                    Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
                 }
-                double money = Double.parseDouble(input.getText().toString());
-                ArrayList<String> accountList = bank.getAccounts();
-                bank.addMoney(2, money);
-                moneyAmount.setText(bank.getMoneyAmount() + "€");
-                String text = "";
-                for (int i = 0; accountList.size() > i; i++) {
-                    text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
-                }
-                accounts.setText(text);
-                Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
-                dialog.dismiss();
             }
         });
         if (accountList.size() == 2) {
@@ -308,21 +316,22 @@ public class main_one extends AppCompatActivity {
         dialog.setNeutralButton("Add to account 3.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(input.getText() == null){
+                if(input.getText() == null || input.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),  "Incorrect amount!", Toast.LENGTH_SHORT).show();
                     dialog.cancel();
+                }else {
+                    double money = Double.parseDouble(input.getText().toString());
+                    ArrayList<String> accountList = bank.getAccounts();
+                    bank.addMoney(3, money);
+                    moneyAmount.setText(bank.getMoneyAmount() + "€");
+                    String text = "";
+                    for (int i = 0; accountList.size() > i; i++) {
+                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                    }
+                    accounts.setText(text);
+                    Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
                 }
-                double money = Double.parseDouble(input.getText().toString());
-                ArrayList<String> accountList = bank.getAccounts();
-                bank.addMoney(3, money);
-                moneyAmount.setText(bank.getMoneyAmount() + "€");
-                String text = "";
-                for (int i = 0; accountList.size() > i; i++) {
-                    text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
-                }
-                accounts.setText(text);
-                Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
-                dialog.dismiss();
             }
         });
         if (accountList.size() == 3) {
