@@ -92,6 +92,7 @@ public class databaseConnector {
             while ((line = reader.readLine()) != null) {
                 list.add(line);
             }
+
             reader.close();
         }  catch (IOException e) {
             e.printStackTrace();
