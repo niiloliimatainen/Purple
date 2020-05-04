@@ -137,16 +137,14 @@ public class main_one extends AppCompatActivity {
 
 
 
-    public void addCardPopup(View v){
-        //asettaa accToAddCard Stringin arvoksi tilin numeron johon kortti lisätään
-        whichAccountPopup();
+    public void addCardPopup(final String accNumber){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         dialog.setTitle("Choose the card type");
 
         dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //debitkortin lisäys tähän
+
                 Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -155,34 +153,71 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                //ja lähetetään accountNumber creditPopuppiin jossa lisäys tapahtuuu
-                //creditPopup(accountNumber);
+                //creditkortti lisätään eri metodissa
+                creditPopup(accNumber);
                 dialog.dismiss();
 
             }
         });
         dialog.show();
     }
-    public void whichAccountPopup(){
+
+    public void whichAccountToAddPopup(View v){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        ArrayList<String> accountList = bank.getAccounts();
+        final ArrayList<String> accountsToAddCard = new ArrayList<>();
+        for(int i = 0; accountList.size()>i;i++){
+            bank.getAccountsPayPossibility(i);
+            if(bank.getAccountsPayPossibility(i).equals("Regular")){
+                accountsToAddCard.add(accountList.get(i));
+            }
+        }
+        if(accountsToAddCard.size()==0){
+            dialog.setTitle("No accounts!");
+            dialog.setMessage("You need to create account first!");
+            dialog.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+
         dialog.setTitle("Choose an account you want to add card");
-        dialog.setPositiveButton("Regular account 1.", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("1. Account", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //tähän haku bankistä regular account ykkönen
+                addCardPopup(accountsToAddCard.get(0));
                 dialog.dismiss();
             }
         });
-
-        dialog.setNegativeButton("Regular account 2.", new DialogInterface.OnClickListener() {
+        if(accountsToAddCard.size()==1){
+            dialog.show();
+        }
+        dialog.setNeutralButton("2. Account", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                //tähän sama haku
+                accToAddCard = accountsToAddCard.get(1);
+                addCardPopup(accountsToAddCard.get(1));
                 dialog.dismiss();
-
             }
         });
-        dialog.show();
+        if(accountsToAddCard.size()==2){
+            dialog.show();
+        }
+        dialog.setNegativeButton("3. Account", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                addCardPopup(accountsToAddCard.get(2));
+                dialog.dismiss();
+            }
+        });
+        if(accountsToAddCard.size()==3){
+            dialog.show();
+        }
+
     }
 
     private void creditPopup(String accountNumber){
@@ -217,6 +252,7 @@ public class main_one extends AppCompatActivity {
     public void addMoney(View v) {
 
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        ArrayList<String> accountList = bank.getAccounts();
         dialog.setTitle("Add money");
         dialog.setMessage("Input the amount you want to add\n");
         final EditText input = new EditText(this);
@@ -226,6 +262,10 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("Add to account 1.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if(input.getText() == null){
+                    Toast.makeText(getApplicationContext(),  "Incorrect amount!", Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
+                }
                 double money = Double.parseDouble(input.getText().toString());
                 ArrayList<String> accountList = bank.getAccounts();
                 bank.addMoney(1, money);
@@ -239,9 +279,16 @@ public class main_one extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+        if (accountList.size() == 1) {
+            dialog.show();
+        }
         dialog.setNegativeButton("Add to account 2.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if(input.getText() == null){
+                    Toast.makeText(getApplicationContext(),  "Incorrect amount!", Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
+                }
                 double money = Double.parseDouble(input.getText().toString());
                 ArrayList<String> accountList = bank.getAccounts();
                 bank.addMoney(2, money);
@@ -255,9 +302,16 @@ public class main_one extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+        if (accountList.size() == 2) {
+            dialog.show();
+        }
         dialog.setNeutralButton("Add to account 3.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if(input.getText() == null){
+                    Toast.makeText(getApplicationContext(),  "Incorrect amount!", Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
+                }
                 double money = Double.parseDouble(input.getText().toString());
                 ArrayList<String> accountList = bank.getAccounts();
                 bank.addMoney(3, money);
@@ -271,7 +325,10 @@ public class main_one extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        dialog.show();
+        if (accountList.size() == 3) {
+            dialog.show();
+        }
+
     }
 
 

@@ -9,4 +9,21 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string-array name="CountryArray">
+        <item>Finland</item>
+        <item>Iraq</item>
+        <item>Saudi Arabia</item>
+        <item>Germany</item>
+        <item>China</item>
+        <item>Japan</item>
+        <item>Guatemala</item>
+        <item>Australia</item>
+        <item>Italy</item>
+        <item>United States</item>
+        <item>Sweden</item>
+        <item>Russia</item>
+        <item>Norway</item>
+        <item>Great Britain</item>
+        <item>New Guinea</item>
+    </string-array>
 </resources>
