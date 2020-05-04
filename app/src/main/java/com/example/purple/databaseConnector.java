@@ -16,7 +16,6 @@ import java.util.ArrayList;
 //This is an utility class for file input and output.
 
 public class databaseConnector {
-
     //Constructor is private to make sure this class cannot be instantiated.
     private databaseConnector() { }
 
@@ -65,9 +64,9 @@ public class databaseConnector {
 
 
     // Saving user's bank statement by email address
-    public static void saveBankStatement(Context context, String email, String transaction) {
+    public static void saveBankStatement(Context context, String accountNumber, String transaction) {
         try {
-            FileOutputStream fos = context.openFileOutput("email", Context.MODE_APPEND);
+            FileOutputStream fos = context.openFileOutput(accountNumber + ".txt", Context.MODE_APPEND);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
 
             writer.print(transaction);
@@ -82,11 +81,11 @@ public class databaseConnector {
     }
 
     // Reading user's bank statement by email address
-    public static ArrayList<String> readBankStatement(Context context, String email) {
+    public static ArrayList<String> readBankStatement(Context context, String accountNumber) {
         ArrayList<String> list = new ArrayList<>();
         String line;
         try {
-            FileInputStream fis = context.openFileInput("email");
+            FileInputStream fis = context.openFileInput(accountNumber + ".txt");
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader reader = new BufferedReader(isr);
 

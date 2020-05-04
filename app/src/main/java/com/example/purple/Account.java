@@ -4,11 +4,21 @@ package com.example.purple;
 public class Account {
     private String accountNumber;
     private double money = 0;
-    private int payPossibility;
+    private int payPossibility, cards = 0;
 
     public Account(String account, int flag) {
         accountNumber = account;
         payPossibility = flag;
+    }
+
+
+    public void addCard() {
+        cards += 1;
+    }
+
+
+    public int getCards() {
+        return cards;
     }
 
 

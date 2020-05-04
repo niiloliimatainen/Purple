@@ -1,13 +1,19 @@
 package com.example.purple;
 
 import android.content.Context;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Bank {
     private static Bank bank = new Bank();
     private ArrayList<User> userList = new ArrayList<>();
     private int currentUser;
     private Context context;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private Date date = new Date();
+
 
     private Bank() {
        String BIC = "BOFAAFIHH";
@@ -50,25 +56,28 @@ public class Bank {
 
 
     public boolean addAccount(int flag) {
-        boolean ok = userList.get(currentUser).addAccount(flag);
-        if (ok) {
-            System.out.println(userList.get(currentUser).counter);
+        String accountNumber = numberHandler.setAccountNumber();
+        if (userList.get(currentUser).addAccount(flag, accountNumber)) {
             databaseConnector.writeToFile(context, userList);
             return true;
         } else {
             return false;
         }
-
     }
 
 
     public void addMoney(int index, double money) {
+        String accountNumber = userList.get(currentUser).getAccountNumber(index);
+        String transaction = sdf.format(date) + "   ADD MONEY   " + money + userList.get(currentUser).getName();
+        System.out.println(transaction);
         userList.get(currentUser).addMoney(index, money);
         databaseConnector.writeToFile(context, userList);
+        databaseConnector.saveBankStatement(context, accountNumber, transaction);
     }
 
 
     public int selfTransfer(int pay, int receive, double money) {
+        String transaction = sdf.format(date) + "   SELF TRANSFER   " + money + userList.get(currentUser).getName();
         if (userList.get(currentUser).selfTransfer(pay, receive, money) == 1) {
             databaseConnector.writeToFile(context, userList);
             return 1;
@@ -128,5 +137,33 @@ public class Bank {
             return "Savings";
         }
     }
+
+
+    public boolean addCard(int index) {
+        String cardNumber = numberHandler.setCardNumber();
+        int CVC = numberHandler.setCVC();
+        int PIN = numberHandler.setPIN();
+        if (userList.get(currentUser).addCard(index, cardNumber, CVC, PIN)) {
+            databaseConnector.writeToFile(context, userList);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public boolean addCreditCard(int index, double creditLimit) {
+        String cardNumber = numberHandler.setCardNumber();
+        int CVC = numberHandler.setCVC();
+        int PIN = numberHandler.setPIN();
+        if (userList.get(currentUser).addCreditCard(index, cardNumber, CVC, PIN, creditLimit)) {
+            databaseConnector.writeToFile(context, userList);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
 }

@@ -69,8 +69,37 @@ public class numberHandler {
         Random random = new Random();
         int number = random.nextInt(89999) + 10000;
         int number2 = random.nextInt(89999) + 10000;
-        account = account + String.valueOf(number) + String.valueOf(number2);
+        account = account + number + number2;
         return account;
     }
+
+
+    public static String setCardNumber() {
+        Random random = new Random();
+        int number = random.nextInt(8999) + 1000;
+        int number2 = random.nextInt(8999) + 1000;
+        int number3 = random.nextInt(8999) + 1000;
+        int number4 = random.nextInt(8999) + 1000;
+
+        String cardNumber = number + " " + number2 + " " + number3 + " " + number4;
+        return cardNumber;
+    }
+
+
+    public static int setCVC() {
+        Random random = new Random();
+        int CVC = random.nextInt(899) + 100;
+        System.out.println(CVC);
+        return CVC;
+    }
+
+
+    public static int setPIN() {
+        Random random = new Random();
+        int PIN = random.nextInt(8999) + 1000;
+        System.out.println(PIN);
+        return PIN;
+    }
+
 
 }

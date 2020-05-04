@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class User {
     protected String firstName, lastName, email, phoneNumber, password;
     protected Account account1, account2, account3;
-    protected int counter = 0;
+    protected  Card card1, card2, card3;
+    protected int accCounter = 0, cardCounter = 0;
 
 
     public User(String fname, String lname,String email, String pnumber, String pword) {
@@ -30,21 +31,18 @@ public class User {
 
 
 
-    public boolean addAccount(int payPossibility) {
-        if (counter == 0) {
-            String accountNumber = numberHandler.setAccountNumber();
+    public boolean addAccount(int payPossibility, String accountNumber) {
+        if (accCounter == 0) {
             account1 = new Account(accountNumber, payPossibility);
-            counter += 1;
-            System.out.println(counter);
-        } else if (counter == 1) {
-            String accountNumber = numberHandler.setAccountNumber();
+            accCounter += 1;
+            System.out.println(accCounter);
+        } else if (accCounter == 1) {
             account2 = new Account(accountNumber, payPossibility);
-            counter += 1;
+            accCounter += 1;
 
-        } else if (counter == 2) {
-            String accountNumber = numberHandler.setAccountNumber();
+        } else if (accCounter == 2) {
             account3 = new Account(accountNumber, payPossibility);
-            counter += 1;
+            accCounter += 1;
         } else {
             return false;
         }
@@ -52,15 +50,66 @@ public class User {
     }
 
 
+    public boolean addCard(int index, String cardNumber, int CVC, int PIN) {
+        if (index == 1) {
+            if (account1.getCards() == 0) {
+                account1.addCard();
+                card1 = new Card(cardNumber, PIN, CVC, account1);
+                return true;
+            }
+
+        } else if (index == 2) {
+            if (account2.getCards() == 0) {
+                account2.addCard();
+                card2 = new Card(cardNumber, PIN, CVC, account2);
+                return true;
+            }
+
+        } else if (index == 3) {
+            if (account3.getCards() == 0) {
+                account3.addCard();
+                card3 = new Card(cardNumber, PIN, CVC, account3);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean addCreditCard(int index, String cardNumber, int CVC, int PIN, double creditLimit) {
+        if (index == 1) {
+            if (account1.getCards() == 0) {
+                account1.addCard();
+                card1 = new creditCard(cardNumber, PIN, CVC, creditLimit, account1);
+                return true;
+            }
+
+        } else if (index == 2) {
+            if (account2.getCards() == 0) {
+                account2.addCard();
+                card2 = new creditCard(cardNumber, PIN, CVC, creditLimit, account2);
+                return true;
+            }
+
+        } else if (index == 3) {
+            if (account3.getCards() == 0) {
+                account3.addCard();
+                card3 = new creditCard(cardNumber, PIN, CVC, creditLimit, account3);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public double getMoneyAmount() {
         double money = 0;
 
-        if (counter == 1) {
+        if (accCounter == 1) {
             money += account1.getMoneyAmount();
-        } else if (counter == 2) {
+        } else if (accCounter == 2) {
             money += account1.getMoneyAmount() + account2.getMoneyAmount();
-        } else if (counter == 3) {
+        } else if (accCounter == 3) {
             money += account1.getMoneyAmount() + account2.getMoneyAmount() + account3.getMoneyAmount();
         }
         return money;
@@ -142,12 +191,12 @@ public class User {
 
     public ArrayList<String> getAccounts() {
         ArrayList<String> list = new ArrayList<>();
-        if (counter == 1) {
+        if (accCounter == 1) {
             list.add(account1.getAccountNumber());
-        } else if (counter == 2) {
+        } else if (accCounter == 2) {
             list.add(account1.getAccountNumber());
             list.add(account2.getAccountNumber());
-        } else if (counter == 3) {
+        } else if (accCounter == 3) {
             list.add(account1.getAccountNumber());
             list.add(account2.getAccountNumber());
             list.add(account3.getAccountNumber());
@@ -197,6 +246,26 @@ public class User {
         }
         return payPossibility;
     }
+
+
+    public String getAccountNumber (int index) {
+        String accountNumber = "";
+        if (index == 1) {
+            accountNumber = account1.getAccountNumber();
+        } else if (index == 2) {
+            accountNumber = account2.getAccountNumber();
+        } else if (index == 3) {
+            accountNumber = account3.getAccountNumber();
+        }
+        return accountNumber;
+    }
+
+    public String getName() {
+        String name = firstName + " " + lastName;
+        return name;
+    }
+
+
 }
 
 

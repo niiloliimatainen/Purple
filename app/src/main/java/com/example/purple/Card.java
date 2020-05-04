@@ -3,14 +3,14 @@ package com.example.purple;
 //joo
 
 public class Card {
-    protected String cardNumber, country;
-    protected int year, raiseLimit = 500;
+    protected String cardNumber, country = "Finland";
+    protected int PIN, CVC, raiseLimit = 500;
     protected Account account;
 
-    public Card(String cardNumber, String country, int year, Account account) {
+    public Card(String cardNumber, int PIN, int CVC, Account account) {
         this.cardNumber = cardNumber;
-        this.country = country;
-        this.year = year;
+        this.PIN = PIN;
+        this.CVC = CVC;
         this.account = account;
     }
 
@@ -47,9 +47,9 @@ public class Card {
 class creditCard extends Card {
     double creditLimit;
 
-    public creditCard(String cardNumber, String country, int year, double creditLimit, Account account) {
-        super(cardNumber, country, year, account);
-        creditLimit = creditLimit;
+    public creditCard(String cardNumber, int PIN, int CVC, double creditLimit, Account account) {
+        super(cardNumber, PIN, CVC, account);
+        this.creditLimit = creditLimit;
     }
 
 
