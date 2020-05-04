@@ -163,7 +163,7 @@ public class main_one extends AppCompatActivity {
         ArrayList<String> accountList = bank.getAccounts();
         final ArrayList<String> accountsToAddCard = new ArrayList<>();
         for(int i = 0; accountList.size()>i;i++){
-            bank.getAccountsPayPossibility(i);
+
             if(bank.getAccountsPayPossibility(i).equals("Regular")){
                 accountsToAddCard.add(accountList.get(i));
             }
@@ -385,7 +385,7 @@ public class main_one extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        
+
         if (accountList.size() == 3) {
             dialog.show();
         }
