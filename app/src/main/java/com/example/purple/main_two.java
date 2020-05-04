@@ -34,13 +34,13 @@ public class main_two extends AppCompatActivity {
         acc1Button.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                choosecard.setAdapter();
+                //choosecard.setAdapter();
               }
           });
         acc2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choosecard.setAdapter();
+                //choosecard.setAdapter();
             }
         });
 
