@@ -159,7 +159,7 @@ public class main_one extends AppCompatActivity {
 
 
     public void whichAccountToAddPopup(View v){
-        int counter = 0
+        int counter = 0;
         String account1 = null, account2 = null, account3 = null;
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         ArrayList<String> accountList = bank.getAccounts();

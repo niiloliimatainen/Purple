@@ -205,20 +205,7 @@ public class User {
         return list;
     }
 
-    public String getAccountNumber (int index) {
-        String accountNumber = "";
-        if (index == 1) {
-            accountNumber = account1.getAccountNumber();
-        } else if (index == 2) {
-            accountNumber = account2.getAccountNumber();
-        } else if (index == 3) {
-            accountNumber = account3.getAccountNumber();
-        }
-        return accountNumber;
-    }
-
-
-   /* public Arraylist<String> getCards() {
+    /*public Arraylist<String> getCards() {
         Arraylist<String> list = new ArrayList<>();
         if (cardCounter == 1){
             list.add(account1.getCardNumber());
@@ -232,11 +219,10 @@ public class User {
         }
         return list;
     }*/
-
     public String getCardNumber (int index) {
         String cardNumber = "";
         if (index == 1) {
-           // cardNumber = account1.getCardNumber();
+            cardNumber = account1.getAccountNumber();
         } else if (index == 2) {
             cardNumber = account2.getAccountNumber();
         } else if (index == 3) {
@@ -288,6 +274,17 @@ public class User {
     }
 
 
+    public String getAccountNumber (int index) {
+        String accountNumber = "";
+        if (index == 1) {
+            accountNumber = account1.getAccountNumber();
+        } else if (index == 2) {
+            accountNumber = account2.getAccountNumber();
+        } else if (index == 3) {
+            accountNumber = account3.getAccountNumber();
+        }
+        return accountNumber;
+    }
 
     public String getName() {
         String name = firstName + " " + lastName;
