@@ -131,6 +131,11 @@ public class Bank {
     }
 
 
+    public ArrayList<String> getCard(){
+        ArrayList<String> cardList = userList.get(currentUser).getAccounts();
+        return cardList;
+    }
+
     public double getMoneyAmount() {
         double money = userList.get(currentUser).getMoneyAmount();
         return money;

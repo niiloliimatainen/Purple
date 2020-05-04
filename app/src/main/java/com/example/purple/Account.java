@@ -50,6 +50,7 @@ public class Account {
     }
 
 
+
     public int getPayPossibility() {
         return payPossibility;
     }

@@ -14,6 +14,10 @@ public class Card {
         this.account = account;
     }
 
+    public String getCardNumber(){
+        return cardNumber;
+    }
+
 
     public int raiseMoney(double money) {
         if (raiseLimit < money) {
