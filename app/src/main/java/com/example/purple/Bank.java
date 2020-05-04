@@ -68,7 +68,7 @@ public class Bank {
 
     public void addMoney(int index, double money) {
         String accountNumber = userList.get(currentUser).getAccountNumber(index);
-        String transaction = sdf.format(date) + "   ADD MONEY   " + money + userList.get(currentUser).getName();
+        String transaction = sdf.format(date) + "   ADD MONEY    +" + money + "    " + userList.get(currentUser).getName();
         System.out.println(transaction);
         userList.get(currentUser).addMoney(index, money);
         databaseConnector.writeToFile(context, userList);
@@ -77,9 +77,15 @@ public class Bank {
 
 
     public int selfTransfer(int pay, int receive, double money) {
-        String transaction = sdf.format(date) + "   SELF TRANSFER   " + money + userList.get(currentUser).getName();
+        String accountNumber1 = userList.get(currentUser).getAccountNumber(pay);
+        String accountNumber2 = userList.get(currentUser).getAccountNumber(receive);
+        String transaction1 = sdf.format(date) + "   SELF TRANSFER    +" + money + "    " + userList.get(currentUser).getName();
+        String transaction2 = sdf.format(date) + "   SELF TRANSFER    -" + money +  "    " + userList.get(currentUser).getName();
+
         if (userList.get(currentUser).selfTransfer(pay, receive, money) == 1) {
             databaseConnector.writeToFile(context, userList);
+            databaseConnector.saveBankStatement(context, accountNumber1, transaction1);
+            databaseConnector.saveBankStatement(context, accountNumber2, transaction2);
             return 1;
         }
         return 0;
@@ -87,18 +93,22 @@ public class Bank {
 
 
     public int transferMoney(String receivingAcc, int payAccount, double money) {
+        String accountNumber = userList.get(currentUser).getAccountNumber(payAccount);
         ArrayList<String> list;
-        int flag;
+
         for (int i = 0; i < userList.size(); i++) {
             list = userList.get(i).getAccounts();
             for (int x = 0; x < list.size(); x++) {
                 System.out.println(receivingAcc + " " + list.get(x));
                 if (receivingAcc.equals(list.get(x))) {
-                    if ((flag = userList.get(currentUser).transferMoney(payAccount, money)) == 1) {
+                    if ((userList.get(currentUser).transferMoney(payAccount, money)) == 1) {
                         userList.get(i).addMoney(x + 1, money);
+                        String transaction = sdf.format(date) + "   MONEY TRANSFER    +" + money + "    " + userList.get(i).getName();
                         databaseConnector.writeToFile(context, userList);
+                        databaseConnector.saveBankStatement(context, accountNumber, transaction);
+                        System.out.println(transaction);
                         return 1;
-                    } else if ((flag = userList.get(currentUser).transferMoney(payAccount, money)) == 0){
+                    } else if ((userList.get(currentUser).transferMoney(payAccount, money)) == 0){
                         return 2;
                     } else {
                         return 3;
