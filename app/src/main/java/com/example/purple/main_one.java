@@ -163,23 +163,20 @@ public class main_one extends AppCompatActivity {
         String account1 = null, account2 = null, account3 = null;
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         ArrayList<String> accountList = bank.getAccounts();
-        final ArrayList<String> accountsToAddCard = new ArrayList<>();
-        accountsToAddCard.add(null);
-        accountsToAddCard.add(null);
-        accountsToAddCard.add(null);
 
         for(int i = 0; accountList.size()>i;i++){
-
+            counter += 1;
             if(bank.getAccountsPayPossibility(i + 1).equals("Regular")){
+
                 if (counter == 1) {
                     account1 = (i + 1) + "." + accountList.get(i);
-                    accountsToAddCard.add(i, account1);
+
                 } else if (counter == 2) {
                     account2 = (i + 1) + "." + accountList.get(i);
-                    accountsToAddCard.add(i, account2);
+
                 } else if (counter == 3) {
                     account3 = (i + 1) + "." + accountList.get(i);
-                    accountsToAddCard.add(i, account3);
+
                 }
             }
         }
@@ -212,7 +209,6 @@ public class main_one extends AppCompatActivity {
         dialog.setNeutralButton(account2, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                accToAddCard = accountsToAddCard.get(1);
                 addCardPopup();
                 dialog.dismiss();
             }
