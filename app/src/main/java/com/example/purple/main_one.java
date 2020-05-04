@@ -159,15 +159,23 @@ public class main_one extends AppCompatActivity {
 
 
     public void whichAccountToAddPopup(View v){
+        String account1 = null, account2 = null, account3 = null;
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         ArrayList<String> accountList = bank.getAccounts();
         final ArrayList<String> accountsToAddCard = new ArrayList<>();
         for(int i = 0; accountList.size()>i;i++){
-            bank.getAccountsPayPossibility(i);
-            if(bank.getAccountsPayPossibility(i).equals("Regular")){
-                accountsToAddCard.add(accountList.get(i));
+            if(bank.getAccountsPayPossibility(i + 1).equals("Regular")){
+                accountsToAddCard.add((i + 1) + "." + accountList.get(i));
+                if (i == 0) {
+                    account1 = accountsToAddCard.get(i);
+                } else if(i == 1) {
+                    account2 = accountsToAddCard.get(i);
+                } else if(i == 2) {
+                    account3 = accountsToAddCard.get(i);
+                }
             }
         }
+
         if(accountsToAddCard.size()==0){
             dialog.setTitle("No accounts!");
             dialog.setMessage("You need to create account first!");
@@ -181,7 +189,7 @@ public class main_one extends AppCompatActivity {
         }
 
         dialog.setTitle("Choose an account you want to add card");
-        dialog.setPositiveButton("1. Account", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton(account1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 addCardPopup();
@@ -193,7 +201,7 @@ public class main_one extends AppCompatActivity {
             dialog.show();
         }
 
-        dialog.setNeutralButton("2. Account", new DialogInterface.OnClickListener() {
+        dialog.setNeutralButton(account2, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
                 accToAddCard = accountsToAddCard.get(1);
@@ -206,7 +214,7 @@ public class main_one extends AppCompatActivity {
             dialog.show();
         }
 
-        dialog.setNegativeButton("3. Account", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton(account3, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 addCardPopup();
