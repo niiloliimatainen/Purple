@@ -8,6 +8,30 @@
     tools:context=".main_two"
     android:id="@+id/frameLayout">
 
+    <Button
+        android:id="@+id/acc2Button"
+        android:layout_width="103dp"
+        android:layout_height="39dp"
+        android:text="account 2"
+        app:layout_constraintBottom_toTopOf="@+id/chooseCardText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.707"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseAccounttext" />
+
+    <Spinner
+        android:id="@+id/chooseCard"
+        android:layout_width="238dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/activitybar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.318" />
+
     <ImageView
         android:id="@+id/activitybar2"
         android:layout_width="wrap_content"
@@ -22,4 +46,90 @@
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_conversion_absoluteWidth="317dp" />
+
+    <ImageButton
+        android:id="@+id/payWithCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="220dp"
+        app:layout_constraintBottom_toTopOf="@+id/activitybar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/payb" />
+
+    <Spinner
+        android:id="@+id/chooseCountry"
+        android:layout_width="238dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/activitybar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/countryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose country"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/chooseCountry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.753" />
+
+    <TextView
+        android:id="@+id/chooseCardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose card"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/chooseCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseCountry"
+        app:layout_constraintVertical_bias="0.883" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/activitybar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/payWithCard"
+        app:layout_constraintVertical_bias="0.149"
+        app:srcCompat="@drawable/ic_touch_app_black_24dp" />
+
+    <TextView
+        android:id="@+id/chooseAccounttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Choose account"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseCountry" />
+
+    <Button
+        android:id="@+id/acc1Button"
+        android:layout_width="104dp"
+        android:layout_height="39dp"
+        android:text="account 1"
+        app:layout_constraintBottom_toTopOf="@+id/chooseCardText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseAccounttext" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
