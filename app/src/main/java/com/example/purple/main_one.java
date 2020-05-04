@@ -24,6 +24,7 @@ public class main_one extends AppCompatActivity {
     private TextView moneyAmount, accounts, accountCounter;
     private Bank bank = Bank.getInstance();
     private double creditLimit;
+    private String accToAddCard;
 
 
     @Override
@@ -137,13 +138,15 @@ public class main_one extends AppCompatActivity {
 
 
     public void addCardPopup(View v){
+        //asettaa accToAddCard Stringin arvoksi tilin numeron johon kortti lisätään
+        whichAccountPopup();
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         dialog.setTitle("Choose the card type");
 
         dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                //debitkortin lisäys tähän
                 Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -152,20 +155,39 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-
-                Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
-                creditPopup();
+                //ja lähetetään accountNumber creditPopuppiin jossa lisäys tapahtuuu
+                //creditPopup(accountNumber);
                 dialog.dismiss();
 
             }
         });
         dialog.show();
+    }
+    public void whichAccountPopup(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Choose an account you want to add card");
+        dialog.setPositiveButton("Regular account 1.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //tähän haku bankistä regular account ykkönen
+                dialog.dismiss();
+            }
+        });
 
+        dialog.setNegativeButton("Regular account 2.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //tähän sama haku
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
     }
 
-    private void creditPopup(){
+    private void creditPopup(String accountNumber){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
-        creditLimit = 0;
+        creditLimit = 1;
         dialog.setTitle("Creditcard");
         dialog.setMessage("Input the limit for your creditcard");
         final EditText input = new EditText(this);
@@ -176,6 +198,9 @@ public class main_one extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which){
                 creditLimit = Double.parseDouble(input.getText().toString());
+
+                //accountin lisäys creditlimitillä
+
                 Toast.makeText(getApplicationContext(), "New card added, with credit limit of: " + creditLimit + "€", Toast.LENGTH_LONG).show();
                 dialog.dismiss();
             }
@@ -197,6 +222,8 @@ public class main_one extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialog.setView(input);
+        dialog.show();
+
         dialog.setPositiveButton("Add to account 1.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -245,7 +272,6 @@ public class main_one extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        dialog.show();
     }
 
 
