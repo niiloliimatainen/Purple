@@ -159,24 +159,32 @@ public class main_one extends AppCompatActivity {
 
 
     public void whichAccountToAddPopup(View v){
+        int counter = 0
         String account1 = null, account2 = null, account3 = null;
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         ArrayList<String> accountList = bank.getAccounts();
         final ArrayList<String> accountsToAddCard = new ArrayList<>();
+        accountsToAddCard.add(null);
+        accountsToAddCard.add(null);
+        accountsToAddCard.add(null);
+
         for(int i = 0; accountList.size()>i;i++){
+
             if(bank.getAccountsPayPossibility(i + 1).equals("Regular")){
-                accountsToAddCard.add((i + 1) + "." + accountList.get(i));
-                if (i == 0) {
-                    account1 = accountsToAddCard.get(i);
-                } else if(i == 1) {
-                    account2 = accountsToAddCard.get(i);
-                } else if(i == 2) {
-                    account3 = accountsToAddCard.get(i);
+                if (counter == 1) {
+                    account1 = (i + 1) + "." + accountList.get(i);
+                    accountsToAddCard.add(i, account1);
+                } else if (counter == 2) {
+                    account2 = (i + 1) + "." + accountList.get(i);
+                    accountsToAddCard.add(i, account2);
+                } else if (counter == 3) {
+                    account3 = (i + 1) + "." + accountList.get(i);
+                    accountsToAddCard.add(i, account3);
                 }
             }
         }
 
-        if(accountsToAddCard.size()==0){
+        if(counter==0){
             dialog.setTitle("No accounts!");
             dialog.setMessage("You need to create account first!");
             dialog.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
@@ -197,7 +205,7 @@ public class main_one extends AppCompatActivity {
             }
         });
 
-        if(accountsToAddCard.size()==1){
+        if((counter==1)){
             dialog.show();
         }
 
@@ -210,7 +218,7 @@ public class main_one extends AppCompatActivity {
             }
         });
 
-        if(accountsToAddCard.size()==2){
+        if(counter==2){
             dialog.show();
         }
 
@@ -221,7 +229,7 @@ public class main_one extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        if(accountsToAddCard.size()==3){
+        if(counter==3){
             dialog.show();
         }
     }
