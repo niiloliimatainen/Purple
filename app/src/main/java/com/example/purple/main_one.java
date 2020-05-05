@@ -54,24 +54,63 @@ public class main_one extends AppCompatActivity {
             int counter = 0;
 
             for (int i = 0; accountList.size() > i; i++) {
-                text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                 counter += 1;
             }
             accountCounter.setText(counter + "/3");
             accounts.setText(text);
 
             if (!(bank.getCardNumber(1).equals(""))) {
-                cardText = cardText + ("\n" + bank.isCardCreditCard(1) + " | " + bank.getCardNumber(1));
+                cardText = cardText + ("\n" + 1 + ". " +  bank.isCardCreditCard(1) + " | " + bank.getCardNumber(1));
             }
             if (!(bank.getCardNumber(2).equals(""))) {
-                cardText = cardText + ("\n" + bank.isCardCreditCard(2) + " | " + bank.getCardNumber(2));
+                cardText = cardText + ("\n" + 2 + ". " +  bank.isCardCreditCard(2) + " | " + bank.getCardNumber(2));
             }
             if (!(bank.getCardNumber(3).equals(""))) {
-                cardText = cardText + ("\n" + bank.isCardCreditCard(3) + " | " + bank.getCardNumber(3));
+                cardText = cardText + ("\n" + 3 + ". " + bank.isCardCreditCard(3) + " | " + bank.getCardNumber(3));
             }
             cards.setText(cardText);
         }
     }
+
+
+    protected void onResume() {
+        super.onResume();
+        ArrayList<String> accountList = bank.getAccounts();
+
+        if (accountList.isEmpty()) {
+            moneyAmount.setText("--");
+        } else {
+            moneyAmount.setText(bank.getMoneyAmount() + "€");
+            String text = "";
+            String cardText = "";
+            int counter = 0;
+
+            for (int i = 0; accountList.size() > i; i++) {
+                text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                counter += 1;
+            }
+            accountCounter.setText(counter + "/3");
+            accounts.setText(text);
+
+            if (!(bank.getCardNumber(1).equals(""))) {
+                cardText = cardText + ("\n" + 1 + ". " +  bank.isCardCreditCard(1) + " | " + bank.getCardNumber(1));
+            }
+            if (!(bank.getCardNumber(2).equals(""))) {
+                cardText = cardText + ("\n" + 2 + ". " +  bank.isCardCreditCard(2) + " | " + bank.getCardNumber(2));
+            }
+            if (!(bank.getCardNumber(3).equals(""))) {
+                cardText = cardText + ("\n" + 3 + ". " + bank.isCardCreditCard(3) + " | " + bank.getCardNumber(3));
+            }
+            cards.setText(cardText);
+        }
+    }
+
+
+
+
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
@@ -108,7 +147,7 @@ public class main_one extends AppCompatActivity {
                     String text = "";
                     int counter = 0;
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                         counter += 1;
                     }
                     accounts.setText(text);
@@ -132,7 +171,7 @@ public class main_one extends AppCompatActivity {
                     String text = "";
                     int counter = 0;
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                         counter += 1;
                     }
                     accounts.setText(text);
@@ -180,7 +219,7 @@ public class main_one extends AppCompatActivity {
                     moneyAmount.setText(bank.getMoneyAmount() + "€");
                     String text = "";
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                     }
                     accounts.setText(text);
                     Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
@@ -206,7 +245,7 @@ public class main_one extends AppCompatActivity {
                     String text = "";
 
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                     }
 
                     accounts.setText(text);
@@ -234,7 +273,7 @@ public class main_one extends AppCompatActivity {
                     String text = "";
 
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                     }
 
                     accounts.setText(text);
@@ -297,8 +336,18 @@ public class main_one extends AppCompatActivity {
 
 
     public void getToSettings(View v) {
-        Intent intent = new Intent(main_one.this, settings.class);
-        startActivity(intent);
+
+        if (bank.isUserAdmin()) {
+            Intent intent1 = new Intent(main_one.this, adminSettings.class);
+            startActivity(intent1);
+        } else {
+            Intent intent2 = new Intent(main_one.this, settings.class);
+            startActivity(intent2);
+        }
+
+
+
+
     }
 
 }
