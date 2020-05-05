@@ -270,7 +270,14 @@ public class Bank {
 
    //Only admin can use
    public void deleteUser(int user) {
-
+       if (isAdmin) {
+            for (int i = 1; i < userList.size(); i++) {
+                if (user == i) {
+                    userList.remove(i);
+                }
+            }
+           databaseConnector.writeToFile(context, userList);
+       }
    }
 
 
