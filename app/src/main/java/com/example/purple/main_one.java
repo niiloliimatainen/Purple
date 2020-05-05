@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class main_one extends AppCompatActivity {
     private GestureDetectorCompat gesture;
-    private TextView moneyAmount, accounts, accountCounter;
+    private TextView moneyAmount, accounts, accountCounter, cards;
     private Bank bank = Bank.getInstance();
     private double creditLimit;
     private String accToAddCard;
@@ -35,6 +35,8 @@ public class main_one extends AppCompatActivity {
         moneyAmount = findViewById(R.id.allmoney);
         accounts = findViewById(R.id.accounts);
         accountCounter = findViewById(R.id.accountCounter);
+        cards = findViewById(R.id.cards);
+
     }
 
 
@@ -42,12 +44,14 @@ public class main_one extends AppCompatActivity {
         super.onStart();
         getDelegate().onStart();
         ArrayList<String> accountList = bank.getAccounts();
+        ArrayList<String> cardsList = bank.getCards();
 
         if (accountList.isEmpty()) {
             moneyAmount.setText("--");
         } else {
             moneyAmount.setText(bank.getMoneyAmount() + "€");
             String text = "";
+            String cardText = "";
             int counter = 0;
 
             for (int i = 0; accountList.size() > i; i++) {
@@ -56,6 +60,11 @@ public class main_one extends AppCompatActivity {
             }
             accountCounter.setText(counter + "/3");
             accounts.setText(text);
+
+            for(int x = 0; cardsList.size() > x; x++){
+                cardText = cardText + ("\n" + (x + 1) + "." + bank.isCardCreditCard(x) + " | " + cardsList.get(x));
+            }
+            cards.setText(cardText);
         }
     }
 
@@ -132,25 +141,78 @@ public class main_one extends AppCompatActivity {
         dialog.show();
     }
 
+    public void alreadyCardToast(){
+        Toast.makeText(getApplicationContext(), "You already have card in this account!", Toast.LENGTH_SHORT).show();
+    }
 
-    public void addCardPopup(){
+    public void addCardPopup(int index){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         dialog.setTitle("Choose the card type");
-
-        dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-
+        //en keksiny kätevämpää tapaa saada toi indexi noihi sisää ku pysty vaihtaa innerclassin muuttujaa
+        if (index == 1) {
+            dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(bank.addCard(1)) {
+                        Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }else{
+                        dialog.dismiss();
+                        alreadyCardToast();
+                    }
+                }
+            });
+        }
         dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                //creditkortti lisätään eri metodissa ehkä tai emmätiie mitä mä teen
-                creditPopup();
+                creditPopup(1);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+        if (index == 2) {
+            dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(bank.addCard(2)) {
+                        Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }else{
+                        dialog.dismiss();
+                        alreadyCardToast();
+                    }
+                }
+            });
+        }
+        dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                creditPopup(2);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+        if (index == 3) {
+            dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(bank.addCard(3)) {
+                        Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }else{
+                        dialog.dismiss();
+                        alreadyCardToast();
+                    }
+                }
+            });
+        }
+        dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                creditPopup(3);
                 dialog.dismiss();
             }
         });
@@ -197,7 +259,7 @@ public class main_one extends AppCompatActivity {
         dialog.setPositiveButton(account1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                addCardPopup();
+                addCardPopup(1);
                 dialog.dismiss();
             }
         });
@@ -209,7 +271,7 @@ public class main_one extends AppCompatActivity {
         dialog.setNeutralButton(account2, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                addCardPopup();
+                addCardPopup(2);
                 dialog.dismiss();
             }
         });
@@ -221,7 +283,7 @@ public class main_one extends AppCompatActivity {
         dialog.setNegativeButton(account3, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                addCardPopup();
+                addCardPopup(3);
                 dialog.dismiss();
             }
         });
@@ -231,7 +293,7 @@ public class main_one extends AppCompatActivity {
     }
 
 
-    private void creditPopup(){
+    private void creditPopup(int index){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         creditLimit = 1;
         dialog.setTitle("Creditcard");
@@ -239,24 +301,69 @@ public class main_one extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialog.setView(input);
-
-        dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which){
-                if(input.getText() == null || input.getText().toString().isEmpty()){
-                    Toast.makeText(getApplicationContext(),  "Incorrect amount!", Toast.LENGTH_SHORT).show();
-                    dialog.cancel();
-                }else {
-                    creditLimit = Double.parseDouble(input.getText().toString());
-
-                    //accountin lisäys creditlimitillä
-
-                    Toast.makeText(getApplicationContext(), "New card added, with credit limit of: " + creditLimit + "€", Toast.LENGTH_LONG).show();
-                    dialog.dismiss();
+        if (index == 1) {
+            dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (input.getText() == null || input.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Incorrect amount!", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    } else {
+                        creditLimit = Double.parseDouble(input.getText().toString());
+                        if(bank.addCreditCard(1, creditLimit)) {
+                            Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }else{
+                            alreadyCardToast();
+                            dialog.dismiss();
+                        }
+                    }
                 }
-            }
-        });
-        dialog.show();
+            });
+            dialog.show();
+        }
+        if (index == 2) {
+            dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (input.getText() == null || input.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Incorrect amount!", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    } else {
+                        creditLimit = Double.parseDouble(input.getText().toString());
+                        if(bank.addCreditCard(2, creditLimit)) {
+                            Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }else{
+                            alreadyCardToast();
+                            dialog.dismiss();
+                        }
+                    }
+                }
+            });
+            dialog.show();
+        }
+        if (index == 3) {
+            dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (input.getText() == null || input.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Incorrect amount!", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    } else {
+                        creditLimit = Double.parseDouble(input.getText().toString());
+                        if(bank.addCreditCard(3, creditLimit)) {
+                            Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }else{
+                            alreadyCardToast();
+                            dialog.dismiss();
+                        }
+                    }
+                }
+            });
+            dialog.show();
+        }
     }
 
     public void payButton(View v){

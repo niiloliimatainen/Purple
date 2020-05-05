@@ -205,20 +205,20 @@ public class User {
         return list;
     }
 
-    /*public Arraylist<String> getCards() {
-        Arraylist<String> list = new ArrayList<>();
+    public ArrayList<String> getCards() {
+        ArrayList<String> list = new ArrayList<>();
         if (cardCounter == 1){
-            list.add(account1.getCardNumber());
+            list.add(card1.getCardNumber());
         } else if (cardCounter == 2){
-            list.add(account1.getCardNumber());
-            list.add(account2.getCardNumber());
+            list.add(card1.getCardNumber());
+            list.add(card2.getCardNumber());
         } else if (cardCounter == 3){
-            list.add(account1.getCardNumber());
-            list.add(account2.getCardNumber());
-            list.add(account3.getCardNumber());
+            list.add(card1.getCardNumber());
+            list.add(card2.getCardNumber());
+            list.add(card3.getCardNumber());
         }
         return list;
-    }*/
+    }
     public String getCardNumber (int index) {
         String cardNumber = "";
         if (index == 1) {
@@ -259,7 +259,17 @@ public class User {
         return money;
     }
 
-
+    public boolean isCardCreditCard(int index){
+        boolean isCredit = true;
+        if(index == 1){
+            isCredit = card1.isCreditCard();
+        }else if (index == 2){
+            isCredit = card2.isCreditCard();
+        }else if (index == 3){
+            isCredit = card3.isCreditCard();
+        }
+        return isCredit;
+    }
 
     public int getAccountsPayPossibility(int index) {
         int payPossibility = 0;

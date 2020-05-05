@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bankStatement3"></activity>
+        <activity android:name=".addCardActivity"></activity>
+        <activity android:name=".bankStatement3" />
         <activity android:name=".bankStatement2" />
         <activity android:name=".bankStatement1" />
         <activity android:name=".pay_transfer" />

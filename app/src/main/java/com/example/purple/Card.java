@@ -5,6 +5,7 @@ package com.example.purple;
 public class Card {
     protected String cardNumber, country = "Finland";
     protected int PIN, CVC, raiseLimit = 500;
+    protected boolean isCredit;
     protected Account account;
 
     public Card(String cardNumber, int PIN, int CVC, Account account) {
@@ -12,12 +13,14 @@ public class Card {
         this.PIN = PIN;
         this.CVC = CVC;
         this.account = account;
+        this.isCredit = false;
     }
 
     public String getCardNumber(){
         return cardNumber;
     }
 
+    public boolean isCreditCard(){return isCredit;}
 
     public int raiseMoney(double money) {
         if (raiseLimit < money) {
@@ -51,9 +54,11 @@ public class Card {
 class creditCard extends Card {
     double creditLimit;
 
+
     public creditCard(String cardNumber, int PIN, int CVC, double creditLimit, Account account) {
         super(cardNumber, PIN, CVC, account);
         this.creditLimit = creditLimit;
+        this.isCredit = true;
     }
 
 

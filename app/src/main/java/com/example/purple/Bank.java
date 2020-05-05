@@ -131,8 +131,8 @@ public class Bank {
     }
 
 
-    public ArrayList<String> getCard(){
-        ArrayList<String> cardList = userList.get(currentUser).getAccounts();
+    public ArrayList<String> getCards(){
+        ArrayList<String> cardList = userList.get(currentUser).getCards();
         return cardList;
     }
 
@@ -154,6 +154,14 @@ public class Bank {
             return "Regular";
         } else {
             return "Savings";
+        }
+    }
+
+    public String isCardCreditCard(int index){
+        if(userList.get(currentUser).isCardCreditCard(index)){
+            return "Credit";
+        } else {
+            return "Debit";
         }
     }
 
