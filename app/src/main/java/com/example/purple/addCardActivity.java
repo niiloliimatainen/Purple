@@ -125,6 +125,7 @@ public class addCardActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Incorrect amount!", Toast.LENGTH_SHORT).show();
             } else {
                 Double creditLimit = Double.parseDouble(creditInput.getText().toString());
+                System.out.println(accIndex + "credit");
                 if (bank.addCreditCard(accIndex, creditLimit)) {
                     Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
@@ -135,6 +136,7 @@ public class addCardActivity extends AppCompatActivity {
             }
 
         }else if (!isCredit){
+            System.out.println(accIndex + "debit");
             if(bank.addCard(accIndex)) {
                 Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
