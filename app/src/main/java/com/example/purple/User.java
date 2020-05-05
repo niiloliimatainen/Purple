@@ -56,7 +56,7 @@ public class User {
             if (account1.getCards() == 0) {
                 account1.addCard();
                 card1 = new Card(cardNumber, PIN, CVC, account1);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
 
@@ -64,7 +64,7 @@ public class User {
             if (account2.getCards() == 0) {
                 account2.addCard();
                 card2 = new Card(cardNumber, PIN, CVC, account2);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
 
@@ -72,7 +72,7 @@ public class User {
             if (account3.getCards() == 0) {
                 account3.addCard();
                 card3 = new Card(cardNumber, PIN, CVC, account3);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
         }
