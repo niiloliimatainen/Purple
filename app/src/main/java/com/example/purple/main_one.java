@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
+
 import android.content.DialogInterface;
 import android.text.InputType;
 import android.view.GestureDetector;
@@ -38,6 +39,7 @@ public class main_one extends AppCompatActivity {
     }
 
 
+
     protected void onStart() {
         super.onStart();
         getDelegate().onStart();
@@ -60,7 +62,7 @@ public class main_one extends AppCompatActivity {
             accounts.setText(text);
 
             for(int x = 0; cardsList.size() > x; x++){
-                cardText = cardText + ("\n" + (x + 1) + "." + bank.isCardCreditCard(x) + " | " + cardsList.get(x));
+                cardText = cardText + ("\n" + (x + 1) + "." + bank.isCardCreditCard(x + 1) + " | " + cardsList.get(x));
                 cards.setText(cardText);
             }
 
