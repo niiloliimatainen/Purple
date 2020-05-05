@@ -2,15 +2,17 @@ package com.example.purple;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class bankStatement1 extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private StringBuilder sb = new StringBuilder();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,4 +30,21 @@ public class bankStatement1 extends AppCompatActivity {
 
         statement.setText(sb.toString());
     }
+
+    public void deleteAccount(View v) {
+        bank.deleteAccount(1);
+        Toast.makeText(getApplicationContext(), "Account deleted", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(bankStatement1.this, main_one.class);
+        startActivity(intent);
+    }
+
+
+    public void returnButton(View v) {
+        Intent intent = new Intent(bankStatement1.this, main_one.class);
+        startActivity(intent);
+    }
+
+
+
+
 }

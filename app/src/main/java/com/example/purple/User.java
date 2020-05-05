@@ -242,7 +242,7 @@ public class User {
     }
 
 
-    public void delAccount(int index) {
+    public void deleteAccount(int index) {
         if (index == 1) {
             account1 = null;
             account1 = account2;
@@ -255,6 +255,7 @@ public class User {
         } else if (index == 3) {
             account3 = null;
         }
+        accCounter -= 1;
     }
 
 
