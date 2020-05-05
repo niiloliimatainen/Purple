@@ -45,7 +45,7 @@ public class main_one extends AppCompatActivity {
         getDelegate().onStart();
         ArrayList<String> accountList = bank.getAccounts();
         ArrayList<String> cardsList = bank.getCards();
-
+        System.out.println("Tässä korttipakan koko" + cardsList.size());
         if (accountList.isEmpty()) {
             moneyAmount.setText("--");
         } else {
