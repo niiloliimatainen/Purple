@@ -465,7 +465,7 @@ public class main_one extends AppCompatActivity {
     }
 
 
-    public void showBankStatement(View v) {
+    public void showBankStatement(View v)   {
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         ArrayList<String> accountList = bank.getAccounts();
         dialog.setTitle("Choose account");
@@ -511,6 +511,10 @@ public class main_one extends AppCompatActivity {
     }
 
 
+    public void getToSettings(View v) {
+        Intent intent = new Intent(main_one.this, settings.class);
+        startActivity(intent);
+    }
 
 }
 

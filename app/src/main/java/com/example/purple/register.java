@@ -51,7 +51,7 @@ public class register extends AppCompatActivity {
         boolean flag2 = matcher2.find();
         boolean flag3 = matcher3.find();
         boolean flag4 = matcher4.find();
-        System.out.println(flag1 +" " + flag2 +" "+ flag3 + " " + flag4);
+
 
         //tässä viel vähän säätämistä ja tarkistamista ton salasanan checkin kanssa//
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
@@ -67,6 +67,8 @@ public class register extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "Passwords don't match!", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(getApplicationContext(), "Password must at least contain number, capital letter, small letter and special character!", Toast.LENGTH_SHORT).show();
         }
 
         if (ok) {

@@ -128,7 +128,6 @@ public class User {
     }
 
 
-
     public int transferMoney(int index, double money) {
         if (index == 1) {
             if (account1.getPayPossibility() == 0) {
@@ -154,7 +153,6 @@ public class User {
         }
         return 2;
     }
-
 
 
     public int selfTransfer(int pay, int receive, double money) {
@@ -183,11 +181,20 @@ public class User {
     }
 
 
-
-    public void editUser() {
+    public void editUserInfo(String change, int flag) {
+        if (flag == 1) {
+            firstName = change;
+        } else if (flag == 2) {
+            lastName = change;
+        } else if (flag == 3) {
+            email = change;
+        } else if (flag == 4) {
+           phoneNumber = change;
+        } else {
+            password = change;
+        }
 
     }
-
 
 
     public ArrayList<String> getAccounts() {
@@ -205,6 +212,7 @@ public class User {
         return list;
     }
 
+
     public ArrayList<String> getCards() {
         ArrayList<String> list = new ArrayList<>();
         if (cardCounter == 1){
@@ -219,6 +227,8 @@ public class User {
         }
         return list;
     }
+
+
     public String getCardNumber (int index) {
         String cardNumber = "";
         if (index == 1) {
@@ -230,6 +240,7 @@ public class User {
         }
         return cardNumber;
     }
+
 
     public void delAccount(int index) {
         if (index == 1) {
@@ -259,6 +270,7 @@ public class User {
         return money;
     }
 
+
     public boolean isCardCreditCard(int index){
         boolean isCredit = true;
         if(index == 1){
@@ -270,6 +282,7 @@ public class User {
         }
         return isCredit;
     }
+
 
     public int getAccountsPayPossibility(int index) {
         int payPossibility = 0;
@@ -296,12 +309,26 @@ public class User {
         return accountNumber;
     }
 
+
     public String getName() {
         String name = firstName + " " + lastName;
         return name;
     }
 
 
+    public String getUserInfo(int flag) {
+        if (flag == 1) {
+            return firstName;
+        } else if (flag == 2) {
+            return lastName;
+        } else if (flag == 3) {
+            return email;
+        } else if (flag == 4) {
+            return phoneNumber;
+        } else {
+            return password;
+        }
+    }
 }
 
 
