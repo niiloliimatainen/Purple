@@ -197,5 +197,18 @@ public class Bank {
     }
 
 
+   public String getUserInfo(int flag) {
+       String info = userList.get(currentUser).getUserInfo(flag);
+       return info;
+   }
+
+
+
+   public void editUserInfo(String change, int flag) {
+        userList.get(currentUser).editUserInfo(change, flag);
+        databaseConnector.writeToFile(context, userList);
+   }
+
+
 
 }

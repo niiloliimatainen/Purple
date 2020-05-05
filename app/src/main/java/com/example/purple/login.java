@@ -67,7 +67,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(code.equals(input.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Confirmation ok, logging in...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Confirmation ok, logging in...", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         Intent intent;
                         intent = new Intent(login.this, main_one.class);
