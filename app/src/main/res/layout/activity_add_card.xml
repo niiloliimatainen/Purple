@@ -7,11 +7,122 @@
     android:backgroundTint="#FFFFFF"
     tools:context=".addCardActivity">
 
+    <Button
+        android:id="@+id/debitB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="debit"
+        app:layout_constraintBottom_toTopOf="@+id/creditInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acc2B"
+        app:layout_constraintVertical_bias="0.714" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="85dp" />
+        android:layout_marginTop="48dp"
+        android:text="account you want to add card"
+        app:layout_constraintBottom_toTopOf="@+id/creditInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <Button
+        android:id="@+id/creditB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="credit"
+        app:layout_constraintBottom_toTopOf="@+id/creditInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acc2B"
+        app:layout_constraintVertical_bias="0.714" />
+
+    <EditText
+        android:id="@+id/creditInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.549" />
+
+    <Button
+        android:id="@+id/addCardB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addCard"
+        android:text="add card"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creditInput"
+        app:layout_constraintVertical_bias="0.207" />
+
+    <Button
+        android:id="@+id/setCreditLimit"
+        android:layout_width="79dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="32dp"
+        android:text="set"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/addCardB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toEndOf="@+id/creditInput"
+        app:layout_constraintTop_toBottomOf="@+id/debitB"
+        app:layout_constraintVertical_bias="0.357" />
+
+    <Button
+        android:id="@+id/acc2B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acc1B"
+        app:layout_constraintVertical_bias="0.031" />
+
+    <Button
+        android:id="@+id/acc1B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.008" />
+
+    <Button
+        android:id="@+id/acc3B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acc2B"
+        app:layout_constraintVertical_bias="0.038" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

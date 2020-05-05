@@ -17,6 +17,7 @@ public class Card {
     }
 
     public String getCardNumber(){
+        System.out.println("Minua kysyttiin getcardnumber card123");
         return cardNumber;
     }
 
