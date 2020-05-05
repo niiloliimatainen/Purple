@@ -131,9 +131,9 @@ public class Bank {
     }
 
 
-    public ArrayList<String> getCards(){
-        ArrayList<String> cardList = userList.get(currentUser).getCards();
-        return cardList;
+    public String getCardNumber(int index){
+        String card = userList.get(currentUser).getCardNumber(index);
+        return card;
     }
 
     public double getMoneyAmount() {
@@ -210,7 +210,8 @@ public class Bank {
    }
 
    public void deleteAccount(int index) {
-        userList.get(currentUser).deleteAccount(index);
+       userList.get(currentUser).deleteCard(index);
+       userList.get(currentUser).deleteAccount(index);
        databaseConnector.writeToFile(context, userList);
    }
 
