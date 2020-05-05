@@ -2,8 +2,11 @@ package com.example.purple;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,4 +32,20 @@ public class bankStatement3 extends AppCompatActivity {
 
         statement.setText(sb.toString());
     }
+
+    public void deleteAccount(View v) {
+        bank.deleteAccount(3);
+        Toast.makeText(getApplicationContext(), "Account deleted", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(bankStatement3.this, main_one.class);
+        startActivity(intent);
+    }
+
+
+    public void returnButton(View v) {
+        Intent intent = new Intent(bankStatement3.this, main_one.class);
+        startActivity(intent);
+    }
+
+
+
 }

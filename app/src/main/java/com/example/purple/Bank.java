@@ -209,6 +209,10 @@ public class Bank {
         databaseConnector.writeToFile(context, userList);
    }
 
+   public void deleteAccount(int index) {
+        userList.get(currentUser).deleteAccount(index);
+       databaseConnector.writeToFile(context, userList);
+   }
 
 
 }
