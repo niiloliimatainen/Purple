@@ -44,8 +44,7 @@ public class main_one extends AppCompatActivity {
         super.onStart();
         getDelegate().onStart();
         ArrayList<String> accountList = bank.getAccounts();
-        ArrayList<String> cardsList = bank.getCards();
-        System.out.println("Tässä korttipakan koko" + cardsList.size());
+
         if (accountList.isEmpty()) {
             moneyAmount.setText("--");
         } else {
@@ -55,17 +54,22 @@ public class main_one extends AppCompatActivity {
             int counter = 0;
 
             for (int i = 0; accountList.size() > i; i++) {
-                text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                 counter += 1;
             }
             accountCounter.setText(counter + "/3");
             accounts.setText(text);
 
-            for(int x = 0; cardsList.size() > x; x++){
-                cardText = cardText + ("\n" + (x + 1) + "." + bank.isCardCreditCard(x + 1) + " | " + cardsList.get(x));
-                cards.setText(cardText);
+            if (!(bank.getCardNumber(1).equals(""))) {
+                cardText = cardText + ("\n" + bank.isCardCreditCard(1) + " | " + bank.getCardNumber(1));
             }
-
+            if (!(bank.getCardNumber(2).equals(""))) {
+                cardText = cardText + ("\n" + bank.isCardCreditCard(2) + " | " + bank.getCardNumber(2));
+            }
+            if (!(bank.getCardNumber(3).equals(""))) {
+                cardText = cardText + ("\n" + bank.isCardCreditCard(3) + " | " + bank.getCardNumber(3));
+            }
+            cards.setText(cardText);
         }
     }
 
@@ -104,7 +108,7 @@ public class main_one extends AppCompatActivity {
                     String text = "";
                     int counter = 0;
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                         counter += 1;
                     }
                     accounts.setText(text);
@@ -176,7 +180,7 @@ public class main_one extends AppCompatActivity {
                     moneyAmount.setText(bank.getMoneyAmount() + "€");
                     String text = "";
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                     }
                     accounts.setText(text);
                     Toast.makeText(getApplicationContext(), money + "€ added to account!", Toast.LENGTH_LONG).show();
@@ -202,7 +206,7 @@ public class main_one extends AppCompatActivity {
                     String text = "";
 
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                     }
 
                     accounts.setText(text);
@@ -230,7 +234,7 @@ public class main_one extends AppCompatActivity {
                     String text = "";
 
                     for (int i = 0; accountList.size() > i; i++) {
-                        text = text + ("\n" + (i + 1) + ". " + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
+                        text = text + ("\n" + bank.getAccountsPayPossibility(i + 1) + " | " + accountList.get(i) + " | " + bank.getAccountsMoneyAmount(i + 1) + "€");
                     }
 
                     accounts.setText(text);

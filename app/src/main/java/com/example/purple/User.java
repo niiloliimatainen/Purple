@@ -57,7 +57,7 @@ public class User {
             if (account1.getCards() == 0) {
                 account1.addCard();
                 card1 = new Card(cardNumber, PIN, CVC, account1);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
 
@@ -65,7 +65,7 @@ public class User {
             if (account2.getCards() == 0) {
                 account2.addCard();
                 card2 = new Card(cardNumber, PIN, CVC, account2);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
 
@@ -73,15 +73,12 @@ public class User {
             if (account3.getCards() == 0) {
                 account3.addCard();
                 card3 = new Card(cardNumber, PIN, CVC, account3);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
         }
         return false;
     }
-
-
-
 
 
     public boolean addCreditCard(int index, String cardNumber, int CVC, int PIN, double creditLimit) {
@@ -90,7 +87,7 @@ public class User {
             if (account1.getCards() == 0) {
                 account1.addCard();
                 card1 = new creditCard(cardNumber, PIN, CVC, creditLimit, account1);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
 
@@ -98,7 +95,7 @@ public class User {
             if (account2.getCards() == 0) {
                 account2.addCard();
                 card2 = new creditCard(cardNumber, PIN, CVC, creditLimit, account2);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
 
@@ -106,7 +103,7 @@ public class User {
             if (account3.getCards() == 0) {
                 account3.addCard();
                 card3 = new creditCard(cardNumber, PIN, CVC, creditLimit, account3);
-                cardCounter =+1;
+                cardCounter +=1;
                 return true;
             }
         }
@@ -224,31 +221,14 @@ public class User {
     }
 
 
-    public ArrayList<String> getCards() {
-        System.out.println("Tässä kortit userissä" + cardCounter);
-        ArrayList<String> list = new ArrayList<>();
-        if (cardCounter == 1){
-            list.add(card1.getCardNumber());
-        } else if (cardCounter == 2){
-            list.add(card1.getCardNumber());
-            list.add(card2.getCardNumber());
-        } else if (cardCounter == 3){
-            list.add(card1.getCardNumber());
-            list.add(card2.getCardNumber());
-            list.add(card3.getCardNumber());
-        }
-        return list;
-    }
-
-
     public String getCardNumber (int index) {
         String cardNumber = "";
-        if (index == 1) {
-            cardNumber = account1.getAccountNumber();
-        } else if (index == 2) {
-            cardNumber = account2.getAccountNumber();
-        } else if (index == 3) {
-            cardNumber = account3.getAccountNumber();
+        if((index == 1) && (card1 != null)) {
+            cardNumber = card1.getCardNumber();
+        } else if ((index == 2) && (card2 != null)) {
+            cardNumber = card2.getCardNumber();
+        } else if ((index == 3) && (card3 != null)) {
+            cardNumber = card3.getCardNumber();
         }
         return cardNumber;
     }
@@ -286,11 +266,11 @@ public class User {
 
     public boolean isCardCreditCard(int index){
         boolean isCredit = true;
-        if(index == 1){
+        if((index == 1) && (card1 != null)){
             isCredit = card1.isCreditCard();
-        }else if (index == 2){
+        }else if ((index == 2) && (card2 != null)){
             isCredit = card2.isCreditCard();
-        }else if (index == 3){
+        }else if ((index == 3) && (card3 != null)){
             isCredit = card3.isCreditCard();
         }
         return isCredit;
@@ -342,6 +322,19 @@ public class User {
             return password;
         }
     }
+
+
+    public void deleteCard(int index) {
+        if (index == 1) {
+            card1 = null;
+        } else if (index == 2) {
+            card2 = null;
+        } else if (index == 3) {
+            card3 = null;
+        }
+        cardCounter -= 1;
+    }
+
 }
 
 
