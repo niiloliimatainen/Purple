@@ -52,6 +52,7 @@ public class User {
 
 
     public boolean addCard(int index, String cardNumber, int CVC, int PIN) {
+        System.out.println("Tässä luotiin kortti indexillä" + index);
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();
@@ -84,6 +85,7 @@ public class User {
 
 
     public boolean addCreditCard(int index, String cardNumber, int CVC, int PIN, double creditLimit) {
+        System.out.println("Tässä luotiin creditkortti indexillä" + index);
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();

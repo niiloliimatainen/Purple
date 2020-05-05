@@ -2,11 +2,17 @@ package com.example.purple;
 
 //joo
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Card {
-    protected String cardNumber, country = "Finland";
-    protected int PIN, CVC, raiseLimit = 500;
-    protected boolean isCredit;
-    protected Account account;
+    private String cardNumber;
+    private String[] countryArray = new String[]{"United States", "Finland", "Norway", "Sweden", "Denmark", "Canada", "United Kingdom", "Switzerland", "Germany"};
+    private int PIN, CVC, raiseLimit = 500;
+    private boolean isCredit;
+    private Account account;
+    private String[] defaultArea = new String[]{"Finland"};
+    private ArrayList<String> areaToUseList;
 
     public Card(String cardNumber, int PIN, int CVC, Account account) {
         this.cardNumber = cardNumber;
@@ -14,12 +20,18 @@ public class Card {
         this.CVC = CVC;
         this.account = account;
         this.isCredit = false;
+        this.areaToUseList = (ArrayList<String>) Arrays.asList(defaultArea);
     }
 
     public String getCardNumber(){
-        System.out.println("Minua kysyttiin getcardnumber card123");
         return cardNumber;
     }
+
+    public ArrayList<String> getAreaToUseList(){
+        return areaToUseList;
+
+    }
+
 
     public boolean isCreditCard(){return isCredit;}
 

@@ -75,7 +75,7 @@ public class main_one extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    class LearnGesture extends GestureDetector.SimpleOnGestureListener {
+    static class LearnGesture extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2, float x1, float y1){
             if(event1.getX() > event2.getX()){
