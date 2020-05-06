@@ -38,7 +38,7 @@ public class login extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Invalid Email address or Password!", Toast.LENGTH_SHORT).show();
 
         } else {
-            if (bank.login(email, password,this) == 1) {
+            if (bank.login(email, password, this) == 1) {
                 confirmationPopup();
 
             } else {

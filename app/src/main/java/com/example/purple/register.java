@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 //Registration screen
@@ -62,7 +64,7 @@ public class register extends AppCompatActivity {
 
         } else if (flag1 && flag2 && flag3 && flag4) {
             if (password2.equals(password1)) {
-                //tähän voisi laittaa sellasen hienon vihreen valon et näkee niitten salasanojen olevan ok//
+
                 ok = true;
             } else {
                 Toast.makeText(getApplicationContext(), "Passwords don't match!", Toast.LENGTH_SHORT).show();
@@ -72,7 +74,13 @@ public class register extends AppCompatActivity {
         }
 
         if (ok) {
-            int newUser = bank.addUser(firstName, lastName, email, phoneNumber, password1, this);
+            String hashedPw;
+            String tempSalt;
+            byte[] salt = numberHandler.getSalt();
+            tempSalt = Arrays.toString(salt);
+            hashedPw = numberHandler.hasher(password1, tempSalt.getBytes());
+
+            int newUser = bank.addUser(firstName, lastName, email, phoneNumber, hashedPw, tempSalt, this);
 
             if (newUser == 1) {
                 Toast.makeText(getApplicationContext(), "Registration complete!", Toast.LENGTH_SHORT).show();

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
 import android.content.DialogInterface;
+import android.media.Image;
 import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -12,15 +13,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
-
+/*
 public class main_two extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private ArrayList<String> chooseCardList = new ArrayList<>();
@@ -36,13 +37,19 @@ public class main_two extends AppCompatActivity {
         gesture = new GestureDetectorCompat(this, new LearnGesture());
         Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
+        ImageButton pay = findViewById(R.id.payWithCard);
+        ImageButton withdraw = findViewById(R.id.withDrawButton);
 
         for(int i=0; 3 > i; i++){
             if(bank.getCardObj(i+1) != null){
                 chooseCardList.add(bank.getCardObj(i + 1).isCreditCard() + " | " + bank.getCardObj(i + 1).getCardNumber());
             }
         }
-
+        if(chooseCardList == null || chooseCardList.isEmpty()){
+            chooseCardSpinner.setVisibility(View.GONE);
+            pay.setVisibility(View.GONE);
+            withdraw.setVisibility(View.GONE);
+        }
 
         ArrayAdapter<String> cardArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, chooseCardList);
         cardArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -187,7 +194,7 @@ public class main_two extends AppCompatActivity {
                                 }
                                 //using debit
                             }else{
-                                if (bank.getCardObj(cardToUse).payment(amountToDialog) == 1) {
+                                if (bank.getCardObj(cardToUse).payment(amountToDialog, true) == 1) {
                                     Toast.makeText(getApplicationContext(), "Payment has been made! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
@@ -204,7 +211,7 @@ public class main_two extends AppCompatActivity {
                                 }
                             }else{
                                 //using debit for withdrawal
-                                if (bank.getCardObj(cardToUse).payment(amountToDialog) == 1) {
+                                if (bank.getCardObj(cardToUse).raiseMoney(amountToDialog, false) == 1) {
                                     Toast.makeText(getApplicationContext(), "Money withdrawn, spend it wisely!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
@@ -240,4 +247,4 @@ public class main_two extends AppCompatActivity {
     }
 
 }
-
+*/

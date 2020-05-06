@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Bank {
     private static Bank bank = new Bank();
-    private User admin = new User("Kalle", "Jaakonpoika", "admin", "0453299483", "admin");
+    private User admin = new User("Kalle", "Jaakonpoika", "admin", "0453299483", "admin", "empty");
     private ArrayList<User> userList = new ArrayList<>();
     private int currentUser;
     private boolean isAdmin = false;
@@ -25,8 +25,8 @@ public class Bank {
     }
 
 
-    public int addUser(String fname, String lname, String email, String pnumber, String pword, Context context) {
-            User user = new User(fname, lname, email, pnumber, pword);
+    public int addUser(String fname, String lname, String email, String pnumber, String pword, String salt, Context context) {
+            User user = new User(fname, lname, email, pnumber, pword, salt);
             for (int i = 0; i < userList.size(); i++) {
                 if (email.equals(userList.get(i).getUserEmail())) {
                     return 0;
@@ -59,7 +59,7 @@ public class Bank {
             return 1;
         } else {
             for (int i = 0; i < userList.size(); i++) {
-                if (email.equals(userList.get(i).getUserEmail()) && (password.equals(userList.get(i).getUserPassword()))) {
+                if (email.equals(userList.get(i).getUserEmail()) && (numberHandler.hasher(password, userList.get(i).getSalt().getBytes()).equals(userList.get(i).getUserPassword()))) {
                     currentUser = i;
                     return 1;
                 }

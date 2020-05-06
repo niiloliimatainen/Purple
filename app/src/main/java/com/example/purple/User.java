@@ -4,17 +4,18 @@ package com.example.purple;
 import java.util.ArrayList;
 
 public class User {
-    private String firstName, lastName, email, phoneNumber, password;
+    private String firstName, lastName, email, phoneNumber, password, salt;
     private Account account1, account2, account3;
     private Card card1, card2, card3;
     private int accCounter = 0;
 
-    public User(String fname, String lname,String email, String pnumber, String pword) {
+    public User(String fname, String lname,String email, String pnumber, String pword, String salt) {
         this.firstName = fname;
         this.lastName = lname;
         this.email = email;
         this.phoneNumber = pnumber;
         this.password = pword;
+        this.salt = salt;
     }
 
 
@@ -22,7 +23,9 @@ public class User {
         return email;
     }
 
-
+    public String getSalt(){
+        return salt;
+    }
 
     public String getUserPassword() {
         return password;
