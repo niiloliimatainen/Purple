@@ -7,14 +7,14 @@ import java.util.Arrays;
 
 public class Card {
     private String cardNumber, country = "Finland";
-    private int PIN, CVC, raiseLimit = 500;
+    private int PIN, CVC, account, raiseLimit = 500;
     private boolean isCredit;
     private double creditLimit;
-    protected Account account;
-    private String[] countryArray = new String[]{"Finland", "United States", "Norway", "Sweden", "Denmark", "Canada", "United Kingdom", "Switzerland", "Germany"};
+    private Bank bank = Bank.getInstance();
+    private String[] countryArray = new String[]{"Finland","United States", "Norway", "Sweden", "Denmark", "Canada", "United Kingdom", "Switzerland", "Germany"};
     private ArrayList<String> areaToUseList;
 
-    public Card(String cardNumber, int PIN, int CVC, Account account, boolean isCredit, double creditLimit) {
+    public Card(String cardNumber, int PIN, int CVC, int account, boolean isCredit, double creditLimit) {
         this.cardNumber = cardNumber;
         this.PIN = PIN;
         this.CVC = CVC;
@@ -43,7 +43,7 @@ public class Card {
         if (raiseLimit < money) {
             return 0;
         } else {
-            if (account.transferMoney(money) == 1) {
+            if (bank.cardPayment(account, money) == 1) {
                 return 1;
             } else {
                 return 0;
@@ -51,10 +51,13 @@ public class Card {
         }
     }
 
+    public boolean testPin(int pin){
+        return pin == PIN;
+    }
 
     public int payment(double money) {
-        System.out.println(("Tässä rahat" + account.getMoneyAmount()));
-        if (account.transferMoney(money) == 1) {
+
+        if (bank.cardPayment(account, money) == 1) {
             return 1;
         } else {
             return 0;
@@ -69,6 +72,7 @@ public class Card {
     public int creditPayment(double money) {
         if(isCredit) {
             if (money <= creditLimit) {
+                bank.saveCredit(account);
                 creditLimit -= money;
                 return 1;
             }

@@ -55,7 +55,7 @@ public class User {
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();
-                card1 = new Card(cardNumber, PIN, CVC, account1, false, creditLimit);
+                card1 = new Card(cardNumber, PIN, CVC, 1, false, creditLimit);
                 cardCounter += 1;
                 return true;
             }
@@ -63,7 +63,7 @@ public class User {
         } else if (index == 2) {
             if (account2.getCards() == 0) {
                 account2.addCard();
-                card2 = new Card(cardNumber, PIN, CVC, account1, false, creditLimit);
+                card2 = new Card(cardNumber, PIN, CVC, 2, false, creditLimit);
                 cardCounter += 1;
                 return true;
             }
@@ -71,7 +71,7 @@ public class User {
         } else if (index == 3) {
             if (account3.getCards() == 0) {
                 account3.addCard();
-                card3 = new Card(cardNumber, PIN, CVC, account1, false, creditLimit);
+                card3 = new Card(cardNumber, PIN, CVC, 3, false, creditLimit);
                 cardCounter += 1;
                 return true;
             }
@@ -84,7 +84,7 @@ public class User {
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();
-                card1 = new Card(cardNumber, PIN, CVC, account1, true, creditLimit);
+                card1 = new Card(cardNumber, PIN, CVC,1, true, creditLimit);
                 cardCounter +=1;
                 return true;
             }
@@ -92,7 +92,7 @@ public class User {
         } else if (index == 2) {
             if (account2.getCards() == 0) {
                 account2.addCard();
-                card2 = new Card(cardNumber, PIN, CVC, account2, true, creditLimit);
+                card2 = new Card(cardNumber, PIN, CVC, 2, true, creditLimit);
                 cardCounter +=1;
                 return true;
             }
@@ -100,7 +100,7 @@ public class User {
         } else if (index == 3) {
             if (account3.getCards() == 0) {
                 account3.addCard();
-                card3 = new Card(cardNumber, PIN, CVC, account3, true, creditLimit);
+                card3 = new Card(cardNumber, PIN, CVC, 3, true, creditLimit);
                 cardCounter +=1;
                 return true;
             }

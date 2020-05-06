@@ -109,8 +109,8 @@ public class main_one extends AppCompatActivity {
 
 
 
-   // @Override
-  /*  public boolean onTouchEvent(MotionEvent event){
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
         this.gesture.onTouchEvent(event);
         return super.onTouchEvent(event);
     }

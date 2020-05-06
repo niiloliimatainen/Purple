@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
 import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.content.Intent;
@@ -104,62 +105,51 @@ public class main_two extends AppCompatActivity {
     }
         public void creditOrDebit (int flag) {
             //flag determines whether its a payment or withdraw
-            //withdraw
+            //when this executes, two flags will be sent to pincodepopup. First Credit/debit, then pay/withdraw!
+//withdraw
             if (flag == 1){
-                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                dialog.setTitle("Choose the payment method");
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    dialog.setTitle("Choose the payment method");
 
-                dialog.setNegativeButton("Debit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (bank.getCardObj(cardToUse).payment(amountToDialog) == 1) {
-                            Toast.makeText(getApplicationContext(), "Money withdrawn, spend it wisely!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
+                    dialog.setNegativeButton("Debit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            pinCodePopup(false, false);
+                            dialog.dismiss();
                         }
-
-                        dialog.dismiss();
-                    }
                 });
-
+                if(!bank.getCardObj(cardToUse).isCreditCard()) {
+                    dialog.show();
+                }
                 dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
-                            Toast.makeText(getApplicationContext(), "Credit money withdrawn, make it rain!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
-                        }
+                       pinCodePopup(false, true);
                         dialog.dismiss();
                     }
                 });
                 dialog.show();
-                //card payment
+//card payment
             }else{
+                // is debitCard
                 AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setTitle("Choose the payment method");
 
                 dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (bank.getCardObj(cardToUse).payment(amountToDialog) == 1) {
-                            Toast.makeText(getApplicationContext(), "Payment has been made! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
-                        }
+                        pinCodePopup(true, false);
                         dialog.dismiss();
                     }
                 });
-
-
+                if(!bank.getCardObj(cardToUse).isCreditCard()) {
+                    dialog.show();
+                }
+                //is creditcard
                 dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
-                            Toast.makeText(getApplicationContext(), "Your credit card was charged! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
-                        }
+                        pinCodePopup(true, true);
                         dialog.dismiss();
                     }
                 });
@@ -167,6 +157,70 @@ public class main_two extends AppCompatActivity {
             }
 
         }
+
+
+    public void pinCodePopup(final boolean isPayment, final boolean isCredit){
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        dialog.setTitle("Payment terminal");
+        dialog.setMessage("Input card pin");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dialog.setView(input);
+
+        dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (input.getText() == null || input.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Incorrect amount!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                } else {
+                    int inputPin = Integer.parseInt(input.getText().toString());
+                    if(bank.getCardObj(cardToUse).testPin(inputPin)) {
+                        if(isPayment) {
+                            //Payment
+                            if(isCredit) {
+                                //Using credit
+                                if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
+                                    Toast.makeText(getApplicationContext(), "Your credit card was charged! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
+                                }
+                                //using debit
+                            }else{
+                                if (bank.getCardObj(cardToUse).payment(amountToDialog) == 1) {
+                                    Toast.makeText(getApplicationContext(), "Payment has been made! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        }else{
+                            if(isCredit){
+                                //using creditfor withdrawal
+                                if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
+                                    Toast.makeText(getApplicationContext(), "Credit money withdrawn, make it rain!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
+                                }
+                            }else{
+                                //using debit for withdrawal
+                                if (bank.getCardObj(cardToUse).payment(amountToDialog) == 1) {
+                                    Toast.makeText(getApplicationContext(), "Money withdrawn, spend it wisely!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                        dialog.dismiss();
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Incorrect pin code, try again!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }
+            }
+        });
+        dialog.show();
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         this.gesture.onTouchEvent(event);

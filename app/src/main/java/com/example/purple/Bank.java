@@ -176,6 +176,11 @@ public class Bank {
     }
 
 
+
+    public Card getCardObj(int index){
+        return userList.get(currentUser).getCardObject(index);
+    }
+
     public ArrayList<String> getAccounts() {
         ArrayList<String> accountList = userList.get(currentUser).getAccounts();
         return accountList;
