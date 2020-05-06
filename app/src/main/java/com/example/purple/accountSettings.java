@@ -3,6 +3,7 @@ package com.example.purple;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class accountSettings extends AppCompatActivity {
     private int account;
     private Bank bank = Bank.getInstance();
     private EditText type;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,8 @@ public class accountSettings extends AppCompatActivity {
                 dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        bank.editAccount(account, 0);
-                        bank.deleteCard(account);
+                        bank.editAccount(account, 0, context);
+                        bank.deleteCard(account, context);
                         Toast.makeText(getApplicationContext(), "Account changed!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(accountSettings.this, main_one.class);
                         startActivity(intent);
@@ -78,7 +80,7 @@ public class accountSettings extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         System.out.println(account);
-                        bank.editAccount(account, 1);
+                        bank.editAccount(account, 1, context);
                         Toast.makeText(getApplicationContext(), "Account changed!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(accountSettings.this, main_one.class);
                         startActivity(intent);

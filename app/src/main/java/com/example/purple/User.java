@@ -4,10 +4,10 @@ package com.example.purple;
 import java.util.ArrayList;
 
 public class User {
-    protected String firstName, lastName, email, phoneNumber, password;
-    protected Account account1, account2, account3;
-    protected  Card card1, card2, card3;
-    protected int accCounter = 0, cardCounter = 0;
+    private String firstName, lastName, email, phoneNumber, password;
+    private Account account1, account2, account3;
+    private Card card1, card2, card3;
+    private int accCounter = 0;
 
     public User(String fname, String lname,String email, String pnumber, String pword) {
         this.firstName = fname;
@@ -51,28 +51,27 @@ public class User {
 
 
     public boolean addCard(int index, String cardNumber, int CVC, int PIN) {
-        double creditLimit = 0;
+
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();
-                card1 = new Card(cardNumber, PIN, CVC, 1, false, creditLimit);
-                cardCounter += 1;
+                card1 = new Card(cardNumber, PIN, CVC, 1, false, 0);
+
                 return true;
             }
 
         } else if (index == 2) {
             if (account2.getCards() == 0) {
                 account2.addCard();
-                card2 = new Card(cardNumber, PIN, CVC, 2, false, creditLimit);
-                cardCounter += 1;
+                card2 = new Card(cardNumber, PIN, CVC, 2, false, 0);
+
                 return true;
             }
 
         } else if (index == 3) {
             if (account3.getCards() == 0) {
                 account3.addCard();
-                card3 = new Card(cardNumber, PIN, CVC, 3, false, creditLimit);
-                cardCounter += 1;
+                card3 = new Card(cardNumber, PIN, CVC, 3, false, 0);
                 return true;
             }
         }
@@ -84,8 +83,8 @@ public class User {
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();
-                card1 = new Card(cardNumber, PIN, CVC,1, true, creditLimit);
-                cardCounter +=1;
+                card1 = new Card(cardNumber, PIN, CVC, 1, true, creditLimit);
+
                 return true;
             }
 
@@ -93,7 +92,7 @@ public class User {
             if (account2.getCards() == 0) {
                 account2.addCard();
                 card2 = new Card(cardNumber, PIN, CVC, 2, true, creditLimit);
-                cardCounter +=1;
+
                 return true;
             }
 
@@ -101,22 +100,11 @@ public class User {
             if (account3.getCards() == 0) {
                 account3.addCard();
                 card3 = new Card(cardNumber, PIN, CVC, 3, true, creditLimit);
-                cardCounter +=1;
+
                 return true;
             }
         }
         return false;
-    }
-
-    public Card getCardObject(int index){
-        if((index == 1) && (card1 != null)) {
-            return card1;
-        } else if ((index == 2) && (card2 != null)) {
-            return card2;
-        } else if ((index == 3) && (card3 != null)) {
-            return card3;
-        }
-        return null;
     }
 
 
@@ -272,20 +260,6 @@ public class User {
         return money;
     }
 
-
-    public boolean isCardCreditCard(int index){
-        boolean isCredit = true;
-        if((index == 1) && (card1 != null)){
-            isCredit = card1.isCreditCard();
-        }else if ((index == 2) && (card2 != null)){
-            isCredit = card2.isCreditCard();
-        }else if ((index == 3) && (card3 != null)){
-            isCredit = card3.isCreditCard();
-        }
-        return isCredit;
-    }
-
-
     public int getAccountsPayPossibility(int index) {
         int payPossibility = 0;
         if (index == 1) {
@@ -346,7 +320,6 @@ public class User {
         } else if (index == 3) {
             card3 = null;
         }
-        cardCounter -= 1;
     }
 
 
@@ -359,6 +332,90 @@ public class User {
             account3.editAccount(hasPayPossibility);
         }
     }
+
+
+    public int getCardRaiseLimit(int index) {
+        int raiseLimit = 0;
+        if (index == 1) {
+            raiseLimit = card1.getCardRaiseLimit();
+        } else if (index == 2) {
+            raiseLimit = card2.getCardRaiseLimit();
+        } else if (index == 3) {
+            raiseLimit = card3.getCardRaiseLimit();
+        }
+        return raiseLimit;
+    }
+
+
+
+    public int getCardPin(int index) {
+        int PIN = 0;
+        if (index == 1) {
+            PIN = card1.getCardPin();
+        } else if (index == 2) {
+            PIN = card2.getCardPin();
+        } else if (index == 3) {
+            PIN = card3.getCardPin();
+        }
+        return PIN;
+    }
+
+
+
+    public double getCardCreditLimit(int index) {
+       double creditLimit = 0;
+        if (index == 1) {
+            creditLimit = card1.getCardCreditLimit();
+        } else if (index == 2) {
+            creditLimit = card2.getCardCreditLimit();
+        } else if (index == 3) {
+            creditLimit = card3.getCardCreditLimit();
+        }
+        return creditLimit;
+    }
+
+
+    public int is(int index) {
+        int PIN = 0;
+        if (index == 1) {
+            PIN = card1.getCardPin();
+        } else if (index == 2) {
+            PIN = card2.getCardPin();
+        } else if (index == 3) {
+            PIN = card3.getCardPin();
+        }
+        return PIN;
+    }
+
+
+    public boolean isCardCreditCard(int index){
+        boolean isCredit = true;
+        if((index == 1) && (card1 != null)){
+            isCredit = card1.isCreditCard();
+        }else if ((index == 2) && (card2 != null)){
+            isCredit = card2.isCreditCard();
+        }else if ((index == 3) && (card3 != null)){
+            isCredit = card3.isCreditCard();
+        }
+        return isCredit;
+    }
+
+
+    public int getCardAmount() {
+        int counter = 0;
+        if (card1 != null) {
+            counter += 1;
+        }
+        if (card2 != null) {
+            counter += 1;
+        }
+        if (card3 != null) {
+            counter += 1;
+        }
+        return counter;
+    }
+
+
 
 
 }

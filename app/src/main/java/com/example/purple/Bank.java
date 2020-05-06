@@ -12,7 +12,6 @@ public class Bank {
     private ArrayList<User> userList = new ArrayList<>();
     private int currentUser;
     private boolean isAdmin = false;
-    private Context context;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 
@@ -26,8 +25,7 @@ public class Bank {
     }
 
 
-    public int addUser(String fname, String lname, String email, String pnumber, String pword, Context Context) {
-            context = Context;
+    public int addUser(String fname, String lname, String email, String pnumber, String pword, Context context) {
             User user = new User(fname, lname, email, pnumber, pword);
             for (int i = 0; i < userList.size(); i++) {
                 if (email.equals(userList.get(i).getUserEmail())) {
@@ -47,8 +45,7 @@ public class Bank {
     }
 
 
-    public int login(String email, String password, Context Context) {
-        context = Context;
+    public int login(String email, String password, Context context) {
         userList.clear();
         userList = databaseConnector.readFromFile(context);
         if (userList.isEmpty()) {
@@ -72,7 +69,7 @@ public class Bank {
     }
 
 
-    public boolean addAccount(int flag) {
+    public boolean addAccount(int flag, Context context) {
         String accountNumber = numberHandler.setAccountNumber();
         if (userList.get(currentUser).addAccount(flag, accountNumber)) {
             databaseConnector.writeToFile(context, userList);
@@ -83,7 +80,7 @@ public class Bank {
     }
 
 
-    public void addMoney(int index, double money) {
+    public void addMoney(int index, double money, Context context) {
         Date date = new Date();
         String accountNumber = userList.get(currentUser).getAccountNumber(index);
         String transaction = String.format("%s        %s           +%s",sdf.format(date), userList.get(currentUser).getName(), money);
@@ -94,7 +91,7 @@ public class Bank {
     }
 
 
-    public int selfTransfer(int pay, int receive, double money) {
+    public int selfTransfer(int pay, int receive, double money, Context context) {
         if (userList.get(currentUser).getAccountsPayPossibility(pay) == 0) {
             return 2;
         }
@@ -114,7 +111,7 @@ public class Bank {
     }
 
 
-    public int transferMoney(String receivingAcc, int payAccount, double money) {
+    public int transferMoney(String receivingAcc, int payAccount, double money, Context context) {
         Date date = new Date();
         String accountNumber = userList.get(currentUser).getAccountNumber(payAccount);
         ArrayList<String> list;
@@ -137,7 +134,6 @@ public class Bank {
                     } else {
                         return 3;
                     }
-
                 }
             }
         }
@@ -159,7 +155,7 @@ public class Bank {
     }
 
     //Raise of money or payment
-    public int cardTransaction(int account, double money, boolean isPayment) {
+    public int cardTransaction(int account, double money, boolean isPayment, Context context) {
         Date date = new Date();
         String accountNumber = userList.get(currentUser).getAccountNumber(account);
         if (isPayment) {
@@ -186,7 +182,7 @@ public class Bank {
 
 
     //Save credit payments
-    public void saveCredit(int account) {
+    public void saveCredit(int account, Context context) {
         databaseConnector.writeToFile(context, userList);
     }
 
@@ -228,16 +224,8 @@ public class Bank {
         }
     }
 
-    public String isCardCreditCard(int index){
-        if(userList.get(currentUser).isCardCreditCard(index)){
-            return "Credit";
-        } else {
-            return "Debit";
-        }
-    }
 
-
-    public boolean addCard(int index) {
+    public boolean addCard(int index, Context context) {
         String cardNumber = numberHandler.setCardNumber();
         int CVC = numberHandler.setCVC();
         int PIN = numberHandler.setPIN();
@@ -250,7 +238,7 @@ public class Bank {
     }
 
 
-    public boolean addCreditCard(int index, double creditLimit) {
+    public boolean addCreditCard(int index, double creditLimit, Context context) {
         String cardNumber = numberHandler.setCardNumber();
         int CVC = numberHandler.setCVC();
         int PIN = numberHandler.setPIN();
@@ -274,12 +262,12 @@ public class Bank {
    }
 
 
-   public void editUserInfo(String change, int flag) {
+   public void editUserInfo(String change, int flag, Context context) {
         userList.get(currentUser).editUserInfo(change, flag);
         databaseConnector.writeToFile(context, userList);
    }
 
-   public void deleteAccount(int index) {
+   public void deleteAccount(int index, Context context) {
        userList.get(currentUser).deleteCard(index);
        userList.get(currentUser).deleteAccount(index);
        databaseConnector.writeToFile(context, userList);
@@ -313,7 +301,7 @@ public class Bank {
 
 
    //Only admin can use
-   public void deleteAll() {
+   public void deleteAll(Context context) {
         if (isAdmin) {
             userList.clear();
             userList.add(admin);
@@ -323,7 +311,7 @@ public class Bank {
 
 
    //Only admin can use
-   public void deleteUser(int user) {
+   public void deleteUser(int user, Context context) {
        if (isAdmin) {
             for (int i = 1; i < userList.size(); i++) {
                 if (user == i) {
@@ -335,15 +323,50 @@ public class Bank {
    }
 
 
-   public void editAccount(int index, int hasPayPossibility) {
+   public void editAccount(int index, int hasPayPossibility, Context context) {
         userList.get(currentUser).editAccount(index, hasPayPossibility);
         databaseConnector.writeToFile(context, userList);
    }
 
 
-   public void deleteCard(int index) {
+   public void deleteCard(int index, Context context) {
         userList.get(currentUser).deleteCard(index);
         databaseConnector.writeToFile(context, userList);
    }
+
+   public int getCardRaiseLimit(int index) {
+        int raiseLimit = userList.get(currentUser).getCardRaiseLimit(index);
+        return raiseLimit;
+   }
+
+
+   public int getCardAmount() {
+        int cardAmount = userList.get(currentUser).getCardAmount();
+        return cardAmount;
+   }
+
+
+
+
+    public int getCardPin(int index) {
+        int PIN = userList.get(currentUser).getCardPin(index);
+        return PIN;
+    }
+
+
+    public double getCreditLimit(int index) {
+        double creditLimit = userList.get(currentUser).getCardCreditLimit(index);
+        return creditLimit;
+    }
+
+
+    public String isCardCreditCard(int index){
+        if(userList.get(currentUser).isCardCreditCard(index)){
+            return "Credit";
+        } else {
+            return "Debit";
+        }
+    }
+
 
 }

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".accountSettings"></activity>
+        <activity android:name=".cardSettings"></activity>
+        <activity android:name=".accountSettings" />
         <activity android:name=".settings" />
         <activity android:name=".addCardActivity" />
         <activity android:name=".adminSettings" />

@@ -3,6 +3,7 @@ package com.example.purple;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ public class addCardActivity extends AppCompatActivity {
     private EditText creditInput;
     private boolean isCredit = false;
     private int accIndex = 0;
+    private Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +128,7 @@ public class addCardActivity extends AppCompatActivity {
             } else {
                 Double creditLimit = Double.parseDouble(creditInput.getText().toString());
                 System.out.println(accIndex + "credit");
-                if (bank.addCreditCard(accIndex, creditLimit)) {
+                if (bank.addCreditCard(accIndex, creditLimit, context)) {
                     Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }else{
@@ -137,7 +139,7 @@ public class addCardActivity extends AppCompatActivity {
 
         }else if (!isCredit){
             System.out.println(accIndex + "debit");
-            if(bank.addCard(accIndex)) {
+            if(bank.addCard(accIndex, context)) {
                 Toast.makeText(getApplicationContext(), "New card added!", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }else{
