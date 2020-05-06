@@ -101,14 +101,11 @@ public class accountSettings extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Write down the type first!", Toast.LENGTH_LONG).show();
         }
-
-
-
-
-
-
     }
 
 
-
+    public void returnButton(View v) {
+        Intent intent = new Intent(accountSettings.this, main_one.class);
+        startActivity(intent);
+    }
 }
