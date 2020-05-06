@@ -89,16 +89,36 @@ public class adminSettings extends AppCompatActivity {
         if (choice.getText() == null) {
             Toast.makeText(getApplicationContext(), "Invalid value!", Toast.LENGTH_SHORT).show();
         } else {
-            userValue = choice.getText().toString();
-            int finalValue = Integer.parseInt(userValue);
-            bank.deleteUser(finalValue);
-            Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_SHORT).show();
-            userList = bank.getAllUsers();
+            AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+            ArrayList<String> accountList = bank.getAccounts();
+            dialog.setTitle("Are you sure?");
 
-            for (int i = 0; i < userList.size(); i++) {
-                sb.append(userList.get(i) + " \n");
-            }
-            users.setText(sb.toString());
+            dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    userValue = choice.getText().toString();
+                    int finalValue = Integer.parseInt(userValue);
+                    bank.deleteUser(finalValue);
+                    Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_SHORT).show();
+                    userList = bank.getAllUsers();
+
+                    for (int i = 0; i < userList.size(); i++) {
+                        sb.append(userList.get(i) + " \n");
+                    }
+                    users.setText(sb.toString());
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
         }
     }
 }

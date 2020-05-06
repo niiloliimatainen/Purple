@@ -21,7 +21,7 @@ public class databaseConnector {
 
     public static void writeToFile(Context context, ArrayList<User> userList) {
         try {
-            FileOutputStream fos = context.openFileOutput("database1.json", Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput("database.json", Context.MODE_PRIVATE);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
             for (int i = 0; i < userList.size(); i++) {
                 Gson gson = new Gson();
@@ -46,7 +46,7 @@ public class databaseConnector {
         Gson gson = new Gson();
         String line;
         try {
-            FileInputStream fis = context.openFileInput("database1.json");
+            FileInputStream fis = context.openFileInput("database.json");
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader reader = new BufferedReader(isr);
 
