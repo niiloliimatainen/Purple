@@ -4,6 +4,7 @@ package com.example.purple;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public abstract class Card {
     protected String cardNumber;
@@ -11,8 +12,8 @@ public abstract class Card {
     protected int PIN, CVC, raiseLimit = 500;
     protected boolean isCredit;
     protected Account account;
-    protected String[] defaultArea = new String[]{"Finland"};
-    protected ArrayList<String> areaToUseList;
+    protected String defaultArea = "Finland";
+    protected ArrayList<String> areaToUseList = new ArrayList<>();
 
 
     public Card(String cardNumber, int PIN, int CVC, Account account) {
@@ -21,9 +22,8 @@ public abstract class Card {
         this.CVC = CVC;
         this.account = account;
         this.isCredit = false;
-        this.areaToUseList = (ArrayList<String>) Arrays.asList(defaultArea);
     }
-
+    
         String getCardNumber(){
             return cardNumber;
         }

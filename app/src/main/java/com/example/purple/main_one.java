@@ -43,6 +43,7 @@ public class main_one extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         getDelegate().onStart();
+
         ArrayList<String> accountList = bank.getAccounts();
 
         if (accountList.isEmpty()) {

@@ -26,18 +26,16 @@ public class main_two extends AppCompatActivity {
     private ArrayList<String> chooseCardList = new ArrayList<>();
     private String[] countryArray = new String[]{"United States", "Finland", "Norway", "Sweden", "Denmark", "Canada", "United Kingdom", "Switzerland", "Germany"};
     private GestureDetectorCompat gesture;
-    private EditText amountInput = findViewById(R.id.amountInput);
     private Card cardToUse;
     private double amountToDialog = 0;
-    private Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
-    private Spinner chooseCountry = findViewById(R.id.chooseCountry);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_two);
         gesture = new GestureDetectorCompat(this, new LearnGesture());
+        Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
+        Spinner chooseCountry = findViewById(R.id.chooseCountry);
 
 
 
@@ -60,7 +58,9 @@ public class main_two extends AppCompatActivity {
     }
 
     public void cardPayment(View v) {
-
+        Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
+        Spinner chooseCountry = findViewById(R.id.chooseCountry);
+        EditText amountInput = findViewById(R.id.amountInput);
         cardToUse = cardsList.get(chooseCardSpinner.getSelectedItemPosition());
         String country = chooseCountry.getSelectedItem().toString();
         ArrayList<String> cardArea = cardToUse.getAreaToUseList();
@@ -85,6 +85,7 @@ public class main_two extends AppCompatActivity {
 
     }
     public void withDraw(View v) {
+        EditText amountInput = findViewById(R.id.amountInput);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
         String country = chooseCountry.getSelectedItem().toString();
         ArrayList<String> cardArea = cardToUse.getAreaToUseList();
