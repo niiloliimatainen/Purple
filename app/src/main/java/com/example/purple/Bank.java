@@ -155,17 +155,29 @@ public class Bank {
         }
     }
 
-
-    public int cardPayment(int account, double money) {
+    //Raise of money or payment
+    public int cardTransaciton(int account, double money, boolean isPayment) {
         Date date = new Date();
         String accountNumber = userList.get(currentUser).getAccountNumber(account);
-        if (userList.get(currentUser).transferMoney(account, money) == 1) {
-            String transaction = String.format("%s        %s           -%s",sdf.format(date), "External user", money);
-            databaseConnector.writeToFile(context, userList);
-            databaseConnector.saveBankStatement(context, accountNumber, transaction);
-            return 1;
+        if (isPayment) {
+            if (userList.get(currentUser).transferMoney(account, money) == 1) {
+                String transaction = String.format("%s        %s           -%s", sdf.format(date), "External user", money);
+                databaseConnector.saveBankStatement(context, accountNumber, transaction);
+                databaseConnector.writeToFile(context, userList);
+                return 1;
+            } else {
+                return 0;
+            }
+
         } else {
-            return 0;
+            if (userList.get(currentUser).transferMoney(account, money) == 1) {
+                String transaction = String.format("%s        %s           -%s",sdf.format(date), userList.get(currentUser).getName(), money);
+                databaseConnector.saveBankStatement(context, accountNumber, transaction);
+                databaseConnector.writeToFile(context, userList);
+                return 1;
+            } else {
+                return 0;
+            }
         }
     }
 
