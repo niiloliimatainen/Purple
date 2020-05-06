@@ -56,7 +56,7 @@ public class User {
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();
-                card1 = new Card(cardNumber, PIN, CVC, account1);
+                card1 = new debitCard(cardNumber, PIN, CVC, account1);
                 cardCounter +=1;
                 return true;
             }
@@ -64,7 +64,7 @@ public class User {
         } else if (index == 2) {
             if (account2.getCards() == 0) {
                 account2.addCard();
-                card2 = new Card(cardNumber, PIN, CVC, account2);
+                card2 = new debitCard(cardNumber, PIN, CVC, account2);
                 cardCounter +=1;
                 return true;
             }
@@ -72,7 +72,7 @@ public class User {
         } else if (index == 3) {
             if (account3.getCards() == 0) {
                 account3.addCard();
-                card3 = new Card(cardNumber, PIN, CVC, account3);
+                card3 = new debitCard(cardNumber, PIN, CVC, account3);
                 cardCounter +=1;
                 return true;
             }
@@ -204,6 +204,16 @@ public class User {
 
     }
 
+    public Card getCardObject(int index){
+        if((index == 1) && (card1 != null)) {
+            return card1;
+        } else if ((index == 2) && (card2 != null)) {
+            return card2;
+        } else if ((index == 3) && (card3 != null)) {
+            return card3;
+        }
+        return null;
+    }
 
     public ArrayList<String> getAccounts() {
         ArrayList<String> list = new ArrayList<>();
