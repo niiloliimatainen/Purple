@@ -3,6 +3,7 @@ package com.example.purple;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class adminSettings extends AppCompatActivity {
     private ArrayList<String> userList;
     private String userValue;
     private TextView users;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class adminSettings extends AppCompatActivity {
         dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                bank.deleteAll();
+                bank.deleteAll(context);
                 Toast.makeText(getApplicationContext(), "BOOM! All users deleted", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(adminSettings.this, main_one.class);
                 startActivity(intent);
@@ -100,7 +102,7 @@ public class adminSettings extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     userValue = choice.getText().toString();
                     int finalValue = Integer.parseInt(userValue);
-                    bank.deleteUser(finalValue);
+                    bank.deleteUser(finalValue, context);
                     Toast.makeText(getApplicationContext(), "User deleted!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(adminSettings.this, main_one.class);
                     startActivity(intent);

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.text.InputType;
 import android.view.GestureDetector;
@@ -24,6 +25,7 @@ public class main_one extends AppCompatActivity {
     private GestureDetectorCompat gesture;
     private TextView moneyAmount, accounts, accountCounter, cards;
     private Bank bank = Bank.getInstance();
+    private Context context = this;
 
 
     @Override
@@ -139,7 +141,7 @@ public class main_one extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if (bank.addAccount(1)) {
+                if (bank.addAccount(1, context)) {
                     ArrayList<String> accountList = bank.getAccounts();
                     Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
                     moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
@@ -163,7 +165,7 @@ public class main_one extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which){
 
-                if (bank.addAccount(0)) {
+                if (bank.addAccount(0, context)) {
                     ArrayList<String> accountList = bank.getAccounts();
                     Toast.makeText(getApplicationContext(), "New account created!", Toast.LENGTH_SHORT).show();
                     moneyAmount.setText(String.format(Locale.GERMANY, "%.2f€", bank.getMoneyAmount()));
@@ -214,7 +216,7 @@ public class main_one extends AppCompatActivity {
                 }else {
                     double money = Double.parseDouble(input.getText().toString());
                     ArrayList<String> accountList = bank.getAccounts();
-                    bank.addMoney(1, money);
+                    bank.addMoney(1, money, context);
                     moneyAmount.setText(bank.getMoneyAmount() + "€");
                     String text = "";
                     for (int i = 0; accountList.size() > i; i++) {
@@ -239,7 +241,7 @@ public class main_one extends AppCompatActivity {
                 }else {
                     double money = Double.parseDouble(input.getText().toString());
                     ArrayList<String> accountList = bank.getAccounts();
-                    bank.addMoney(2, money);
+                    bank.addMoney(2, money, context);
                     moneyAmount.setText(bank.getMoneyAmount() + "€");
                     String text = "";
 
@@ -267,7 +269,7 @@ public class main_one extends AppCompatActivity {
                 }else {
                     double money = Double.parseDouble(input.getText().toString());
                     ArrayList<String> accountList = bank.getAccounts();
-                    bank.addMoney(3, money);
+                    bank.addMoney(3, money, context);
                     moneyAmount.setText(bank.getMoneyAmount() + "€");
                     String text = "";
 

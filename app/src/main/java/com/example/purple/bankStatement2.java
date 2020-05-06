@@ -2,6 +2,7 @@ package com.example.purple;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ public class bankStatement2 extends AppCompatActivity {
 
     private Bank bank = Bank.getInstance();
     private StringBuilder sb = new StringBuilder();
+    private Context context = this;
 
 
     @Override
@@ -47,7 +49,7 @@ public class bankStatement2 extends AppCompatActivity {
 
 
     public void deleteAccount(View v) {
-        bank.deleteAccount(2);
+        bank.deleteAccount(2, context);
         Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(bankStatement2.this, main_one.class);
         startActivity(intent);

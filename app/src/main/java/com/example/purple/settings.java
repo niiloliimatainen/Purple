@@ -2,6 +2,7 @@ package com.example.purple;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ public class settings extends AppCompatActivity {
     private EditText editFirstName, editLastName, editEmail, editPhoneNumber, editPassword, confirmPassword;
     private String firstName, lastName, email, phoneNumber, password;
     private Bank bank = Bank.getInstance();
+    private Context context = this;
 
 
     @Override
@@ -55,22 +57,22 @@ public class settings extends AppCompatActivity {
         } else {
             if (!(firstName.equals(editFirstName.getText().toString()))) {
                 firstName = editFirstName.getText().toString();
-                bank.editUserInfo(firstName, 1);
+                bank.editUserInfo(firstName, 1, context);
             }
 
             if (!(lastName.equals(editLastName.getText().toString()))) {
                 lastName = editLastName.getText().toString();
-                bank.editUserInfo(lastName, 2);
+                bank.editUserInfo(lastName, 2, context);
             }
 
             if (!(email.equals(editEmail.getText().toString()))) {
                 email = editEmail.getText().toString();
-                bank.editUserInfo(email, 3);
+                bank.editUserInfo(email, 3, context);
             }
 
             if (!(phoneNumber.equals(editPhoneNumber.getText().toString()))) {
                 phoneNumber = editPhoneNumber.getText().toString();
-                bank.editUserInfo(phoneNumber, 4);
+                bank.editUserInfo(phoneNumber, 4, context);
             }
 
             if ((!(editPassword.getText().toString().isEmpty())) || (!(confirmPassword.getText().toString().isEmpty()))) {
@@ -96,7 +98,7 @@ public class settings extends AppCompatActivity {
                 } else if (flag1 && flag2 && flag3 && flag4) {
                     if ((confirmPassword.getText().toString()).equals(password)) {
                         //Tämä on vittu kohta
-                        bank.editUserInfo(password, 5);
+                        bank.editUserInfo(password, 5, context);
                         ok = true;
                     } else {
                         Toast.makeText(getApplicationContext(), "Passwords don't match!", Toast.LENGTH_SHORT).show();
