@@ -45,10 +45,6 @@ public class main_one extends AppCompatActivity {
         getDelegate().onStart();
 
         ArrayList<String> accountList = bank.getAccounts();
-        if(bank.isUserAdmin()) {
-            Toast.makeText(getApplicationContext(), "You're logged in as admin!", Toast.LENGTH_LONG).show();
-        }
-
         if (accountList.isEmpty()) {
             moneyAmount.setText("--");
         } else {
@@ -113,11 +109,8 @@ public class main_one extends AppCompatActivity {
 
 
 
-
-
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
+   // @Override
+  /*  public boolean onTouchEvent(MotionEvent event){
         this.gesture.onTouchEvent(event);
         return super.onTouchEvent(event);
     }

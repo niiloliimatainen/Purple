@@ -67,11 +67,16 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(code.equals(input.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Confirmation ok, logging in...", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        Intent intent;
-                        intent = new Intent(login.this, main_one.class);
-                        startActivity(intent);
+                    if (bank.isUserAdmin()) {
+                        Toast.makeText(getApplicationContext(), "You're logged in as admin!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Confirmation ok, logging in...", Toast.LENGTH_SHORT).show();
+                    }
+
+                    dialog.dismiss();
+                    Intent intent;
+                    intent = new Intent(login.this, main_one.class);
+                    startActivity(intent);
                 }else {
                     Toast.makeText(getApplicationContext(), "Incorrect code, try again!", Toast.LENGTH_SHORT).show();
                 }

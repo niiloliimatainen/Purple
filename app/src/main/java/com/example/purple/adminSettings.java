@@ -17,7 +17,7 @@ public class adminSettings extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private StringBuilder sb = new StringBuilder();
     private EditText choice;
-    private ArrayList<String> userList = bank.getAllUsers();
+    private ArrayList<String> userList;
     private String userValue;
     private TextView users;
 
@@ -28,7 +28,7 @@ public class adminSettings extends AppCompatActivity {
         users = findViewById(R.id.users);
         choice = findViewById(R.id.choice);
         bank.resetCurrentUser();
-
+        userList = bank.getAllUsers();
         for (int i = 0; i < userList.size(); i++) {
             sb.append(userList.get(i) + " \n");
         }
@@ -43,8 +43,8 @@ public class adminSettings extends AppCompatActivity {
             userValue = choice.getText().toString();
             int finalValue = Integer.parseInt(userValue);
             for (int i = 0; i < userList.size(); i++) {
-                if ((i + 1) == finalValue) {
-                    bank.setCurrenUser(i + 1);
+                if (i == finalValue) {
+                    bank.setCurrenUser(i);
                 }
             }
             Toast.makeText(getApplicationContext(), "Return to profile to change account you want to modify!", Toast.LENGTH_SHORT).show();
@@ -70,6 +70,8 @@ public class adminSettings extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 bank.deleteAll();
                 Toast.makeText(getApplicationContext(), "BOOM! All users deleted", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(adminSettings.this, main_one.class);
+                startActivity(intent);
                 dialog.dismiss();
             }
         });
@@ -100,12 +102,8 @@ public class adminSettings extends AppCompatActivity {
                     int finalValue = Integer.parseInt(userValue);
                     bank.deleteUser(finalValue);
                     Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_SHORT).show();
-                    userList = bank.getAllUsers();
-
-                    for (int i = 0; i < userList.size(); i++) {
-                        sb.append(userList.get(i) + " \n");
-                    }
-                    users.setText(sb.toString());
+                    Intent intent = new Intent(adminSettings.this, main_one.class);
+                    startActivity(intent);
                     dialog.dismiss();
                 }
             });
