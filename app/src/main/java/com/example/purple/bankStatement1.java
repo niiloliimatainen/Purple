@@ -31,6 +31,12 @@ public class bankStatement1 extends AppCompatActivity {
         statement.setText(sb.toString());
     }
 
+    //public void editAccount(View v) {
+       // Intent intent = new Intent(bankStatement1.this, )
+    //}
+
+
+
     public void deleteAccount(View v) {
         bank.deleteAccount(1);
         Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_LONG).show();

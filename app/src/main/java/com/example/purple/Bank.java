@@ -138,7 +138,6 @@ public class Bank {
                 }
             }
         }
-
         //To external account(only in Finland)
         if ((receivingAcc.length() == 18) && (receivingAcc.contains("FI"))) {
             if ((userList.get(currentUser).transferMoney(payAccount, money)) == 1) {
@@ -154,6 +153,26 @@ public class Bank {
         } else {
             return 4;
         }
+    }
+
+
+    public int cardPayment(int account, double money) {
+        Date date = new Date();
+        String accountNumber = userList.get(currentUser).getAccountNumber(account);
+        if (userList.get(currentUser).transferMoney(account, money) == 1) {
+            String transaction = String.format("%s        %s           -%s",sdf.format(date), "External user", money);
+            databaseConnector.writeToFile(context, userList);
+            databaseConnector.saveBankStatement(context, accountNumber, transaction);
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+
+    //Save credit payments
+    public void saveCredit(int account) {
+        databaseConnector.writeToFile(context, userList);
     }
 
 
