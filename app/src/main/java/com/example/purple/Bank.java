@@ -17,8 +17,8 @@ public class Bank {
 
 
     private Bank() {
-       String BIC = "BOFAAFIHH";
-       String bankName = "Bank of Finland";
+        String BIC = "BOFAAFIHH";
+        String bankName = "Bank of Finland";
     }
 
     public static Bank getInstance() {
@@ -27,18 +27,18 @@ public class Bank {
 
 
     public int addUser(String fname, String lname, String email, String pnumber, String pword, Context Context) {
-            context = Context;
-            User user = new User(fname, lname, email, pnumber, pword);
-            for (int i = 0; i < userList.size(); i++) {
-                if (email.equals(userList.get(i).getUserEmail())) {
-                    return 0;
-                }
+        context = Context;
+        User user = new User(fname, lname, email, pnumber, pword);
+        for (int i = 0; i < userList.size(); i++) {
+            if (email.equals(userList.get(i).getUserEmail())) {
+                return 0;
             }
+        }
 
-            userList.add(user);
-            databaseConnector.writeToFile(context, userList);
-            return 1;
-            //admini viel
+        userList.add(user);
+        databaseConnector.writeToFile(context, userList);
+        return 1;
+        //admini viel
     }
 
 
@@ -154,7 +154,7 @@ public class Bank {
 
 
     public double getAccountsMoneyAmount(int index) {
-       double money = userList.get(currentUser).getAccountsMoneyAmount(index);
+        double money = userList.get(currentUser).getAccountsMoneyAmount(index);
         return money;
     }
 
@@ -202,40 +202,37 @@ public class Bank {
         }
     }
 
-    public Card getCardObj(int index){
-        return userList.get(currentUser).getCardObject(index);
-    }
 
     public String getAccountNumber(int index) {
         return userList.get(currentUser).getAccountNumber(index);
     }
 
 
-   public String getUserInfo(int flag) {
-       String info = userList.get(currentUser).getUserInfo(flag);
-       return info;
-   }
+    public String getUserInfo(int flag) {
+        String info = userList.get(currentUser).getUserInfo(flag);
+        return info;
+    }
 
-   public String getUserName(int index) {
+    public String getUserName(int index) {
         String name = userList.get(index).getName();
         return name;
-   }
+    }
 
 
 
-   public void editUserInfo(String change, int flag) {
+    public void editUserInfo(String change, int flag) {
         userList.get(currentUser).editUserInfo(change, flag);
         databaseConnector.writeToFile(context, userList);
-   }
+    }
 
-   public void deleteAccount(int index) {
-       userList.get(currentUser).deleteCard(index);
-       userList.get(currentUser).deleteAccount(index);
-       databaseConnector.writeToFile(context, userList);
-   }
+    public void deleteAccount(int index) {
+        userList.get(currentUser).deleteCard(index);
+        userList.get(currentUser).deleteAccount(index);
+        databaseConnector.writeToFile(context, userList);
+    }
 
 
-   public ArrayList<String> getAllUsers() {
+    public ArrayList<String> getAllUsers() {
         ArrayList<String> list = new ArrayList<>();
         String user;
         for (int i = 1; i < userList.size(); i++) {
@@ -243,45 +240,45 @@ public class Bank {
             list.add(user);
         }
         return list;
-   }
+    }
 
 
-   public boolean isUserAdmin() {
+    public boolean isUserAdmin() {
         return isAdmin;
-   }
+    }
 
-   //Only admin method!
-   public void setCurrenUser(int userToModify) {
+    //Only admin method!
+    public void setCurrenUser(int userToModify) {
         currentUser = userToModify;
-   }
+    }
 
 
-   public void resetCurrentUser() {
+    public void resetCurrentUser() {
         currentUser = 0;
-   }
+    }
 
 
-   //Only admin can use
-   public void deleteAll() {
+    //Only admin can use
+    public void deleteAll() {
         if (isAdmin) {
             userList.clear();
             userList.add(admin);
             databaseConnector.writeToFile(context, userList);
         }
-   }
+    }
 
 
-   //Only admin can use
-   public void deleteUser(int user) {
-       if (isAdmin) {
+    //Only admin can use
+    public void deleteUser(int user) {
+        if (isAdmin) {
             for (int i = 1; i < userList.size(); i++) {
                 if (user == i) {
                     userList.remove(i);
                 }
             }
-           databaseConnector.writeToFile(context, userList);
-       }
-   }
+            databaseConnector.writeToFile(context, userList);
+        }
+    }
 
 
 

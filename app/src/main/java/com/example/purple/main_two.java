@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
+/*
 
 public class main_two extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
@@ -190,4 +190,4 @@ public class main_two extends AppCompatActivity {
         }
     }
 
-}
+}*/
