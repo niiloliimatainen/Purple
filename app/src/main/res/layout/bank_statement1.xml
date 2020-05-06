@@ -101,9 +101,10 @@
         app:srcCompat="@android:drawable/ic_media_rew" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/toAccountSettings"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:onClick="editAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.042"

@@ -32,7 +32,12 @@ public class bankStatement1 extends AppCompatActivity {
     }
 
     public void editAccount(View v) {
-      // Intent intent = new Intent(bankStatement1.this, )
+       Intent intent = new Intent(bankStatement1.this, accountSettings.class);
+       Bundle b = new Bundle();
+       b.putInt("key", 1);
+       intent.putExtras(b);
+       startActivity(intent);
+       finish();
     }
 
 

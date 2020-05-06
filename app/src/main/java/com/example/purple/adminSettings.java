@@ -101,7 +101,7 @@ public class adminSettings extends AppCompatActivity {
                     userValue = choice.getText().toString();
                     int finalValue = Integer.parseInt(userValue);
                     bank.deleteUser(finalValue);
-                    Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "User deleted!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(adminSettings.this, main_one.class);
                     startActivity(intent);
                     dialog.dismiss();
@@ -119,4 +119,6 @@ public class adminSettings extends AppCompatActivity {
 
         }
     }
+
+
 }

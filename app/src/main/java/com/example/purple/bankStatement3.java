@@ -33,6 +33,19 @@ public class bankStatement3 extends AppCompatActivity {
         statement.setText(sb.toString());
     }
 
+    public void editAccount(View v) {
+        Intent intent = new Intent(bankStatement3.this, accountSettings.class);
+        Bundle b = new Bundle();
+        b.putInt("key", 3);
+        intent.putExtras(b);
+        startActivity(intent);
+        finish();
+    }
+
+
+
+
+
     public void deleteAccount(View v) {
         bank.deleteAccount(3);
         Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_LONG).show();
