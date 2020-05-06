@@ -95,6 +95,9 @@ public class Bank {
 
 
     public int selfTransfer(int pay, int receive, double money) {
+        if (userList.get(currentUser).getAccountsPayPossibility(pay) == 0) {
+            return 2;
+        }
         Date date = new Date();
         String accountNumber1 = userList.get(currentUser).getAccountNumber(pay);
         String accountNumber2 = userList.get(currentUser).getAccountNumber(receive);
@@ -156,7 +159,7 @@ public class Bank {
     }
 
     //Raise of money or payment
-    public int cardTransaciton(int account, double money, boolean isPayment) {
+    public int cardTransaction(int account, double money, boolean isPayment) {
         Date date = new Date();
         String accountNumber = userList.get(currentUser).getAccountNumber(account);
         if (isPayment) {
@@ -265,12 +268,6 @@ public class Bank {
        return info;
    }
 
-   public String getUserName(int index) {
-        String name = userList.get(index).getName();
-        return name;
-   }
-
-
 
    public void editUserInfo(String change, int flag) {
         userList.get(currentUser).editUserInfo(change, flag);
@@ -333,5 +330,15 @@ public class Bank {
    }
 
 
+   public void editAccount(int index, int hasPayPossibility) {
+        userList.get(currentUser).editAccount(index, hasPayPossibility);
+        databaseConnector.writeToFile(context, userList);
+   }
+
+
+   public void deleteCard(int index) {
+        userList.get(currentUser).deleteCard(index);
+        databaseConnector.writeToFile(context, userList);
+   }
 
 }

@@ -84,7 +84,9 @@ public class pay_transfer extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Payment completed!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(pay_transfer.this, main_one.class);
                 startActivity(intent);
-            } else if(bank.selfTransfer(chooseAcc.getSelectedItemPosition() + 1, chooseAccToPay.getSelectedItemPosition() + 1, amount) == 0) {
+            } else if(bank.selfTransfer(chooseAcc.getSelectedItemPosition() + 1, chooseAccToPay.getSelectedItemPosition() + 1, amount) == 2) {
+                Toast.makeText(getApplicationContext(), "You're trying to pay with savings account!", Toast.LENGTH_SHORT).show();
+            } else {
                 Toast.makeText(getApplicationContext(), "Not enough money!", Toast.LENGTH_SHORT).show();
             }
 

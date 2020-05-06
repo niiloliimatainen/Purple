@@ -337,4 +337,16 @@ public class User {
         cardCounter -= 1;
     }
 
+
+    public void editAccount(int index, int hasPayPossibility) {
+        if (index == 1) {
+            account1.editAccount(hasPayPossibility);
+        } else if (index == 2) {
+            account2.editAccount(hasPayPossibility);
+        } else if (index == 3) {
+            account3.editAccount(hasPayPossibility);
+        }
+    }
+
+
 }

@@ -41,7 +41,8 @@ public class Account {
     }
 
 
-    public void getAccountInfo() {
+    public void editAccount(int hasPayPossibility) {
+        payPossibility = hasPayPossibility;
     }
 
 
