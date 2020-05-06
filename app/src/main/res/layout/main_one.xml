@@ -202,6 +202,7 @@
         android:id="@+id/cardSettings"
         android:layout_width="38dp"
         android:layout_height="40dp"
+        android:onClick="toCardSettings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.975"

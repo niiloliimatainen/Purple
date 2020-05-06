@@ -5,19 +5,37 @@ package com.example.purple;
 public class Card {
     private String cardNumber, country = "Finland";
     private int PIN, CVC, raiseLimit = 500;
+    private double creditLimit;
     private boolean isCredit;
 
-    public Card(String cardNumber, int PIN, int CVC) {
+
+    public Card(String cardNumber, int PIN, int CVC, boolean isCredit, double creditLimit) {
         this.cardNumber = cardNumber;
         this.PIN = PIN;
         this.CVC = CVC;
-        this.isCredit = false;
+        this.isCredit = isCredit;
+        this.creditLimit = creditLimit;
     }
 
     public String getCardNumber(){
         System.out.println("Minua kysyttiin getcardnumber card123");
         return cardNumber;
     }
+
+    public int getCardRaiseLimit() {
+        return raiseLimit;
+    }
+
+
+    public int getCardPin() {
+        return PIN;
+    }
+
+
+    public double getCardCreditLimit() {
+        return creditLimit;
+    }
+
 
     public boolean isCreditCard(){return isCredit;}
 

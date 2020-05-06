@@ -134,7 +134,6 @@ public class Bank {
                     } else {
                         return 3;
                     }
-
                 }
             }
         }
@@ -217,14 +216,6 @@ public class Bank {
             return "Regular";
         } else {
             return "Savings";
-        }
-    }
-
-    public String isCardCreditCard(int index){
-        if(userList.get(currentUser).isCardCreditCard(index)){
-            return "Credit";
-        } else {
-            return "Debit";
         }
     }
 
@@ -337,5 +328,40 @@ public class Bank {
         userList.get(currentUser).deleteCard(index);
         databaseConnector.writeToFile(context, userList);
    }
+
+   public int getCardRaiseLimit(int index) {
+        int raiseLimit = userList.get(currentUser).getCardRaiseLimit(index);
+        return raiseLimit;
+   }
+
+
+   public int getCardAmount() {
+        int cardAmount = userList.get(currentUser).getCardAmount();
+        return cardAmount;
+   }
+
+
+
+
+    public int getCardPin(int index) {
+        int PIN = userList.get(currentUser).getCardPin(index);
+        return PIN;
+    }
+
+
+    public double getCreditLimit(int index) {
+        double creditLimit = userList.get(currentUser).getCardCreditLimit(index);
+        return creditLimit;
+    }
+
+
+    public String isCardCreditCard(int index){
+        if(userList.get(currentUser).isCardCreditCard(index)){
+            return "Credit";
+        } else {
+            return "Debit";
+        }
+    }
+
 
 }

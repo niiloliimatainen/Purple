@@ -337,7 +337,6 @@ public class main_one extends AppCompatActivity {
 
 
     public void getToSettings(View v) {
-
         if (bank.isUserAdmin()) {
             Intent intent1 = new Intent(main_one.this, adminSettings.class);
             startActivity(intent1);
@@ -345,12 +344,60 @@ public class main_one extends AppCompatActivity {
             Intent intent2 = new Intent(main_one.this, settings.class);
             startActivity(intent2);
         }
-
-
-
-
     }
 
+
+    public void toCardSettings(View v) {
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        int cards = bank.getCardAmount();
+        dialog.setTitle("Choose account");
+
+        dialog.setPositiveButton("Settings to Card 1.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(main_one.this, cardSettings.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 1);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+                dialog.dismiss();
+            }
+        });
+        if (cards == 1) {
+            dialog.show();
+        }
+        dialog.setNegativeButton("Settings to Card 2.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(main_one.this, cardSettings.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 2);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+                dialog.dismiss();
+            }
+        });
+        if (cards == 2) {
+            dialog.show();
+        }
+        dialog.setNeutralButton("Settings to Card 3.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(main_one.this, cardSettings.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 3);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+                dialog.dismiss();
+            }
+        });
+        if (cards == 3) {
+            dialog.show();
+        }
+    }
 }
 
 
