@@ -1,4 +1,4 @@
-package com.example.purple;
+/*package com.example.purple;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,13 +39,7 @@ public class main_two extends AppCompatActivity {
 
 
 
-// Card objects need to be fetched to another list to get strings for arrayadapter (chooseCardList)
-        for(int i=0; 3 > i; i++){
-            if(bank.getCardObj(i+1) != null){
-                cardsList.add(bank.getCardObj(i + 1));
-                chooseCardList.add(bank.getCardObj(i + 1).isCreditCard() + " | " + bank.getCardObj(i + 1).cardNumber);
-            }
-        }
+//
 
         ArrayAdapter<String> cardArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, chooseCardList);
         cardArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -191,3 +185,5 @@ public class main_two extends AppCompatActivity {
     }
 
 }
+
+*/

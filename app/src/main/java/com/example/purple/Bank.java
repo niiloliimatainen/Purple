@@ -202,9 +202,6 @@ public class Bank {
         }
     }
 
-    public Card getCardObj(int index){
-        return userList.get(currentUser).getCardObject(index);
-    }
 
     public String getAccountNumber(int index) {
         return userList.get(currentUser).getAccountNumber(index);
