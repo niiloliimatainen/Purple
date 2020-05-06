@@ -31,9 +31,9 @@ public class bankStatement1 extends AppCompatActivity {
         statement.setText(sb.toString());
     }
 
-    //public void editAccount(View v) {
-       // Intent intent = new Intent(bankStatement1.this, )
-    //}
+    public void editAccount(View v) {
+      // Intent intent = new Intent(bankStatement1.this, )
+    }
 
 
 
