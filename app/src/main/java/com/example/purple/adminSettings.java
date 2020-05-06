@@ -46,7 +46,7 @@ public class adminSettings extends AppCompatActivity {
             int finalValue = Integer.parseInt(userValue);
             for (int i = 0; i < userList.size(); i++) {
                 if (i == finalValue) {
-                    bank.setCurrenUser(i);
+                    bank.setCurrentUser(i);
                 }
             }
             Toast.makeText(getApplicationContext(), "Return to profile to change account you want to modify!", Toast.LENGTH_SHORT).show();

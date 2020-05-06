@@ -9,12 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class cardSettings extends AppCompatActivity {
     private int card;
     private TextView title, raiselimit, isCredit, PIN, creditLimit;
     private Bank bank = Bank.getInstance();
-    private EditText getRaiseLimit;
+    private EditText getRaiseLimit, getPin, getType, getCreditLimit;
     private Context context = this;
 
     @SuppressLint("SetTextI18n")
@@ -28,34 +29,77 @@ public class cardSettings extends AppCompatActivity {
         isCredit = findViewById(R.id.isCredit);
         PIN = findViewById(R.id.pin);
         creditLimit = findViewById(R.id.creditlimit);
+        getRaiseLimit = findViewById(R.id.changeraiselimit);
+        getPin = findViewById(R.id.changePin);
+        getType = findViewById(R.id.changecredit);
+        getCreditLimit = findViewById(R.id.changecreditlimit);
+
 
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
             card = b.getInt("key");
-            if (card == 1) {
-                title.setText("Card " + 1 + ": " + bank.getCardNumber(1));
-                raiselimit.setText("Current raiselimit: " + bank.getCardRaiseLimit(1));
-                isCredit.setText(("Current type: " + bank.isCardCreditCard(1)));
-                PIN.setText("Current PIN-Code: " + bank.getCardPin(1));
-                creditLimit.setText("(only credit cards)Current creditlimit: " + bank.getCreditLimit(1));
+            title.setText("Card " + card + ": " + bank.getCardNumber(card));
+            raiselimit.setText("Current raiselimit: " + bank.getCardRaiseLimit(card) + "€");
+            isCredit.setText(("Current type: " + bank.isCardCreditCard(card)));
+            PIN.setText("Current PIN-Code: " + bank.getCardPin(card));
+            creditLimit.setText("(only credit cards)Current creditlimit: " + bank.getCreditLimit(card) + "€");
+        }
+    }
 
+    public void editCard(View v) {
+        Intent intent = new Intent(cardSettings.this, main_one.class);
+        String raiseLimit, PIN, type, creditLimit;
+        boolean ok = true;
+        raiseLimit = getRaiseLimit.getText().toString();
+        PIN = getPin.getText().toString();
+        type = getType.getText().toString();
+        creditLimit = getCreditLimit.getText().toString();
 
-            } else if (card == 2) {
-                title.setText("Card " + 2 + ": " + bank.getCardNumber(2));;
-                raiselimit.setText("Current raiselimit: " + bank.getCardRaiseLimit(2));
-                isCredit.setText(("Current type: " + bank.isCardCreditCard(2)));
-                PIN.setText("Current PIN-Code: " + bank.getCardPin(2));
-                creditLimit.setText("(only credit cards)Current creditlimit: " + bank.getCreditLimit(2));
-
-            } else if (card == 3) {
-                title.setText("Card " + 3 + ": " + bank.getCardNumber(3));;
-                raiselimit.setText("Current raiselimit: " + bank.getCardRaiseLimit(3));
-                isCredit.setText(("Current type: " + bank.isCardCreditCard(3)));
-                PIN.setText("Current PIN-Code: " + bank.getCardPin(3));
-                creditLimit.setText("(only credit cards)Current creditlimit: " + bank.getCreditLimit(3));
+        if((raiseLimit.isEmpty()) && (PIN.isEmpty()) && (type.isEmpty()) && (creditLimit.isEmpty())) {
+            Toast.makeText(getApplicationContext(), "No changes were made!", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+        } else {
+            if (!(raiseLimit.isEmpty())) {
+                int finalValue = Integer.parseInt(raiseLimit);
+                bank.editCard(finalValue, 1, card, context);
 
             }
+            if (!(PIN.isEmpty())) {
+                if (PIN.length() == 4) {
+                    int finalValue = Integer.parseInt(PIN);
+                    bank.editCard(finalValue, 2, card, context);
+                } else {
+                    ok = false;
+                }
+            }
+            if (!(type.isEmpty())) {
+                if (type.equals("Credit")) {
+                    int finalValue = 1;
+                    bank.editCard(finalValue, 3, card, context);
+                } else if (type.equals("Debit")) {
+                    int finalValue = 0;
+                    bank.editCard(finalValue, 3, card, context);
+                }
+            }
+            if (!(creditLimit.isEmpty())) {
+                if (type.equals("Credit")) {
+                    int finalValue = Integer.parseInt(creditLimit);
+                    bank.editCard(finalValue, 4, card, context);
+                } else if ((bank.isCardCreditCard(card).equals("Credit")) && (!(type.equals("Debit")))) {
+                    int finalValue = Integer.parseInt(creditLimit);
+                    bank.editCard(finalValue, 4, card, context);
+                } else {
+                    ok = false;
+                }
+            }
+            if (ok) {
+                Toast.makeText(getApplicationContext(), "Changes were made!", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Oops! Wrong values!", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 

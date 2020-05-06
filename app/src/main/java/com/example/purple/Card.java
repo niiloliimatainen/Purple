@@ -39,6 +39,38 @@ public class Card {
 
     public boolean isCreditCard(){return isCredit;}
 
+
+    public void editCard(int change, int flag) {
+        if (flag == 1) {
+            raiseLimit = change;
+        } else if (flag == 2) {
+            PIN = change;
+        } else if (flag == 3) {
+            if (change == 1) {
+                isCredit = true;
+            } else {
+                isCredit = false;
+            }
+        } else if (flag == 4) {
+            creditLimit = change;
+        }
+    }
+
+
+
+    /*public void editCard(String change, int flag) {
+        if (flag == 1) {
+            raiseLimit = Integer(
+            lastName = change;
+        } else if (flag == 3) {
+            email = change;
+        } else if (flag == 4) {
+            phoneNumber = change;
+        } else {
+            password = change;
+        }
+    }
+
     /*public int raiseMoney(double money) {
         if (raiseLimit < money) {
             return 0;

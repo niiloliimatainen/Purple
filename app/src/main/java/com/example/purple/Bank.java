@@ -285,7 +285,7 @@ public class Bank {
    }
 
    //Only admin method!
-   public void setCurrenUser(int userToModify) {
+   public void setCurrentUser(int userToModify) {
         currentUser = userToModify;
    }
 
@@ -341,8 +341,6 @@ public class Bank {
    }
 
 
-
-
     public int getCardPin(int index) {
         int PIN = userList.get(currentUser).getCardPin(index);
         return PIN;
@@ -362,6 +360,12 @@ public class Bank {
             return "Debit";
         }
     }
+
+    public void editCard(int change, int flag, int index, Context context) {
+        userList.get(currentUser).editCard(change, flag, index);
+        databaseConnector.writeToFile(context, userList);
+    }
+
 
 
 }
