@@ -4,10 +4,10 @@ package com.example.purple;
 import java.util.ArrayList;
 
 public class User {
-    protected String firstName, lastName, email, phoneNumber, password;
-    protected Account account1, account2, account3;
-    protected  Card card1, card2, card3;
-    protected int accCounter = 0, cardCounter = 0;
+    private String firstName, lastName, email, phoneNumber, password;
+    private Account account1, account2, account3;
+    private  Card card1, card2, card3;
+    private int accCounter = 0, cardCounter = 0;
 
     public User(String fname, String lname,String email, String pnumber, String pword) {
         this.firstName = fname;

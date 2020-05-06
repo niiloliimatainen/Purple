@@ -3,9 +3,9 @@ package com.example.purple;
 //joo
 
 public class Card {
-    protected String cardNumber, country = "Finland";
-    protected int PIN, CVC, raiseLimit = 500;
-    protected boolean isCredit;
+    private String cardNumber, country = "Finland";
+    private int PIN, CVC, raiseLimit = 500;
+    private boolean isCredit;
 
     public Card(String cardNumber, int PIN, int CVC) {
         this.cardNumber = cardNumber;
