@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".settings"></activity>
         <activity android:name=".addCardActivity" />
+        <activity android:name=".adminSettings" />
         <activity android:name=".bankStatement3" />
         <activity android:name=".bankStatement2" />
         <activity android:name=".bankStatement1" />

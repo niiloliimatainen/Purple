@@ -8,8 +8,10 @@ import java.util.Date;
 
 public class Bank {
     private static Bank bank = new Bank();
+    private User admin = new User("Kalle", "Jaakonpoika", "admin", "0453299483", "admin");;
     private ArrayList<User> userList = new ArrayList<>();
     private int currentUser;
+    private boolean isAdmin = false;
     private Context context;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
@@ -43,11 +45,20 @@ public class Bank {
     public int login(String email, String password, Context Context) {
         context = Context;
         userList.clear();
-        userList = databaseConnector.readFromFile(context);
-        for (int i = 0; i < userList.size(); i++) {
-            if (email.equals(userList.get(i).getUserEmail()) && (password.equals(userList.get(i).getUserPassword()))) {
-                currentUser = i;
-                return 1;
+        userList.addAll(databaseConnector.readFromFile(context));
+        if (userList.isEmpty()) {
+            userList.add(admin);
+        }
+        if ((email.equals(admin.getUserEmail())) && (password.equals(admin.getUserPassword()))) {
+            isAdmin = true;
+            currentUser = 0;
+            return 1;
+        } else {
+            for (int i = 0; i < userList.size(); i++) {
+                if (email.equals(userList.get(i).getUserEmail()) && (password.equals(userList.get(i).getUserPassword()))) {
+                    currentUser = i;
+                    return 1;
+                }
             }
         }
         return 0;
@@ -80,8 +91,8 @@ public class Bank {
         Date date = new Date();
         String accountNumber1 = userList.get(currentUser).getAccountNumber(pay);
         String accountNumber2 = userList.get(currentUser).getAccountNumber(receive);
-        String transaction1 = String.format("%s        %s         +%s",sdf.format(date), userList.get(currentUser).getName(), money);
-        String transaction2 = String.format("%s        %s         -%s",sdf.format(date), userList.get(currentUser).getName(), money);
+        String transaction1 = String.format("%s        %s         -%s",sdf.format(date), userList.get(currentUser).getName(), money);
+        String transaction2 = String.format("%s        %s         +%s",sdf.format(date), userList.get(currentUser).getName(), money);
 
         if (userList.get(currentUser).selfTransfer(pay, receive, money) == 1) {
             databaseConnector.writeToFile(context, userList);
@@ -205,6 +216,11 @@ public class Bank {
        return info;
    }
 
+   public String getUserName(int index) {
+        String name = userList.get(index).getName();
+        return name;
+   }
+
 
 
    public void editUserInfo(String change, int flag) {
@@ -217,6 +233,56 @@ public class Bank {
        userList.get(currentUser).deleteAccount(index);
        databaseConnector.writeToFile(context, userList);
    }
+
+
+   public ArrayList<String> getAllUsers() {
+        ArrayList<String> list = new ArrayList<>();
+        String user;
+        for (int i = 1; i < userList.size(); i++) {
+            user = (i + "." + userList.get(i).getName());
+            list.add(user);
+        }
+        return list;
+   }
+
+
+   public boolean isUserAdmin() {
+        return isAdmin;
+   }
+
+   //Only admin method!
+   public void setCurrenUser(int userToModify) {
+        currentUser = userToModify;
+   }
+
+
+   public void resetCurrentUser() {
+        currentUser = 0;
+   }
+
+
+   //Only admin can use
+   public void deleteAll() {
+        if (isAdmin) {
+            userList.clear();
+            userList.add(admin);
+            databaseConnector.writeToFile(context, userList);
+        }
+   }
+
+
+   //Only admin can use
+   public void deleteUser(int user) {
+       if (isAdmin) {
+            for (int i = 1; i < userList.size(); i++) {
+                if (user == i) {
+                    userList.remove(i);
+                }
+            }
+           databaseConnector.writeToFile(context, userList);
+       }
+   }
+
 
 
 }

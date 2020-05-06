@@ -10,7 +10,6 @@ public class User {
     protected  Card card1, card2, card3;
     protected int accCounter = 0, cardCounter = 0;
 
-
     public User(String fname, String lname,String email, String pnumber, String pword) {
         this.firstName = fname;
         this.lastName = lname;
@@ -51,13 +50,13 @@ public class User {
     }
 
 
+
     public boolean addCard(int index, String cardNumber, int CVC, int PIN) {
-        System.out.println("Tässä luotiin kortti indexillä" + index);
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();
                 card1 = new debitCard(cardNumber, PIN, CVC, account1);
-                cardCounter +=1;
+                cardCounter += 1;
                 return true;
             }
 
@@ -65,7 +64,7 @@ public class User {
             if (account2.getCards() == 0) {
                 account2.addCard();
                 card2 = new debitCard(cardNumber, PIN, CVC, account2);
-                cardCounter +=1;
+                cardCounter += 1;
                 return true;
             }
 
@@ -73,7 +72,7 @@ public class User {
             if (account3.getCards() == 0) {
                 account3.addCard();
                 card3 = new debitCard(cardNumber, PIN, CVC, account3);
-                cardCounter +=1;
+                cardCounter += 1;
                 return true;
             }
         }
@@ -82,7 +81,6 @@ public class User {
 
 
     public boolean addCreditCard(int index, String cardNumber, int CVC, int PIN, double creditLimit) {
-        System.out.println("Tässä luotiin creditkortti indexillä" + index);
         if (index == 1) {
             if (account1.getCards() == 0) {
                 account1.addCard();
@@ -337,8 +335,13 @@ public class User {
     public void deleteCard(int index) {
         if (index == 1) {
             card1 = null;
+            card1 = card2;
+            card2 = card3;
+            card3 = null;
         } else if (index == 2) {
             card2 = null;
+            card2 = card3;
+            card3 = null;
         } else if (index == 3) {
             card3 = null;
         }
@@ -348,25 +351,3 @@ public class User {
 }
 
 
-
-class Admin extends User {
-
-    public Admin(String fname, String lname,String email, String pnumber, String pword) {
-        super(fname, lname, email, pnumber, pword);
-    }
-
-
-    public void delAnyAccount() {
-
-    }
-
-
-    public void getAnyAccount() {
-
-    }
-
-    public void changeAnyUserInfo() {
-
-    }
-
-}
