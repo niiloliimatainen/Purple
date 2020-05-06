@@ -1,7 +1,6 @@
 package com.example.purple;
 
 //Class for creating user. Abstract class shows the structure of user classes.
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class User {
