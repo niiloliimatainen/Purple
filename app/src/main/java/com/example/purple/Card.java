@@ -2,23 +2,39 @@ package com.example.purple;
 
 //joo
 
-public class Card {
-    protected String cardNumber, country = "Finland";
-    protected int PIN, CVC, raiseLimit = 500;
-    protected boolean isCredit;
-    protected Account account;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-    public Card(String cardNumber, int PIN, int CVC, Account account) {
+public class Card {
+    private String cardNumber, country = "Finland";
+    private int PIN, CVC, raiseLimit = 500;
+    private boolean isCredit;
+    private double creditLimit;
+    protected Account account;
+    private String[] countryArray = new String[]{"Finland", "United States", "Norway", "Sweden", "Denmark", "Canada", "United Kingdom", "Switzerland", "Germany"};
+    private ArrayList<String> areaToUseList;
+
+    public Card(String cardNumber, int PIN, int CVC, Account account, boolean isCredit, double creditLimit) {
         this.cardNumber = cardNumber;
         this.PIN = PIN;
         this.CVC = CVC;
         this.account = account;
-        this.isCredit = false;
+        this.isCredit = isCredit;
+        this.creditLimit = creditLimit;
+
     }
 
     public String getCardNumber(){
-        System.out.println("Minua kysyttiin getcardnumber card123");
         return cardNumber;
+    }
+
+    public ArrayList<String> getAreaToUseList(){
+        if(areaToUseList == null){
+            areaToUseList = new ArrayList<>();
+            String defaultCountry = "Finland";
+            areaToUseList.add(defaultCountry);
+        }
+        return areaToUseList;
     }
 
     public boolean isCreditCard(){return isCredit;}
@@ -37,6 +53,7 @@ public class Card {
 
 
     public int payment(double money) {
+        System.out.println(("Tässä rahat" + account.getMoneyAmount()));
         if (account.transferMoney(money) == 1) {
             return 1;
         } else {
@@ -49,28 +66,18 @@ public class Card {
 
     }
 
-
-}
-
-
-
-class creditCard extends Card {
-    double creditLimit;
-
-
-    public creditCard(String cardNumber, int PIN, int CVC, double creditLimit, Account account) {
-        super(cardNumber, PIN, CVC, account);
-        this.creditLimit = creditLimit;
-        this.isCredit = true;
-    }
-
-
     public int creditPayment(double money) {
-        if (money <= creditLimit) {
-            creditLimit -= money;
-            return 1;
+        if(isCredit) {
+            if (money <= creditLimit) {
+                creditLimit -= money;
+                return 1;
+            }
         }
         return 0;
     }
-
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-/*package com.example.purple;
+package com.example.purple;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,11 +22,10 @@ import java.util.ArrayList;
 
 public class main_two extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
-    private ArrayList<Card> cardsList = new ArrayList<>();
     private ArrayList<String> chooseCardList = new ArrayList<>();
     private String[] countryArray = new String[]{"United States", "Finland", "Norway", "Sweden", "Denmark", "Canada", "United Kingdom", "Switzerland", "Germany"};
     private GestureDetectorCompat gesture;
-    private Card cardToUse;
+    private int cardToUse = 0;
     private double amountToDialog = 0;
 
     @Override
@@ -37,14 +36,16 @@ public class main_two extends AppCompatActivity {
         Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
 
+        for(int i=0; 3 > i; i++){
+            if(bank.getCardObj(i+1) != null){
+                chooseCardList.add(bank.getCardObj(i + 1).isCreditCard() + " | " + bank.getCardObj(i + 1).getCardNumber());
+            }
+        }
 
-
-//
 
         ArrayAdapter<String> cardArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, chooseCardList);
         cardArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chooseCardSpinner.setAdapter(cardArrayAdapter);
-
 
         ArrayAdapter<String> countryArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, countryArray);
         countryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -55,16 +56,16 @@ public class main_two extends AppCompatActivity {
         Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
         EditText amountInput = findViewById(R.id.amountInput);
-        cardToUse = cardsList.get(chooseCardSpinner.getSelectedItemPosition());
+        cardToUse = chooseCardSpinner.getSelectedItemPosition() + 1;
         String country = chooseCountry.getSelectedItem().toString();
-        ArrayList<String> cardArea = cardToUse.getAreaToUseList();
+        ArrayList<String> cardArea = bank.getCardObj(cardToUse).getAreaToUseList();
 
         boolean countryOk = false;
         if (amountInput.getText() == null || amountInput.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "Incorrect amount!", Toast.LENGTH_SHORT).show();
         } else {
             amountToDialog = Double.parseDouble(amountInput.getText().toString());
-            for (int i = 0; 8 > i; i++) {
+            for (int i = 0; bank.getCardObj(cardToUse).getAreaToUseList().size() > i; i++) {
                 if (country.equals(cardArea.get(i))) {
                     countryOk = true;
                     break;
@@ -82,7 +83,7 @@ public class main_two extends AppCompatActivity {
         EditText amountInput = findViewById(R.id.amountInput);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
         String country = chooseCountry.getSelectedItem().toString();
-        ArrayList<String> cardArea = cardToUse.getAreaToUseList();
+        ArrayList<String> cardArea = bank.getCardObj(cardToUse).getAreaToUseList();
         boolean countryOk = false;
         if (amountInput.getText() == null || amountInput.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "Incorrect amount!", Toast.LENGTH_SHORT).show();
@@ -111,7 +112,7 @@ public class main_two extends AppCompatActivity {
                 dialog.setNegativeButton("Debit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (cardToUse.payment(amountToDialog) == 1) {
+                        if (bank.getCardObj(cardToUse).payment(amountToDialog) == 1) {
                             Toast.makeText(getApplicationContext(), "Money withdrawn, spend it wisely!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
@@ -124,7 +125,7 @@ public class main_two extends AppCompatActivity {
                 dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (cardToUse.creditPayment(amountToDialog) == 1) {
+                        if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
                             Toast.makeText(getApplicationContext(), "Credit money withdrawn, make it rain!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
@@ -141,7 +142,7 @@ public class main_two extends AppCompatActivity {
                 dialog.setNeutralButton("Debit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (cardToUse.payment(amountToDialog) == 1) {
+                        if (bank.getCardObj(cardToUse).payment(amountToDialog) == 1) {
                             Toast.makeText(getApplicationContext(), "Payment has been made! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
@@ -154,7 +155,7 @@ public class main_two extends AppCompatActivity {
                 dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (cardToUse.creditPayment((amountToDialog)) == 1) {
+                        if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
                             Toast.makeText(getApplicationContext(), "Your credit card was charged! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
@@ -186,4 +187,3 @@ public class main_two extends AppCompatActivity {
 
 }
 
-*/

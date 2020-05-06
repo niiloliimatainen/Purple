@@ -24,7 +24,9 @@ public class Bank {
     public static Bank getInstance() {
         return bank;
     }
-
+    public Card getCardObj(int index){
+        return userList.get(currentUser).getCardObject(index);
+    }
 
     public int addUser(String fname, String lname, String email, String pnumber, String pword, Context Context) {
         context = Context;

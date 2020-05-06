@@ -28,7 +28,9 @@ public class Account {
 
 
     public int transferMoney(double x) {
+
         if (money < x) {
+            System.out.println(("Tässä maksettiin epäonnistui" ));
             return 0;
         }
         money -= x;

@@ -30,7 +30,7 @@ public class main_one extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_one);
-        //gesture = new GestureDetectorCompat(this, new LearnGesture());
+        gesture = new GestureDetectorCompat(this, new LearnGesture());
         moneyAmount = findViewById(R.id.allmoney);
         accounts = findViewById(R.id.accounts);
         accountCounter = findViewById(R.id.accountCounter);
@@ -122,7 +122,7 @@ public class main_one extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    /*class LearnGesture extends GestureDetector.SimpleOnGestureListener {
+    class LearnGesture extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2, float x1, float y1){
             if(event1.getX() > event2.getX()){
@@ -136,7 +136,7 @@ public class main_one extends AppCompatActivity {
         }
     }
 
-     */
+
 
     public void addAccountPopup(View v){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
