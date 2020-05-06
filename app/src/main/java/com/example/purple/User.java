@@ -7,7 +7,7 @@ public class User {
     private String firstName, lastName, email, phoneNumber, password;
     private Account account1, account2, account3;
     private  Card card1, card2, card3;
-    private int accCounter = 0, cardCounter = 0;
+    private int accCounter = 0;
 
     public User(String fname, String lname,String email, String pnumber, String pword) {
         this.firstName = fname;
@@ -55,7 +55,6 @@ public class User {
             if (account1.getCards() == 0) {
                 account1.addCard();
                 card1 = new Card(cardNumber, PIN, CVC);
-                cardCounter += 1;
                 return true;
             }
 
@@ -63,7 +62,6 @@ public class User {
             if (account2.getCards() == 0) {
                 account2.addCard();
                 card2 = new Card(cardNumber, PIN, CVC);
-                cardCounter += 1;
                 return true;
             }
 
@@ -71,7 +69,6 @@ public class User {
             if (account3.getCards() == 0) {
                 account3.addCard();
                 card3 = new Card(cardNumber, PIN, CVC);
-                cardCounter += 1;
                 return true;
             }
         }
@@ -84,7 +81,6 @@ public class User {
             if (account1.getCards() == 0) {
                 account1.addCard();
                 card1 = new Card(cardNumber, PIN, CVC);
-                cardCounter +=1;
                 return true;
             }
 
@@ -92,7 +88,6 @@ public class User {
             if (account2.getCards() == 0) {
                 account2.addCard();
                 card2 = new Card(cardNumber, PIN, CVC);
-                cardCounter +=1;
                 return true;
             }
 
@@ -100,7 +95,6 @@ public class User {
             if (account3.getCards() == 0) {
                 account3.addCard();
                 card3 = new Card(cardNumber, PIN, CVC);
-                cardCounter +=1;
                 return true;
             }
         }
@@ -334,7 +328,6 @@ public class User {
         } else if (index == 3) {
             card3 = null;
         }
-        cardCounter -= 1;
     }
 
 
