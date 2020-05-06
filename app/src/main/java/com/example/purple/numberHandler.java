@@ -29,7 +29,6 @@ public class numberHandler {
         String hashed = "";
         try{
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
-            messageDigest.reset();
             messageDigest.update(salt);
             byte[] bytes = messageDigest.digest(password.getBytes());
             hashed = toHex(bytes);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.media.Image;
 import android.text.InputType;
@@ -21,7 +22,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-/*
+
 public class main_two extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private ArrayList<String> chooseCardList = new ArrayList<>();
@@ -29,6 +30,7 @@ public class main_two extends AppCompatActivity {
     private GestureDetectorCompat gesture;
     private int cardToUse = 0;
     private double amountToDialog = 0;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,15 +129,16 @@ public class main_two extends AppCompatActivity {
                 });
                 if(!bank.getCardObj(cardToUse).isCreditCard()) {
                     dialog.show();
+                }else {
+                    dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            pinCodePopup(false, true);
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
                 }
-                dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                       pinCodePopup(false, true);
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
 //card payment
             }else{
                 // is debitCard
@@ -151,16 +154,17 @@ public class main_two extends AppCompatActivity {
                 });
                 if(!bank.getCardObj(cardToUse).isCreditCard()) {
                     dialog.show();
+                }else {
+                    //is creditcard
+                    dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            pinCodePopup(true, true);
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
                 }
-                //is creditcard
-                dialog.setPositiveButton("Credit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        pinCodePopup(true, true);
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
             }
 
         }
@@ -188,13 +192,14 @@ public class main_two extends AppCompatActivity {
                             if(isCredit) {
                                 //Using credit
                                 if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
+                                    bank.saveCredit(bank.getCardObj(cardToUse).getAccount(), context);
                                     Toast.makeText(getApplicationContext(), "Your credit card was charged! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
                                 }
                                 //using debit
                             }else{
-                                if (bank.getCardObj(cardToUse).payment(amountToDialog, true) == 1) {
+                                if (bank.cardTransaction(bank.getCardObj(cardToUse).getAccount(), amountToDialog, true, context) == 1) {
                                     Toast.makeText(getApplicationContext(), "Payment has been made! Have fun with your" + amountToDialog + "€ breadtoaster!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Card declined! WELL THAT'S EMBARRASSING..", Toast.LENGTH_SHORT).show();
@@ -203,15 +208,16 @@ public class main_two extends AppCompatActivity {
                             }
                         }else{
                             if(isCredit){
-                                //using creditfor withdrawal
+                                //using credit for withdrawal
                                 if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
+                                    bank.saveCredit(bank.getCardObj(cardToUse).getAccount(), context);
                                     Toast.makeText(getApplicationContext(), "Credit money withdrawn, make it rain!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
                                 }
                             }else{
                                 //using debit for withdrawal
-                                if (bank.getCardObj(cardToUse).raiseMoney(amountToDialog, false) == 1) {
+                                if ((bank.cardTransaction(bank.getCardObj(cardToUse).getAccount(), amountToDialog, false, context) == 1) && (bank.getCardObj(cardToUse).creditPayment(amountToDialog)) == 1) {
                                     Toast.makeText(getApplicationContext(), "Money withdrawn, spend it wisely!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
@@ -247,4 +253,4 @@ public class main_two extends AppCompatActivity {
     }
 
 }
-*/
+
