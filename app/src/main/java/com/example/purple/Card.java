@@ -112,6 +112,7 @@ public class Card {
                 isCredit = true;
             } else {
                 isCredit = false;
+                creditLimit = 0;
             }
         } else if (flag == 4) {
             creditLimit = change;
