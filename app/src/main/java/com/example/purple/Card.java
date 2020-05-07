@@ -50,6 +50,13 @@ public class Card {
         return creditLimit;
     }
 
+    public int creditPayment(double money){
+        if(creditLimit < money){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 
     public ArrayList<String> getAreaToUseList() {
         if (areaToUseList == null) {
