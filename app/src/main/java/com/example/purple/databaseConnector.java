@@ -98,9 +98,4 @@ public class databaseConnector {
         }
         return list;
     }
-
-
-
-
-
 }

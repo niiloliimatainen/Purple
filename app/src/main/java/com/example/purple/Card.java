@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class Card {
-    private String cardNumber, country = "Finland";
+    private String cardNumber;
     private int PIN, CVC, account, raiseLimit = 500;
     private double creditLimit;
     private boolean isCredit;
