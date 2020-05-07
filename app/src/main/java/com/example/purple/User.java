@@ -360,7 +360,6 @@ public class User {
     }
 
 
-
     public int getCardPin(int index) {
         int PIN = 0;
         if (index == 1) {
@@ -372,7 +371,6 @@ public class User {
         }
         return PIN;
     }
-
 
 
     public double getCardCreditLimit(int index) {
