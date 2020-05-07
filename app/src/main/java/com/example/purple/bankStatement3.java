@@ -1,8 +1,10 @@
 package com.example.purple;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,7 @@ public class bankStatement3 extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private StringBuilder sb = new StringBuilder();
     private Context context = this;
+    private databaseConnector data = new databaseConnector();
 
 
     @Override
@@ -26,7 +29,7 @@ public class bankStatement3 extends AppCompatActivity {
         TextView statement = findViewById(R.id.statement);
         TextView title = findViewById(R.id.title);
         title.setText(bank.getAccountNumber(3));
-        ArrayList<String> list = databaseConnector.readBankStatement(this, bank.getAccountNumber(3));
+        ArrayList<String> list = data.readBankStatement(this, bank.getAccountNumber(3));
 
         for (int i = 0; i < list.size(); i++) {
             sb.append(list.get(i) + " \n");
@@ -49,10 +52,32 @@ public class bankStatement3 extends AppCompatActivity {
 
 
     public void deleteAccount(View v) {
-        bank.deleteAccount(3, context);
-        Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(bankStatement3.this, main_one.class);
-        startActivity(intent);
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+
+        if (bank.getAccountsPayPossibility(3).equals("Regular")) {
+            dialog.setTitle("Are you sure? You delete the account's possible card also.");
+        } else {
+            dialog.setTitle("Are you sure?");
+        }
+
+        dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                bank.deleteAccount(3, context);
+                Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(bankStatement3.this, main_one.class);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 

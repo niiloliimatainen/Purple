@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,6 @@ public class main_one extends AppCompatActivity {
         accounts = findViewById(R.id.accounts);
         accountCounter = findViewById(R.id.accountCounter);
         cards = findViewById(R.id.cards);
-
     }
 
 
@@ -188,13 +188,23 @@ public class main_one extends AppCompatActivity {
 
 
     public void payButton(View v){
-        Intent intent = new Intent(main_one.this, pay_transfer.class);
-        startActivity(intent);
+        ArrayList<String> accountList = bank.getAccounts();
+        if (accountList.isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Add account first!", Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent(main_one.this, pay_transfer.class);
+            startActivity(intent);
+    }
     }
 
     public void cardAdder(View v){
-        Intent intent = new Intent(main_one.this, addCardActivity.class);
-        startActivity(intent);
+        ArrayList<String> accountList = bank.getAccounts();
+        if (accountList.isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Add account first!", Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent(main_one.this, addCardActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void addMoney(View v) {
@@ -206,6 +216,10 @@ public class main_one extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialog.setView(input);
+
+        if (accountList.isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Add account first!", Toast.LENGTH_LONG).show();
+        }
 
         dialog.setPositiveButton("Add to account 1.", new DialogInterface.OnClickListener() {
             @Override
@@ -295,6 +309,10 @@ public class main_one extends AppCompatActivity {
         ArrayList<String> accountList = bank.getAccounts();
         dialog.setTitle("Choose account");
 
+        if (accountList.isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Add account first!", Toast.LENGTH_LONG).show();
+        }
+
         dialog.setPositiveButton("Bank statement of Account 1.", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -351,6 +369,10 @@ public class main_one extends AppCompatActivity {
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         int cards = bank.getCardAmount();
         dialog.setTitle("Choose account");
+
+        if (cards == 0) {
+            Toast.makeText(getApplicationContext(),"Add card first!", Toast.LENGTH_LONG).show();
+        }
 
         dialog.setPositiveButton("Settings to Card 1.", new DialogInterface.OnClickListener() {
             @Override

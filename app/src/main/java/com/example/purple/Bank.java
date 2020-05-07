@@ -13,6 +13,8 @@ public class Bank {
     private int currentUser;
     private boolean isAdmin = false;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private numberHandler nh = new numberHandler();
+    private databaseConnector data = new databaseConnector();
 
 
     private Bank() {
@@ -32,14 +34,14 @@ public class Bank {
                     return 0;
                 }
             }
-            userList = databaseConnector.readFromFile(context);
+            userList = data.readFromFile(context);
             if (userList.isEmpty()) {
                 userList.add(admin);
-                userList.addAll(databaseConnector.readFromFile(context));
+                userList.addAll(data.readFromFile(context));
             }
 
             userList.add(user);
-            databaseConnector.writeToFile(context, userList);
+            data.writeToFile(context, userList);
             return 1;
             //admini viel
     }
@@ -47,10 +49,10 @@ public class Bank {
 
     public int login(String email, String password, Context context) {
         userList.clear();
-        userList = databaseConnector.readFromFile(context);
+        userList = data.readFromFile(context);
         if (userList.isEmpty()) {
             userList.add(admin);
-            userList.addAll(databaseConnector.readFromFile(context));
+            userList.addAll(data.readFromFile(context));
         }
 
         if ((email.equals(admin.getUserEmail())) && (password.equals(admin.getUserPassword()))) {
@@ -59,7 +61,7 @@ public class Bank {
             return 1;
         } else {
             for (int i = 0; i < userList.size(); i++) {
-                if (email.equals(userList.get(i).getUserEmail()) && (numberHandler.hasher(password, userList.get(i).getSalt().getBytes()).equals(userList.get(i).getUserPassword()))) {
+                if (email.equals(userList.get(i).getUserEmail()) && (nh.hasher(password, userList.get(i).getSalt().getBytes()).equals(userList.get(i).getUserPassword()))) {
                     currentUser = i;
                     return 1;
                 }
@@ -70,9 +72,9 @@ public class Bank {
 
 
     public boolean addAccount(int flag, Context context) {
-        String accountNumber = numberHandler.setAccountNumber();
+        String accountNumber = nh.setAccountNumber();
         if (userList.get(currentUser).addAccount(flag, accountNumber)) {
-            databaseConnector.writeToFile(context, userList);
+            data.writeToFile(context, userList);
             return true;
         } else {
             return false;
@@ -86,8 +88,8 @@ public class Bank {
         String transaction = String.format("%s        %s           +%s",sdf.format(date), userList.get(currentUser).getName(), money);
         System.out.println(transaction);
         userList.get(currentUser).addMoney(index, money);
-        databaseConnector.writeToFile(context, userList);
-        databaseConnector.saveBankStatement(context, accountNumber, transaction);
+        data.writeToFile(context, userList);
+        data.saveBankStatement(context, accountNumber, transaction);
     }
 
 
@@ -102,9 +104,9 @@ public class Bank {
         String transaction2 = String.format("%s        %s           +%s",sdf.format(date), userList.get(currentUser).getName(), money);
 
         if (userList.get(currentUser).selfTransfer(pay, receive, money) == 1) {
-            databaseConnector.writeToFile(context, userList);
-            databaseConnector.saveBankStatement(context, accountNumber1, transaction1);
-            databaseConnector.saveBankStatement(context, accountNumber2, transaction2);
+            data.writeToFile(context, userList);
+            data.saveBankStatement(context, accountNumber1, transaction1);
+            data.saveBankStatement(context, accountNumber2, transaction2);
             return 1;
         }
         return 0;
@@ -124,9 +126,9 @@ public class Bank {
                         userList.get(i).addMoney(x + 1, money);
                         String transaction1 = String.format("%s        %s           +%s",sdf.format(date), userList.get(currentUser).getName(), money);
                         String transaction2 = String.format("%s        %s           -%s",sdf.format(date), userList.get(i).getName(), money);
-                        databaseConnector.writeToFile(context, userList);
-                        databaseConnector.saveBankStatement(context, accountNumber, transaction2);
-                        databaseConnector.saveBankStatement(context, receivingAcc, transaction1);
+                        data.writeToFile(context, userList);
+                        data.saveBankStatement(context, accountNumber, transaction2);
+                        data.saveBankStatement(context, receivingAcc, transaction1);
 
                         return 1;
                     } else if ((userList.get(currentUser).transferMoney(payAccount, money)) == 0){
@@ -141,8 +143,8 @@ public class Bank {
         if ((receivingAcc.length() == 18) && (receivingAcc.contains("FI"))) {
             if ((userList.get(currentUser).transferMoney(payAccount, money)) == 1) {
                 String transaction = String.format("%s        %s           -%s",sdf.format(date), "External user", money);
-                databaseConnector.writeToFile(context, userList);
-                databaseConnector.saveBankStatement(context, accountNumber, transaction);
+                data.writeToFile(context, userList);
+                data.saveBankStatement(context, accountNumber, transaction);
                 return 1;
             } else if ((userList.get(currentUser).transferMoney(payAccount, money)) == 0){
                 return 2;
@@ -161,8 +163,8 @@ public class Bank {
         if (isPayment) {
             if (userList.get(currentUser).transferMoney(account, money) == 1) {
                 String transaction = String.format("%s        %s           -%s", sdf.format(date), "External user", money);
-                databaseConnector.saveBankStatement(context, accountNumber, transaction);
-                databaseConnector.writeToFile(context, userList);
+                data.saveBankStatement(context, accountNumber, transaction);
+                data.writeToFile(context, userList);
                 return 1;
             } else {
                 return 0;
@@ -171,8 +173,8 @@ public class Bank {
         } else {
             if (userList.get(currentUser).transferMoney(account, money) == 1) {
                 String transaction = String.format("%s        %s           -%s",sdf.format(date), userList.get(currentUser).getName(), money);
-                databaseConnector.saveBankStatement(context, accountNumber, transaction);
-                databaseConnector.writeToFile(context, userList);
+                data.saveBankStatement(context, accountNumber, transaction);
+                data.writeToFile(context, userList);
                 return 1;
             } else {
                 return 0;
@@ -183,7 +185,7 @@ public class Bank {
 
     //Save credit payments
     public void saveCredit(int account, Context context) {
-        databaseConnector.writeToFile(context, userList);
+        data.writeToFile(context, userList);
     }
 
 
@@ -226,11 +228,11 @@ public class Bank {
 
 
     public boolean addCard(int index, Context context) {
-        String cardNumber = numberHandler.setCardNumber();
-        int CVC = numberHandler.setCVC();
-        int PIN = numberHandler.setPIN();
+        String cardNumber = nh.setCardNumber();
+        int CVC = nh.setCVC();
+        int PIN = nh.setPIN();
         if (userList.get(currentUser).addCard(index, cardNumber, CVC, PIN)) {
-            databaseConnector.writeToFile(context, userList);
+            data.writeToFile(context, userList);
             return true;
         } else {
             return false;
@@ -239,11 +241,11 @@ public class Bank {
 
 
     public boolean addCreditCard(int index, double creditLimit, Context context) {
-        String cardNumber = numberHandler.setCardNumber();
-        int CVC = numberHandler.setCVC();
-        int PIN = numberHandler.setPIN();
+        String cardNumber = nh.setCardNumber();
+        int CVC = nh.setCVC();
+        int PIN = nh.setPIN();
         if (userList.get(currentUser).addCreditCard(index, cardNumber, CVC, PIN, creditLimit)) {
-            databaseConnector.writeToFile(context, userList);
+            data.writeToFile(context, userList);
             return true;
         } else {
             return false;
@@ -264,13 +266,13 @@ public class Bank {
 
    public void editUserInfo(String change, int flag, Context context) {
         userList.get(currentUser).editUserInfo(change, flag);
-        databaseConnector.writeToFile(context, userList);
+        data.writeToFile(context, userList);
    }
 
    public void deleteAccount(int index, Context context) {
        userList.get(currentUser).deleteCard(index);
        userList.get(currentUser).deleteAccount(index);
-       databaseConnector.writeToFile(context, userList);
+       data.writeToFile(context, userList);
    }
 
 
@@ -305,7 +307,7 @@ public class Bank {
         if (isAdmin) {
             userList.clear();
             userList.add(admin);
-            databaseConnector.writeToFile(context, userList);
+            data.writeToFile(context, userList);
         }
    }
 
@@ -318,20 +320,20 @@ public class Bank {
                     userList.remove(i);
                 }
             }
-           databaseConnector.writeToFile(context, userList);
+           data.writeToFile(context, userList);
        }
    }
 
 
    public void editAccount(int index, int hasPayPossibility, Context context) {
         userList.get(currentUser).editAccount(index, hasPayPossibility);
-        databaseConnector.writeToFile(context, userList);
+        data.writeToFile(context, userList);
    }
 
 
    public void deleteCard(int index, Context context) {
         userList.get(currentUser).deleteCard(index);
-        databaseConnector.writeToFile(context, userList);
+        data.writeToFile(context, userList);
    }
 
    public int getCardRaiseLimit(int index) {
@@ -368,7 +370,7 @@ public class Bank {
 
     public void editCard(int change, int flag, int index, Context context) {
         userList.get(currentUser).editCard(change, flag, index);
-        databaseConnector.writeToFile(context, userList);
+        data.writeToFile(context, userList);
     }
 
 
