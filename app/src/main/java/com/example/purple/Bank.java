@@ -268,10 +268,15 @@ public class Bank {
    public void editUserInfo(String change, int flag, Context context) {
        String hashedPw;
        String saltString;
-       byte[] salt = nh.getSalt();
-       saltString = Arrays.toString(salt);
-       hashedPw = nh.hasher(change, saltString.getBytes());
-       userList.get(currentUser).editUserInfo(hashedPw, flag , saltString);
+       if(flag == 5) {
+           byte[] salt = nh.getSalt();
+           saltString = Arrays.toString(salt);
+           hashedPw = nh.hasher(change, saltString.getBytes());
+           userList.get(currentUser).editUserInfo(hashedPw, flag , saltString);
+       }else{
+           userList.get(currentUser).editUserInfo(change, flag, "");
+       }
+
        data.writeToFile(context, userList);
    }
 

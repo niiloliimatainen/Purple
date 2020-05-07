@@ -64,8 +64,6 @@ public class adminSettings extends AppCompatActivity {
 
     public void deleteAll(View v) {
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
-        ArrayList<String> accountList = bank.getAccounts();
-
         dialog.setTitle("Are you sure?");
 
         dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
