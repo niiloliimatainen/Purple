@@ -37,6 +37,28 @@ public class Card {
         }
     }
 
+    public String[] getCountryArray(){
+        return countryArray;
+    }
+
+    public void addCountry(int index){
+        boolean flag = true;
+        for(int i = 0; i < areaToUseList.size(); i++){
+           if(areaToUseList.get(i).equals(countryArray[index])){
+               flag = false;
+           }
+        }if(flag){
+            areaToUseList.add(countryArray[index]);
+        }
+    }
+    public void removeCountry(int index){
+        if(areaToUseList.isEmpty()){
+            areaToUseList.add("Finland");
+        }else {
+            areaToUseList.remove(index);
+        }
+    }
+
     public int getAccount() {
         return account;
     }

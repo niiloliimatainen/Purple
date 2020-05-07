@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ public class cardSettings extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private EditText getRaiseLimit, getPin, getType, getCreditLimit;
     private Context context = this;
+    private boolean countryChangesMade = false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,8 +46,20 @@ public class cardSettings extends AppCompatActivity {
             raiselimit.setText("Current raiselimit: " + bank.getCardRaiseLimit(card) + "€");
             isCredit.setText(("Current type: " + bank.isCardCreditCard(card)));
             PIN.setText("Current PIN-Code: " + bank.getCardPin(card));
-            creditLimit.setText("(only credit cards)Current creditlimit: " + bank.getCreditLimit(card) + "€");
+            creditLimit.setText("Current creditlimit: " + bank.getCreditLimit(card) + "€");
         }
+        Spinner currentCountries = findViewById(R.id.currentCountries);
+        Spinner allCountries = findViewById(R.id.allCountries);
+
+        ArrayAdapter<String> currentCountryArray = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, bank.getCardObj(card).getAreaToUseList());
+        currentCountryArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currentCountries.setAdapter(currentCountryArray);
+
+        ArrayAdapter<String> countriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, bank.getCardObj(card).getCountryArray());
+        countriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        allCountries.setAdapter(countriesAdapter);
+
+
     }
 
     public void editCard(View v) {
@@ -93,7 +108,7 @@ public class cardSettings extends AppCompatActivity {
                     ok = false;
                 }
             }
-            if (ok) {
+            if (ok || countryChangesMade) {
                 Toast.makeText(getApplicationContext(), "Changes were made!", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             } else {
@@ -103,6 +118,23 @@ public class cardSettings extends AppCompatActivity {
         }
     }
 
+    public void addCountry(View v){
+        Spinner allCountries = findViewById(R.id.allCountries);
+        bank.getCardObj(card).addCountry(allCountries.getSelectedItemPosition());
+        countryChangesMade = true;
+        ArrayAdapter<String> countriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, bank.getCardObj(card).getCountryArray());
+        countriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        allCountries.setAdapter(countriesAdapter);
+    }
+
+    public void removeCountry(View v){
+        Spinner currentCountries = findViewById(R.id.currentCountries);
+        bank.getCardObj(card).removeCountry(currentCountries.getSelectedItemPosition());
+        countryChangesMade = true;
+        ArrayAdapter<String> currentCountryArray = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, bank.getCardObj(card).getAreaToUseList());
+        currentCountryArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currentCountries.setAdapter(currentCountryArray);
+    }
 
     public void returnButton(View v) {
         Intent intent = new Intent(cardSettings.this, main_one.class);
