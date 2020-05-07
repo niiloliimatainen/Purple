@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-//Moi
+//Moi2
 //Starting page
 
 public class MainActivity extends AppCompatActivity {
