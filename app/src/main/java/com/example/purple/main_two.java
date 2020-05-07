@@ -44,7 +44,7 @@ public class main_two extends AppCompatActivity {
 
         for(int i=0; 3 > i; i++){
             if(bank.getCardObj(i+1) != null){
-                chooseCardList.add(bank.getCardObj(i + 1).isCreditCard() + " | " + bank.getCardObj(i + 1).getCardNumber());
+                chooseCardList.add(i+1 + "." + bank.isCardCreditCard(i + 1) + " | " + bank.getCardObj(i + 1).getCardNumber());
             }
         }
         if(chooseCardList == null || chooseCardList.isEmpty()){
@@ -90,8 +90,10 @@ public class main_two extends AppCompatActivity {
 
     }
     public void withDraw(View v) {
+        Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
         EditText amountInput = findViewById(R.id.amountInput);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
+        cardToUse = chooseCardSpinner.getSelectedItemPosition() + 1;
         String country = chooseCountry.getSelectedItem().toString();
         ArrayList<String> cardArea = bank.getCardObj(cardToUse).getAreaToUseList();
         boolean countryOk = false;

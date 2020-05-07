@@ -25,6 +25,7 @@ public class numberHandler {
         return salt;
     }
 
+    //simple hashing function to generate hash using sha 512 and randomly generated salt
     public static String hasher(String password, byte[] salt){
         String hashed = "";
         try{
