@@ -288,11 +288,11 @@ public class User {
 
     public String getAccountNumber (int index) {
         String accountNumber = "";
-        if (index == 1) {
+        if ((index == 1) && (account1 != null)) {
             accountNumber = account1.getAccountNumber();
-        } else if (index == 2) {
+        } else if ((index == 2) && (account2 != null)) {
             accountNumber = account2.getAccountNumber();
-        } else if (index == 3) {
+        } else if ((index == 3) && (account3 != null)) {
             accountNumber = account3.getAccountNumber();
         }
         return accountNumber;
@@ -385,19 +385,6 @@ public class User {
             creditLimit = card3.getCardCreditLimit();
         }
         return creditLimit;
-    }
-
-
-    public int is(int index) {
-        int PIN = 0;
-        if (index == 1) {
-            PIN = card1.getCardPin();
-        } else if (index == 2) {
-            PIN = card2.getCardPin();
-        } else if (index == 3) {
-            PIN = card3.getCardPin();
-        }
-        return PIN;
     }
 
 

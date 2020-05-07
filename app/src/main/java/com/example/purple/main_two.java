@@ -66,6 +66,7 @@ public class main_two extends AppCompatActivity {
         Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
         EditText amountInput = findViewById(R.id.amountInput);
+        cardToUse = 0;
         cardToUse = chooseCardSpinner.getSelectedItemPosition() + 1;
         String country = chooseCountry.getSelectedItem().toString();
         ArrayList<String> cardArea = bank.getCardObj(cardToUse).getAreaToUseList();
@@ -93,6 +94,7 @@ public class main_two extends AppCompatActivity {
         Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
         EditText amountInput = findViewById(R.id.amountInput);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
+        cardToUse = 0;
         cardToUse = chooseCardSpinner.getSelectedItemPosition() + 1;
         String country = chooseCountry.getSelectedItem().toString();
         ArrayList<String> cardArea = bank.getCardObj(cardToUse).getAreaToUseList();
@@ -174,11 +176,14 @@ public class main_two extends AppCompatActivity {
 
     public void pinCodePopup(final boolean isPayment, final boolean isCredit){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
         dialog.setTitle("Payment terminal");
         dialog.setMessage("Input card pin");
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialog.setView(input);
+        cardToUse = 0;
+        cardToUse = chooseCardSpinner.getSelectedItemPosition() + 1;
 
         dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override

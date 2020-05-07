@@ -71,7 +71,7 @@ public class cardSettings extends AppCompatActivity {
         type = getType.getText().toString();
         creditLimit = getCreditLimit.getText().toString();
 
-        if((raiseLimit.isEmpty()) && (PIN.isEmpty()) && (type.isEmpty()) && (creditLimit.isEmpty())) {
+        if((raiseLimit.isEmpty()) && (PIN.isEmpty()) && (type.isEmpty()) && (creditLimit.isEmpty()) && (!countryChangesMade)) {
             Toast.makeText(getApplicationContext(), "No changes were made!", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         } else {
