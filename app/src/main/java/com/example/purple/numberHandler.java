@@ -20,7 +20,7 @@ public class numberHandler {
         random.nextBytes(salt);
         return salt;
     }
-    //simple hashing function to generate hash using sha 512 and randomly generated salt
+    //simple hashing function to generate hash using sha 512 and salt which calls for toHex() to convert result into string format.
     public String hasher(String password, byte[] salt){
         String hashed = "";
         try{
@@ -34,7 +34,7 @@ public class numberHandler {
 
     }
 
-
+    // only hash function will call this! Purpose is to generate String from hashed bytes.
     public String toHex(byte[] bytes) {
         StringBuilder pwString = new StringBuilder();
         for (byte b: bytes) {
