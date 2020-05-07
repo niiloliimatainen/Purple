@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,10 +29,10 @@ public class addCardActivity extends AppCompatActivity {
 
 
         creditInput = findViewById(R.id.creditInput);
-        final Button debit = findViewById(R.id.debitB);
-        final Button credit = findViewById(R.id.creditB);
-        final Button addCard = findViewById(R.id.addCardB);
-        final Button setCredit = findViewById(R.id.setCreditLimit);
+        final ImageButton debit = findViewById(R.id.debitB);
+        final ImageButton credit = findViewById(R.id.creditB);
+        final ImageButton addCard = findViewById(R.id.addCardB);
+        final ImageButton setCredit = findViewById(R.id.setCreditLimit);
         final Button acc1B = findViewById(R.id.acc1B);
         final Button acc2B = findViewById(R.id.acc2B);
         final Button acc3B = findViewById(R.id.acc3B);

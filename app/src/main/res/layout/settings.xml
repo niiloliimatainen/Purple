@@ -87,9 +87,11 @@
 
     <ImageButton
         android:id="@+id/editInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="123dp"
+        android:layout_height="33dp"
+        android:backgroundTint="#03FFFFFF"
         android:onClick="editInfo"
+        android:src="@drawable/apply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -8,42 +8,27 @@
 
     <ImageButton
         android:id="@+id/bank1"
-        android:layout_width="156dp"
-        android:layout_height="104dp"
-        android:layout_marginStart="16dp"
-        android:background="@null"
+        android:layout_width="152dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="120dp"
+        android:background="#605C5C"
+        android:backgroundTint="#61736C6C"
         android:onClick="openActivity2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888"
-        app:srcCompat="@drawable/mainscreen_buttons1" />
-
-    <ImageButton
-        android:id="@+id/bank2"
-        android:layout_width="156dp"
-        android:layout_height="104dp"
-        android:background="@null"
-        android:onClick="tester"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888"
-        app:srcCompat="@drawable/mainscreen_buttons2" />
+        app:layout_constraintVertical_bias="0.951"
+        app:srcCompat="@drawable/purplebuttton" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="576dp"
         android:layout_height="574dp"
         android:contentDescription="TODO"
-        app:layout_constraintBottom_toTopOf="@+id/bank2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/component_4__1"
         tools:ignore="MissingConstraints" />
 

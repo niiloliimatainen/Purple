@@ -148,29 +148,31 @@
 
     <ImageButton
         android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="106dp"
+        android:layout_height="33dp"
+        android:backgroundTint="#02FFFFFF"
         android:onClick="editCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.899"
-        app:srcCompat="@drawable/ic_touch_app_black_24dp" />
+        app:layout_constraintVertical_bias="0.898"
+        app:srcCompat="@drawable/apply" />
 
     <ImageButton
         android:id="@+id/returnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="104dp"
+        android:layout_height="34dp"
+        android:backgroundTint="#02FFFFFF"
         android:onClick="returnButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintHorizontal_bias="0.146"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.899"
-        app:srcCompat="@drawable/abc_vector_test" />
+        app:srcCompat="@drawable/return1" />
 
     <TextView
         android:id="@+id/textView6"
@@ -209,29 +211,31 @@
 
     <ImageButton
         android:id="@+id/setNewCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="107dp"
+        android:layout_height="35dp"
+        android:backgroundTint="#00FFFFFF"
         android:onClick="addCountry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
+        app:layout_constraintHorizontal_bias="0.799"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77"
-        app:srcCompat="@drawable/payb" />
+        app:layout_constraintVertical_bias="0.747"
+        app:srcCompat="@drawable/addcountry" />
 
     <ImageButton
         android:id="@+id/deleteCurrentCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="104dp"
+        android:layout_height="35dp"
+        android:backgroundTint="#02FFFFFF"
         android:onClick="removeCountry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.143"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77"
-        app:srcCompat="@drawable/payb" />
+        app:layout_constraintVertical_bias="0.747"
+        app:srcCompat="@drawable/delete" />
 
     <TextView
         android:id="@+id/infotext"

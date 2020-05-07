@@ -38,7 +38,7 @@ public class adminSettings extends AppCompatActivity {
     }
 
 
-    public void getChoice(View v) {
+    public void accessUser(View v) {
         if (choice.getText() == null) {
             Toast.makeText(getApplicationContext(), "Invalid value!", Toast.LENGTH_SHORT).show();
         } else {

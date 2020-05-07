@@ -13,14 +13,14 @@
 
     <ImageView
         android:id="@+id/cardviewbox"
-        android:layout_width="457dp"
-        android:layout_height="112dp"
+        android:layout_width="428dp"
+        android:layout_height="115dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accountviewbox"
         app:layout_constraintVertical_bias="0.314"
-        app:srcCompat="@drawable/emptyboxblue" />
+        app:srcCompat="@drawable/newbox1" />
 
     <ImageView
         android:id="@+id/accountviewbox"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moneyviewbox"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/emptyboxblue" />
+        app:srcCompat="@drawable/newbox1" />
 
     <ImageView
         android:id="@+id/banklogo"
@@ -55,8 +55,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banklogo"
-        app:layout_constraintVertical_bias="0.033"
-        app:srcCompat="@drawable/emptyboxblue" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/newboxsmall" />
 
     <TextView
         android:id="@+id/allmoney"
@@ -74,14 +74,16 @@
 
     <ImageButton
         android:id="@+id/addMoney"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="131dp"
+        android:layout_height="26dp"
         android:background="#00FFFFFF"
         android:onClick="addMoney"
         app:layout_constraintBottom_toTopOf="@+id/accountviewbox"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moneyviewbox"
+        app:layout_constraintVertical_bias="0.333"
         app:srcCompat="@drawable/addmoneyb" />
 
     <ImageButton
@@ -90,12 +92,12 @@
         android:layout_height="46dp"
         android:backgroundTint="#00FFFFFF"
         android:onClick="getToSettings"
-        app:layout_constraintBottom_toTopOf="@+id/navigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardviewbox"
-        app:layout_constraintVertical_bias="0.541"
+        app:layout_constraintVertical_bias="0.285"
         app:srcCompat="@drawable/profileb" />
 
     <ImageButton
@@ -104,12 +106,12 @@
         android:layout_height="48dp"
         android:backgroundTint="#00FFFFFF"
         android:onClick="payButton"
-        app:layout_constraintBottom_toTopOf="@+id/navigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.168"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardviewbox"
-        app:layout_constraintVertical_bias="0.59"
+        app:layout_constraintVertical_bias="0.255"
         app:srcCompat="@drawable/payb" />
 
     <TextView
@@ -123,43 +125,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.608" />
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="409dp"
-        android:layout_height="29dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardviewbox"
-        app:layout_constraintVertical_bias="0.931" />
-
     <ImageButton
         android:id="@+id/addcard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
         android:backgroundTint="#03FFFFFF"
         android:onClick="cardAdder"
-        app:layout_constraintBottom_toTopOf="@+id/cardviewbox"
+        app:layout_constraintBottom_toTopOf="@+id/accountviewbox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.785"
+        app:layout_constraintHorizontal_bias="0.964"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountviewbox"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/moneyviewbox"
+        app:layout_constraintVertical_bias="0.333"
         app:srcCompat="@drawable/addcardb" />
 
     <ImageButton
         android:id="@+id/imageButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="26dp"
         android:backgroundTint="#02FFFFFF"
         android:onClick="addAccountPopup"
-        app:layout_constraintBottom_toTopOf="@+id/cardviewbox"
+        app:layout_constraintBottom_toTopOf="@+id/accountviewbox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountviewbox"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/moneyviewbox"
+        app:layout_constraintVertical_bias="0.357"
         app:srcCompat="@drawable/addaccountb" />
 
     <TextView
@@ -187,28 +178,41 @@
 
     <ImageButton
         android:id="@+id/statement"
-        android:layout_width="38dp"
-        android:layout_height="40dp"
+        android:layout_width="108dp"
+        android:layout_height="25dp"
         android:onClick="showBankStatement"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cardviewbox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.217"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintTop_toBottomOf="@+id/accountviewbox"
+        app:layout_constraintVertical_bias="0.521"
+        app:srcCompat="@drawable/accounts" />
 
     <ImageButton
         android:id="@+id/cardSettings"
-        android:layout_width="38dp"
-        android:layout_height="40dp"
+        android:layout_width="109dp"
+        android:layout_height="26dp"
+        android:adjustViewBounds="false"
         android:onClick="toCardSettings"
+        app:layout_constraintBottom_toTopOf="@+id/cardviewbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountviewbox"
+        app:layout_constraintVertical_bias="0.545"
+        app:srcCompat="@drawable/cards" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="174dp"
+        android:layout_height="27dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintTop_toBottomOf="@+id/cardviewbox"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/status2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

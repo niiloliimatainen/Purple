@@ -51,54 +51,57 @@
 
     <ImageButton
         android:id="@+id/editUser"
-        android:layout_width="25dp"
-        android:layout_height="29dp"
-        android:onClick="getChoice"
+        android:layout_width="109dp"
+        android:layout_height="35dp"
+        android:backgroundTint="#00FFFFFF"
+        android:onClick="accessUser"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.37"
+        app:layout_constraintHorizontal_bias="0.221"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.304"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        app:layout_constraintVertical_bias="0.298"
+        app:srcCompat="@drawable/accessuser" />
 
     <ImageButton
         android:id="@+id/returnButton"
-        android:layout_width="39dp"
-        android:layout_height="29dp"
+        android:layout_width="111dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#00FFFFFF"
         android:onClick="returnButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.279"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951"
-        app:srcCompat="@android:drawable/ic_media_rew" />
-
-    <ImageButton
-        android:id="@+id/ripBank"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="deleteAll"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.828"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        app:srcCompat="@drawable/return1" />
+
+    <ImageButton
+        android:id="@+id/ripBank"
+        android:layout_width="139dp"
+        android:layout_height="64dp"
+        android:onClick="deleteAll"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.827"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.961"
+        app:srcCompat="@drawable/delete_all_accounts" />
 
     <ImageButton
         android:id="@+id/deleteUser"
-        android:layout_width="25dp"
-        android:layout_height="29dp"
+        android:layout_width="114dp"
+        android:layout_height="35dp"
+        android:backgroundTint="#00FFFFFF"
         android:onClick="deleteUser"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.304"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        app:layout_constraintVertical_bias="0.298"
+        app:srcCompat="@drawable/delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

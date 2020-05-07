@@ -77,41 +77,41 @@
 
     <ImageButton
         android:id="@+id/deleteAccount"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="101dp"
+        android:layout_height="25dp"
         android:onClick="deleteAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintHorizontal_bias="0.977"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        app:layout_constraintVertical_bias="0.028"
+        app:srcCompat="@drawable/delete" />
 
     <ImageButton
         android:id="@+id/returnButton"
-        android:layout_width="39dp"
-        android:layout_height="29dp"
+        android:layout_width="102dp"
+        android:layout_height="24dp"
         android:onClick="returnButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.962"
-        app:srcCompat="@android:drawable/ic_media_rew" />
+        app:srcCompat="@drawable/return1" />
 
     <ImageButton
         android:id="@+id/toAccountSettings"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="103dp"
+        android:layout_height="23dp"
         android:onClick="editAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.031"
-        app:srcCompat="@android:drawable/ic_menu_manage" />
+        app:srcCompat="@drawable/settings" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

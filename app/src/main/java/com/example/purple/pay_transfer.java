@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +28,8 @@ public class pay_transfer extends AppCompatActivity {
         payAmount = findViewById(R.id.payamount);
         inputAccountToPay = findViewById(R.id.inputAccountToPay);
 
-        Button showInputButton = findViewById(R.id.payment);
-        Button showSpinnerButton = findViewById(R.id.selfTransfer);
+        ImageButton showInputButton = findViewById(R.id.payment);
+        ImageButton showSpinnerButton = findViewById(R.id.selfTransfer);
         final TextView paymentInfo = findViewById(R.id.paymentInfoTW);
         final View payButton = findViewById(R.id.payButton);
         final Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
