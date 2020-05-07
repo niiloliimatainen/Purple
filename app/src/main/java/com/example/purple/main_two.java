@@ -41,10 +41,12 @@ public class main_two extends AppCompatActivity {
         Spinner chooseCountry = findViewById(R.id.chooseCountry);
         ImageButton pay = findViewById(R.id.payWithCard);
         ImageButton withdraw = findViewById(R.id.withDrawButton);
-
+        chooseCardList.add("");
+        chooseCardList.add("");
+         chooseCardList.add("");
         for(int i=0; 3 > i; i++){
             if(bank.getCardObj(i+1) != null){
-                chooseCardList.add(i+1 + "." + bank.isCardCreditCard(i + 1) + " | " + bank.getCardObj(i + 1).getCardNumber());
+                chooseCardList.add(i ,i+1 + "." + bank.isCardCreditCard(i + 1) + " | " + bank.getCardObj(i + 1).getCardNumber());
             }
         }
         if(chooseCardList == null || chooseCardList.isEmpty()){

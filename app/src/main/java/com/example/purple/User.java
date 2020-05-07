@@ -54,14 +54,14 @@ public class User {
     }
 
     public Card getCardObject(int index){
-        if(index == 1){
+        if((index == 1) && (card1 != null)) {
             return card1;
-        }else if(index == 2){
+        } else if ((index == 2) && (card2 != null)) {
             return card2;
-        }else if(index == 3){
+        } else if ((index == 3) && (card3 != null)) {
             return card3;
-        }else
-            return null;
+        }
+        return null;
     }
 
     public boolean addCard(int index, String cardNumber, int CVC, int PIN) {
