@@ -53,8 +53,12 @@ public class bankStatement3 extends AppCompatActivity {
 
     public void deleteAccount(View v) {
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
-        ArrayList<String> accountList = bank.getAccounts();
-        dialog.setTitle("Are you sure?");
+
+        if (bank.getAccountsPayPossibility(3).equals("Regular")) {
+            dialog.setTitle("Are you sure? You delete the account's possible card also.");
+        } else {
+            dialog.setTitle("Are you sure?");
+        }
 
         dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
