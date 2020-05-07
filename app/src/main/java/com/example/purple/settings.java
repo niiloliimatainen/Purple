@@ -37,7 +37,6 @@ public class settings extends AppCompatActivity {
         phoneNumber = bank.getUserInfo(4);
         password = bank.getUserInfo(5);
 
-
         editFirstName.setText(firstName);
         editLastName.setText(lastName);
         editEmail.setText(email);
@@ -78,7 +77,7 @@ public class settings extends AppCompatActivity {
             if ((!(editPassword.getText().toString().isEmpty())) || (!(confirmPassword.getText().toString().isEmpty()))) {
                 password = editPassword.getText().toString();
                 ok = false;
-                System.out.println(ok);
+
 
                 Pattern pattern1 = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
                 Pattern pattern2 = Pattern.compile("[a-z0-9]");
@@ -97,7 +96,6 @@ public class settings extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Password has to be at least 12 characters!", Toast.LENGTH_SHORT).show();
                 } else if (flag1 && flag2 && flag3 && flag4) {
                     if ((confirmPassword.getText().toString()).equals(password)) {
-                        //Tämä on vittu kohta
                         bank.editUserInfo(password, 5, context);
                         ok = true;
                     } else {
@@ -107,7 +105,7 @@ public class settings extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Password must at least contain number, capital letter, small letter and special character!", Toast.LENGTH_SHORT).show();
                 }
             }
-            if (ok == true) {
+            if (ok) {
                 Toast.makeText(getApplicationContext(), "Changes were made!", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }

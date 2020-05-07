@@ -6,7 +6,6 @@ import androidx.core.view.GestureDetectorCompat;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.media.Image;
 import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -43,7 +42,7 @@ public class main_two extends AppCompatActivity {
         ImageButton withdraw = findViewById(R.id.withDrawButton);
         chooseCardList.add("");
         chooseCardList.add("");
-         chooseCardList.add("");
+        chooseCardList.add("");
         for(int i=0; 3 > i; i++){
             if(bank.getCardObj(i+1) != null){
                 chooseCardList.add(i ,i+1 + "." + bank.isCardCreditCard(i + 1) + " | " + bank.getCardObj(i + 1).getCardNumber());
@@ -63,7 +62,7 @@ public class main_two extends AppCompatActivity {
         countryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chooseCountry.setAdapter(countryArrayAdapter);
     }
-
+// from this comment downwards there is just lot of checks to validate payment/withdraw with multiple if else statements and dialogs
     public void cardPayment(View v) {
         Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
         Spinner chooseCountry = findViewById(R.id.chooseCountry);

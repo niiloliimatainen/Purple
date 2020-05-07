@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+// heart of the program
+
 public class Bank {
     private static Bank bank = new Bank();
     private User admin = new User("Kalle", "Jaakonpoika", "admin", "0453299483", "admin", "empty");
@@ -44,7 +46,6 @@ public class Bank {
             userList.add(user);
             data.writeToFile(context, userList);
             return 1;
-            //admini viel
     }
 
 
@@ -62,6 +63,7 @@ public class Bank {
             return 1;
         } else {
             for (int i = 0; i < userList.size(); i++) {
+                // when logging in, input password has to be hashed with same salt to test if it is a match
                 if (email.equals(userList.get(i).getUserEmail()) && (nh.hasher(password, userList.get(i).getSalt().getBytes()).equals(userList.get(i).getUserPassword()))) {
                     currentUser = i;
                     return 1;
@@ -87,7 +89,6 @@ public class Bank {
         Date date = new Date();
         String accountNumber = userList.get(currentUser).getAccountNumber(index);
         String transaction = String.format("%s        %s           +%s",sdf.format(date), userList.get(currentUser).getName(), money);
-        System.out.println(transaction);
         userList.get(currentUser).addMoney(index, money);
         data.writeToFile(context, userList);
         data.saveBankStatement(context, accountNumber, transaction);

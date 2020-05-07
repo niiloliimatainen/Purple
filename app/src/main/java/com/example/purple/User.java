@@ -1,9 +1,9 @@
 package com.example.purple;
 
-//Class for creating user. Abstract class shows the structure of user classes.
+//Class for creating user
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class User {
     private String firstName, lastName, email, phoneNumber, password, salt;
@@ -39,7 +39,6 @@ public class User {
         if (accCounter == 0) {
             account1 = new Account(accountNumber, payPossibility);
             accCounter += 1;
-            System.out.println(accCounter);
         } else if (accCounter == 1) {
             account2 = new Account(accountNumber, payPossibility);
             accCounter += 1;

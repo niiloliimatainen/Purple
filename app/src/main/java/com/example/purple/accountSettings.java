@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+// the view where user can edit profile
 
 public class accountSettings extends AppCompatActivity {
     private TextView title;
@@ -43,7 +43,7 @@ public class accountSettings extends AppCompatActivity {
         }
     }
 
-
+// on click this method will update accounts type to regular or savings
     public void editAccount(View v) {
         if (!(type.getText().toString().isEmpty())) {
             if (type.getText().toString().equals("Savings") && (!(type.getText().toString().equals(bank.getAccountsPayPossibility(account))))) {

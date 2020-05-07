@@ -1,20 +1,19 @@
 package com.example.purple;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+// view after user clicks add card button in main screen
 
 public class addCardActivity extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
@@ -120,7 +119,7 @@ public class addCardActivity extends AppCompatActivity {
             }
         }
     }
-
+    // method to add card with account type/amount check
     public void addCard(View v){
         Intent intent = new Intent(addCardActivity.this, main_one.class );
         if (isCredit){

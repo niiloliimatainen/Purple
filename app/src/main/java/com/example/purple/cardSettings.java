@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// main one will pass to this activity a bundle which contains card information
 public class cardSettings extends AppCompatActivity {
     private int card;
     private TextView title, raiselimit, isCredit, PIN, creditLimit;

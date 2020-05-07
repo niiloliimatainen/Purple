@@ -1,6 +1,6 @@
 package com.example.purple;
 
-
+// account class with only simple methods
 public class Account {
     private String accountNumber;
     private double money = 0;
@@ -30,7 +30,6 @@ public class Account {
     public int transferMoney(double x) {
 
         if (money < x) {
-            System.out.println(("Tässä maksettiin epäonnistui" ));
             return 0;
         }
         money -= x;
@@ -53,7 +52,7 @@ public class Account {
     }
 
 
-
+// to determine if account is regular or savings
     public int getPayPossibility() {
         return payPossibility;
     }

@@ -1,8 +1,9 @@
 package com.example.purple;
 import java.util.ArrayList;
-//joo
 
 
+//  here is card class with its methods. CVC is not currently in use
+// list of available countries is also specified here
 public class Card {
     private String cardNumber;
     private int PIN, CVC, account, raiseLimit = 500;
@@ -80,7 +81,7 @@ public class Card {
             return 0;
         }
     }
-
+    // returns list of countries where card can be used. If it is empty, finland will be added to list
     public ArrayList<String> getAreaToUseList() {
         if (areaToUseList == null) {
             areaToUseList = new ArrayList<>();

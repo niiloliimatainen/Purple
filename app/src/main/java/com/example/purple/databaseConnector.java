@@ -18,6 +18,7 @@ public class databaseConnector {
 
     public databaseConnector() { }
 
+    // Gson serializes user data to json
     public void writeToFile(Context context, ArrayList<User> userList) {
         try {
             FileOutputStream fos = context.openFileOutput("database.json", Context.MODE_PRIVATE);
@@ -25,7 +26,6 @@ public class databaseConnector {
             for (int i = 0; i < userList.size(); i++) {
                 Gson gson = new Gson();
                 String json_object = gson.toJson(userList.get(i));
-                System.out.println(json_object);
                 writer.print(json_object);
                 writer.println();
                 writer.flush();

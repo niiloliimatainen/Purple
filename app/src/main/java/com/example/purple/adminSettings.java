@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+// view where is admins functionality
 public class adminSettings extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private StringBuilder sb = new StringBuilder();
@@ -37,7 +38,7 @@ public class adminSettings extends AppCompatActivity {
         users.setText(sb.toString());
     }
 
-
+// grants access to wanted user
     public void accessUser(View v) {
         if ((choice.getText()== null) || (choice.getText().toString().isEmpty())) {
             Toast.makeText(getApplicationContext(), "Invalid value!", Toast.LENGTH_SHORT).show();

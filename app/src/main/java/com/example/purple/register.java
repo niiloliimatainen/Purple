@@ -75,6 +75,8 @@ public class register extends AppCompatActivity {
         }
 
         if (ok) {
+            // the salt is converted to string and back to bytes before hashing password to avoid .getBytes() method mixing the string.
+            //This happens when user is logging in and wanted salt is fetched from database and converted to bytes
             String hashedPw;
             String saltString;
             byte[] salt = nh.getSalt();

@@ -14,13 +14,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
+// main screen after login
 
 public class main_one extends AppCompatActivity {
     private GestureDetectorCompat gesture;

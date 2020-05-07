@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -31,7 +30,6 @@ public class pay_transfer extends AppCompatActivity {
         ImageButton showInputButton = findViewById(R.id.payment);
         ImageButton showSpinnerButton = findViewById(R.id.selfTransfer);
         final TextView paymentInfo = findViewById(R.id.paymentInfoTW);
-        final View payButton = findViewById(R.id.payButton);
         final Spinner chooseAccToPay = findViewById(R.id.chooseAccToPay);
 
 
