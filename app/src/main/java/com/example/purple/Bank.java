@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Bank {
@@ -265,8 +266,13 @@ public class Bank {
 
 
    public void editUserInfo(String change, int flag, Context context) {
-        userList.get(currentUser).editUserInfo(change, flag);
-        data.writeToFile(context, userList);
+       String hashedPw;
+       String saltString;
+       byte[] salt = nh.getSalt();
+       saltString = Arrays.toString(salt);
+       hashedPw = nh.hasher(change, saltString.getBytes());
+       userList.get(currentUser).editUserInfo(hashedPw, flag , saltString);
+       data.writeToFile(context, userList);
    }
 
    public void deleteAccount(int index, Context context) {

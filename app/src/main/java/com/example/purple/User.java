@@ -3,6 +3,7 @@ package com.example.purple;
 //Class for creating user. Abstract class shows the structure of user classes.
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class User {
     private String firstName, lastName, email, phoneNumber, password, salt;
@@ -199,7 +200,7 @@ public class User {
     }
 
 
-    public void editUserInfo(String change, int flag) {
+    public void editUserInfo(String change, int flag, String newSalt) {
         if (flag == 1) {
             firstName = change;
         } else if (flag == 2) {
@@ -209,7 +210,9 @@ public class User {
         } else if (flag == 4) {
             phoneNumber = change;
         } else {
+            salt = newSalt;
             password = change;
+
         }
 
     }

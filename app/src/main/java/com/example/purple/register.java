@@ -76,12 +76,12 @@ public class register extends AppCompatActivity {
 
         if (ok) {
             String hashedPw;
-            String tempSalt;
+            String saltString;
             byte[] salt = nh.getSalt();
-            tempSalt = Arrays.toString(salt);
-            hashedPw = nh.hasher(password1, tempSalt.getBytes());
+            saltString = Arrays.toString(salt);
+            hashedPw = nh.hasher(password1, saltString.getBytes());
 
-            int newUser = bank.addUser(firstName, lastName, email, phoneNumber, hashedPw, tempSalt, this);
+            int newUser = bank.addUser(firstName, lastName, email, phoneNumber, hashedPw, saltString, this);
 
             if (newUser == 1) {
                 Toast.makeText(getApplicationContext(), "Registration complete!", Toast.LENGTH_SHORT).show();
