@@ -51,7 +51,8 @@ public class Card {
     }
 
     public int creditPayment(double money){
-        if(creditLimit < money){
+        if(creditLimit >= money){
+            creditLimit -= money;
             return 1;
         }else {
             return 0;
