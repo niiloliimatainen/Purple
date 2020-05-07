@@ -103,7 +103,7 @@ public class main_two extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Incorrect amount!", Toast.LENGTH_SHORT).show();
         } else {
             amountToDialog = Double.parseDouble(amountInput.getText().toString());
-            for (int i = 0; 8 > i; i++) {
+            for (int i = 0; cardArea.size() > i; i++) {
                 if (country.equals(cardArea.get(i))) {
                     countryOk = true;
                     break;
