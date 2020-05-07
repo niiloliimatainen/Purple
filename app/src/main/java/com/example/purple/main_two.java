@@ -173,7 +173,7 @@ public class main_two extends AppCompatActivity {
 
         }
 
-
+    // to handle pincode check
     public void pinCodePopup(final boolean isPayment, final boolean isCredit){
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         Spinner chooseCardSpinner = findViewById(R.id.chooseCardSpinner);
