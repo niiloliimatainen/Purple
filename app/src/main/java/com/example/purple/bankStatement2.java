@@ -1,8 +1,10 @@
 package com.example.purple;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -49,10 +51,28 @@ public class bankStatement2 extends AppCompatActivity {
 
 
     public void deleteAccount(View v) {
-        bank.deleteAccount(2, context);
-        Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(bankStatement2.this, main_one.class);
-        startActivity(intent);
+        AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+        ArrayList<String> accountList = bank.getAccounts();
+        dialog.setTitle("Are you sure?");
+
+        dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                bank.deleteAccount(2, context);
+                Toast.makeText(getApplicationContext(), "Account deleted!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(bankStatement2.this, main_one.class);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 
