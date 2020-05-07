@@ -42,6 +42,7 @@ public class adminSettings extends AppCompatActivity {
         if ((choice.getText()== null) || (choice.getText().toString().isEmpty())) {
             Toast.makeText(getApplicationContext(), "Invalid value!", Toast.LENGTH_SHORT).show();
         } else {
+            userList = bank.getAllUsers();
             userValue = choice.getText().toString();
             int finalValue = Integer.parseInt(userValue);
             for (int i = 0; i < userList.size(); i++) {
@@ -64,6 +65,7 @@ public class adminSettings extends AppCompatActivity {
 
     public void deleteAll(View v) {
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+
         dialog.setTitle("Are you sure?");
 
         dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
@@ -93,7 +95,6 @@ public class adminSettings extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Invalid value!", Toast.LENGTH_SHORT).show();
         } else {
             AlertDialog.Builder dialog= new AlertDialog.Builder(this);
-            ArrayList<String> accountList = bank.getAccounts();
             dialog.setTitle("Are you sure?");
 
             dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
