@@ -194,7 +194,7 @@ public class main_one extends AppCompatActivity {
         } else {
             Intent intent = new Intent(main_one.this, pay_transfer.class);
             startActivity(intent);
-        }
+    }
     }
 
     public void cardAdder(View v){

@@ -17,6 +17,7 @@ public class bankStatement1 extends AppCompatActivity {
     private Bank bank = Bank.getInstance();
     private StringBuilder sb = new StringBuilder();
     private Context context = this;
+    private databaseConnector data = new databaseConnector();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class bankStatement1 extends AppCompatActivity {
         TextView statement = findViewById(R.id.statement);
         TextView title = findViewById(R.id.title);
         title.setText(bank.getAccountNumber(1));
-        ArrayList<String> list = databaseConnector.readBankStatement(this, bank.getAccountNumber(1));
+        ArrayList<String> list = data.readBankStatement(this, bank.getAccountNumber(1));
 
         for (int i = 0; i < list.size(); i++) {
             sb.append(list.get(i) + " \n");

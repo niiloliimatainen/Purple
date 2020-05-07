@@ -17,6 +17,7 @@ public class login extends AppCompatActivity {
     private EditText getEmail, getPassword;
     private String email, password;
     private Bank bank = Bank.getInstance();
+    private numberHandler nh = new numberHandler();
 
 
     @Override
@@ -55,7 +56,7 @@ public class login extends AppCompatActivity {
     }
 
     public void confirmationPopup(){
-        final String code = numberHandler.setVerificationNumber();
+        final String code = nh.setVerificationNumber();
          AlertDialog.Builder dialog= new AlertDialog.Builder(this);
         dialog.setTitle("Confirmation");
         dialog.setMessage("Input the given code below\nCode: "+ code);

@@ -18,6 +18,7 @@ public class register extends AppCompatActivity {
     private String firstName, lastName, email, phoneNumber, password1, password2;
     private boolean ok = false;
     private Bank bank = Bank.getInstance();
+    private numberHandler nh = new numberHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,9 @@ public class register extends AppCompatActivity {
         if (ok) {
             String hashedPw;
             String tempSalt;
-            byte[] salt = numberHandler.getSalt();
+            byte[] salt = nh.getSalt();
             tempSalt = Arrays.toString(salt);
-            hashedPw = numberHandler.hasher(password1, tempSalt.getBytes());
+            hashedPw = nh.hasher(password1, tempSalt.getBytes());
 
             int newUser = bank.addUser(firstName, lastName, email, phoneNumber, hashedPw, tempSalt, this);
 

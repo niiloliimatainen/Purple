@@ -3,29 +3,25 @@ import java.security.MessageDigest;
 import java.util.Random;
 
 
-
-
-//Only class methods
 public class numberHandler {
 
-    //Constructor is private to make sure this class cannot be instantiated
-    private numberHandler() {}
+    public numberHandler() {}
 
-    public static String setVerificationNumber(){
+    public String setVerificationNumber(){
         Random random = new Random();
         int number = random.nextInt(899999) + 100000;
         String code = String.valueOf(number);
         return code;
     }
 
-    public static byte[] getSalt(){
+    public byte[] getSalt(){
         Random random = new Random();
         byte[] salt= new byte[150];
         random.nextBytes(salt);
         return salt;
     }
 
-    public static String hasher(String password, byte[] salt){
+    public String hasher(String password, byte[] salt){
         String hashed = "";
         try{
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
@@ -39,7 +35,7 @@ public class numberHandler {
     }
 
 
-    public static String toHex(byte[] bytes) {
+    public String toHex(byte[] bytes) {
         StringBuilder pwString = new StringBuilder();
         for (byte b: bytes) {
             pwString.append(String.format("%02x", b));
@@ -49,7 +45,7 @@ public class numberHandler {
 
 
 
-    public static String setAccountNumber() {
+    public String setAccountNumber() {
         //Country code, IBAN-code and bank identifier
         String account = "FI86 433";
         Random random = new Random();
@@ -60,7 +56,7 @@ public class numberHandler {
     }
 
 
-    public static String setCardNumber() {
+    public String setCardNumber() {
         Random random = new Random();
         int number = random.nextInt(8999) + 1000;
         int number2 = random.nextInt(8999) + 1000;
@@ -72,7 +68,7 @@ public class numberHandler {
     }
 
 
-    public static int setCVC() {
+    public int setCVC() {
         Random random = new Random();
         int CVC = random.nextInt(899) + 100;
         System.out.println(CVC);
@@ -80,7 +76,7 @@ public class numberHandler {
     }
 
 
-    public static int setPIN() {
+    public int setPIN() {
         Random random = new Random();
         int PIN = random.nextInt(8999) + 1000;
         System.out.println(PIN);

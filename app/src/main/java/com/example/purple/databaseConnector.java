@@ -14,12 +14,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 //This is an utility class for file input and output.
-
 public class databaseConnector {
-    //Constructor is private to make sure this class cannot be instantiated.
-    private databaseConnector() { }
 
-    public static void writeToFile(Context context, ArrayList<User> userList) {
+    public databaseConnector() { }
+
+    public void writeToFile(Context context, ArrayList<User> userList) {
         try {
             FileOutputStream fos = context.openFileOutput("database.json", Context.MODE_PRIVATE);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
@@ -41,7 +40,7 @@ public class databaseConnector {
     }
 
 
-    public static ArrayList<User> readFromFile(Context context) {
+    public ArrayList<User> readFromFile(Context context) {
         ArrayList<User> list = new ArrayList<User>();
         Gson gson = new Gson();
         String line;
@@ -64,7 +63,7 @@ public class databaseConnector {
 
 
     // Saving user's bank statement by email address
-    public static void saveBankStatement(Context context, String accountNumber, String transaction) {
+    public void saveBankStatement(Context context, String accountNumber, String transaction) {
         try {
             FileOutputStream fos = context.openFileOutput(accountNumber + ".txt", Context.MODE_APPEND);
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"));
@@ -81,7 +80,7 @@ public class databaseConnector {
     }
 
     // Reading user's bank statement by email address
-    public static ArrayList<String> readBankStatement(Context context, String accountNumber) {
+    public ArrayList<String> readBankStatement(Context context, String accountNumber) {
         ArrayList<String> list = new ArrayList<>();
         String line;
         try {
