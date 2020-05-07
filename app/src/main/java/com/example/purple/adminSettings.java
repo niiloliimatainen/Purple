@@ -45,15 +45,16 @@ public class adminSettings extends AppCompatActivity {
             userList = bank.getAllUsers();
             userValue = choice.getText().toString();
             int finalValue = Integer.parseInt(userValue);
-            for (int i = 0; i < userList.size(); i++) {
-                if (i == finalValue) {
-                    bank.setCurrentUser(i);
-                }
+                for (int i = 0; i < userList.size(); i++) {
+                    if ((i + 1) == finalValue) {
+                        bank.setCurrentUser(finalValue);
+                        Toast.makeText(getApplicationContext(), "Return to profile to change account you want to modify!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(adminSettings.this, main_one.class);
+                        startActivity(intent);
+                    }
             }
-            Toast.makeText(getApplicationContext(), "Return to profile to change account you want to modify!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(adminSettings.this, main_one.class);
-            startActivity(intent);
         }
+        Toast.makeText(getApplicationContext(), "Invalid value!", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -103,6 +104,7 @@ public class adminSettings extends AppCompatActivity {
                     userValue = choice.getText().toString();
                     int finalValue = Integer.parseInt(userValue);
                     bank.deleteUser(finalValue, context);
+                    bank.resetCurrentUser();
                     Toast.makeText(getApplicationContext(), "User deleted!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(adminSettings.this, main_one.class);
                     startActivity(intent);
