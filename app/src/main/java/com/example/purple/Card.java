@@ -1,10 +1,6 @@
 package com.example.purple;
-
-//joo
-
 import java.util.ArrayList;
-
-
+//joo
 
 
 public class Card {
@@ -12,7 +8,7 @@ public class Card {
     private int PIN, CVC, account, raiseLimit = 500;
     private double creditLimit;
     private boolean isCredit;
-    private String[] countryArray = new String[]{"Finland","United States", "Norway", "Sweden", "Denmark", "Canada", "United Kingdom", "Switzerland", "Germany"};
+    private String[] countryArray = new String[]{"Finland", "United States", "Norway", "Sweden", "Denmark", "Canada", "United Kingdom", "Switzerland", "Germany"};
     private ArrayList<String> areaToUseList;
 
 
@@ -25,7 +21,7 @@ public class Card {
         this.account = account;
     }
 
-    public String getCardNumber(){
+    public String getCardNumber() {
         return cardNumber;
     }
 
@@ -33,29 +29,30 @@ public class Card {
         return raiseLimit;
     }
 
-    public boolean testPin(int pin){
-        if(pin == PIN){
+    public boolean testPin(int pin) {
+        if (pin == PIN) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public int getAccount(){
-    return account;
-}
+    public int getAccount() {
+        return account;
+    }
 
     public int getCardPin() {
         return PIN;
     }
+
 
     public double getCardCreditLimit() {
         return creditLimit;
     }
 
 
-    public ArrayList<String> getAreaToUseList(){
-        if(areaToUseList == null){
+    public ArrayList<String> getAreaToUseList() {
+        if (areaToUseList == null) {
             areaToUseList = new ArrayList<>();
             String defaultCountry = "Finland";
             areaToUseList.add(defaultCountry);
@@ -63,7 +60,9 @@ public class Card {
         return areaToUseList;
     }
 
-    public boolean isCreditCard(){return isCredit;}
+    public boolean isCreditCard() {
+        return isCredit;
+    }
 
     public int raiseMoney(double money) {
         if (raiseLimit < money) {
@@ -73,20 +72,23 @@ public class Card {
         }
     }
 
-
-
-    public int creditPayment(double money) {
-        if(isCredit) {
-            if (money <= creditLimit) {
-                creditLimit -= money;
-                return 1;
+    public void editCard(int change, int flag) {
+        if (flag == 1) {
+            raiseLimit = change;
+        } else if (flag == 2) {
+            PIN = change;
+        } else if (flag == 3) {
+            if (change == 1) {
+                isCredit = true;
+            } else {
+                isCredit = false;
             }
+        } else if (flag == 4) {
+            creditLimit = change;
         }
-        return 0;
     }
+
 }
-
-
 
 
 

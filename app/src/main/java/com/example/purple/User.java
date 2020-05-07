@@ -1,6 +1,7 @@
 package com.example.purple;
 
 //Class for creating user. Abstract class shows the structure of user classes.
+
 import java.util.ArrayList;
 
 public class User {
@@ -428,6 +429,14 @@ public class User {
     }
 
 
-
+    public void editCard(int change, int flag, int index) {
+        if ((index == 1) && (card1 != null)) {
+            card1.editCard(change, flag);
+        } else if ((index == 2) && (card2 != null)) {
+            card2.editCard(change, flag);
+        } else if ((index == 3) && (card3 != null)) {
+            card3.editCard(change, flag);
+        }
+    }
 
 }
