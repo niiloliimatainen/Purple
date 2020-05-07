@@ -216,7 +216,7 @@ public class main_two extends AppCompatActivity {
                         }else{
                             if(isCredit){
                                 //using credit for withdrawal
-                                if (bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) {
+                                if ((bank.getCardObj(cardToUse).creditPayment(amountToDialog) == 1) && (bank.getCardObj(cardToUse).raiseMoney(amountToDialog)==1)){
                                     bank.saveCredit(bank.getCardObj(cardToUse).getAccount(), context);
                                     Toast.makeText(getApplicationContext(), "Credit money withdrawn, make it rain!", Toast.LENGTH_SHORT).show();
                                 } else {
@@ -224,7 +224,7 @@ public class main_two extends AppCompatActivity {
                                 }
                             }else{
                                 //using debit for withdrawal
-                                if ((bank.cardTransaction(bank.getCardObj(cardToUse).getAccount(), amountToDialog, false, context) == 1) && (bank.getCardObj(cardToUse).creditPayment(amountToDialog)) == 1) {
+                                if ((bank.cardTransaction(bank.getCardObj(cardToUse).getAccount(), amountToDialog, false, context) == 1) && (bank.getCardObj(cardToUse).raiseMoney(amountToDialog)) == 1) {
                                     Toast.makeText(getApplicationContext(), "Money withdrawn, spend it wisely!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Card declined! Get a job..", Toast.LENGTH_SHORT).show();
